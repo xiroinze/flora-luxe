@@ -1,0 +1,301 @@
+{% extends 'main/base.html' %}
+{% load static %}{% load i18n_tags %}
+{% block title %}{% if current_lang == 'uz' %}Profil{% elif current_lang == 'en' %}Profile{% else %}Профиль{% endif %} — Flora Luxe{% endblock %}
+{% block extra_head %}
+<style>
+.pr-page{max-width:740px;margin:0 auto;padding:2rem 1.25rem 5rem}
+
+/* HERO CARD */
+.pr-hero{background:linear-gradient(140deg,#1a0e0b,var(--ink3));border:1px solid var(--edge2);border-radius:var(--r-xl);padding:1.8rem 1.5rem;display:flex;align-items:center;gap:1.3rem;margin-bottom:1.4rem;position:relative;overflow:hidden}
+.pr-hero::before{content:'🌸';position:absolute;right:1.2rem;top:50%;transform:translateY(-50%);font-size:5rem;opacity:.06;pointer-events:none}
+.pr-avatar-wrap{position:relative;flex-shrink:0}
+.pr-avatar{width:80px;height:80px;border-radius:50%;border:3px solid rgba(200,150,60,.4);background:var(--ink4);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.pr-avatar img{width:100%;height:100%;object-fit:cover}
+.pr-avatar-init{font-size:2rem;font-weight:700;color:var(--amber2);text-transform:uppercase}
+.pr-info h2{font-family:var(--serif);font-size:1.45rem;font-weight:700;color:var(--cream);margin-bottom:.2rem}
+.pr-info .pr-email{font-size:.8rem;color:var(--mist);display:flex;align-items:center;gap:.35rem}
+.pr-info .pr-email svg{width:13px;height:13px;stroke:var(--sage2);fill:none;stroke-width:2}
+.pr-stats{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.pr-stat{padding:.28rem .75rem;border-radius:2rem;background:rgba(74,110,80,.12);border:1px solid var(--edge);font-size:.75rem;color:var(--mist);display:flex;align-items:center;gap:.3rem}
+.pr-stat svg{width:12px;height:12px;stroke:var(--amber2);fill:none;stroke-width:2}
+
+/* TABS */
+.pr-tabs{display:flex;gap:.4rem;margin-bottom:1.2rem;background:var(--ink3);border-radius:var(--r-md);padding:.3rem;border:1px solid var(--edge)}
+.pr-tab{flex:1;padding:.6rem .5rem;border:none;background:transparent;color:var(--mist);border-radius:var(--r-sm);cursor:pointer;font-family:var(--sans);font-size:.83rem;font-weight:600;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:.38rem;white-space:nowrap}
+.pr-tab svg{width:15px;height:15px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.8}
+.pr-tab.active{background:var(--ink);color:var(--cream);box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.pr-tab.active svg{stroke:var(--amber2)}
+
+/* FORM CARD */
+.pr-card{background:var(--ink2);border:1px solid var(--edge);border-radius:var(--r-xl);padding:1.5rem;margin-bottom:1rem}
+.pr-card-title{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:1.1rem;display:flex;align-items:center;gap:.4rem}
+.pr-card-title svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.pr-field{margin-bottom:1rem}
+.pr-field label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mist);margin-bottom:.38rem}
+.pr-field input,.pr-field textarea{width:100%;padding:.72rem .95rem;border:1.5px solid var(--edge);border-radius:var(--r-sm);background:var(--ink3);color:var(--cream);font-family:var(--sans);font-size:.9rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.pr-field input:focus,.pr-field textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px rgba(181,49,42,.12)}
+.pr-field input::placeholder,.pr-field textarea::placeholder{color:rgba(240,235,224,.2)}
+.pr-field-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+/* avatar upload */
+.pr-avatar-field{display:flex;align-items:center;gap:1rem;padding:.85rem;background:var(--ink3);border:1.5px dashed var(--edge);border-radius:var(--r-sm);cursor:pointer;transition:border-color .2s}
+.pr-avatar-field:hover{border-color:var(--amber2)}
+.pr-avatar-preview{width:52px;height:52px;border-radius:50%;border:2px solid var(--edge);background:var(--ink4);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.pr-avatar-preview img{width:100%;height:100%;object-fit:cover}
+.pr-avatar-text strong{display:block;font-size:.83rem;color:var(--cream);margin-bottom:.18rem}
+.pr-avatar-text span{font-size:.74rem;color:var(--mist)}
+.pr-avatar-field input{display:none}
+.pr-save-btn{width:100%;padding:.85rem;border:none;border-radius:var(--r-md);background:var(--grad-rose);color:#fff;font-family:var(--sans);font-size:.95rem;font-weight:700;cursor:pointer;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:.5rem;box-shadow:0 4px 18px rgba(181,49,42,.4);min-height:52px}
+.pr-save-btn:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 8px 26px rgba(181,49,42,.55)}
+.pr-save-btn svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
+
+/* ORDERS */
+.orders-empty{text-align:center;padding:3rem 1.5rem;color:var(--mist)}
+.orders-empty svg{width:52px;height:52px;stroke:var(--sage2);fill:none;stroke-width:1.2;margin:0 auto 1rem;opacity:.5}
+.order-card{background:var(--ink3);border:1px solid var(--edge);border-radius:var(--r-lg);padding:1.1rem 1.2rem;margin-bottom:.75rem;transition:border-color .2s}
+.order-card:hover{border-color:rgba(200,150,60,.2)}
+.order-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem;gap:.5rem;flex-wrap:wrap}
+.order-id{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--cream)}
+.order-code{font-family:'Courier New',monospace;font-size:.72rem;color:var(--amber2);background:rgba(200,150,60,.08);padding:.18rem .5rem;border-radius:.4rem;border:1px solid rgba(200,150,60,.15)}
+.order-status{display:inline-flex;align-items:center;padding:.2rem .7rem;border-radius:2rem;font-size:.7rem;font-weight:700}
+.s-new{background:rgba(181,49,42,.15);color:var(--rose3)}
+.s-processing{background:rgba(243,156,18,.12);color:#f39c12}
+.s-paid{background:rgba(46,204,113,.1);color:#2ecc71}
+.s-delivered{background:rgba(46,204,113,.15);color:#27ae60}
+.s-cancelled{background:rgba(150,150,150,.1);color:#888}
+.order-meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem}
+.order-meta-item{font-size:.77rem;color:var(--mist);display:flex;align-items:center;gap:.28rem}
+.order-meta-item svg{width:12px;height:12px;stroke:var(--sage2);fill:none;stroke-width:2;flex-shrink:0}
+.order-items-list{background:var(--ink2);border-radius:var(--r-sm);padding:.6rem .8rem;margin-bottom:.75rem}
+.order-item-row{display:flex;justify-content:space-between;align-items:center;padding:.28rem 0;font-size:.8rem;color:var(--mist);border-bottom:1px dashed rgba(74,110,80,.1)}
+.order-item-row:last-child{border-bottom:none}
+.order-item-row span:last-child{color:var(--amber2);font-weight:600}
+.order-total{display:flex;justify-content:space-between;align-items:center}
+.order-total span{font-size:.8rem;color:var(--mist)}
+.order-total strong{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--amber2)}
+.order-actions{display:flex;gap:.5rem;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--edge)}
+.order-action-btn{padding:.42rem .9rem;border-radius:var(--r-sm);font-size:.78rem;font-weight:600;text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:.35rem}
+.order-action-btn svg{width:13px;height:13px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2}
+.btn-receipt{background:rgba(200,150,60,.1);border:1px solid rgba(200,150,60,.2);color:var(--amber2)}
+.btn-receipt:hover{background:rgba(200,150,60,.18);color:var(--amber2)}
+.btn-pay-now{background:var(--grad-rose);color:#fff;border:none;box-shadow:0 2px 10px rgba(181,49,42,.35)}
+.btn-pay-now:hover{opacity:.88;color:#fff}
+
+@media(max-width:600px){
+  .pr-page{padding:1.2rem .85rem 4rem}
+  .pr-hero{flex-direction:column;text-align:center;padding:1.4rem 1.2rem;gap:1rem}
+  .pr-hero::before{display:none}
+  .pr-stats{justify-content:center}
+  .pr-field-row{grid-template-columns:1fr}
+  .pr-tabs{gap:.25rem}
+  .pr-tab{font-size:.76rem;padding:.55rem .35rem}
+  .order-head{flex-direction:column;align-items:flex-start;gap:.35rem}
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="pr-page">
+
+  <!-- HERO -->
+  <div class="pr-hero">
+    <div class="pr-avatar-wrap">
+      <div class="pr-avatar">
+        {% if profile.avatar %}<img src="{{ profile.avatar.url }}" alt="">
+        {% else %}<span class="pr-avatar-init">{{ user.first_name|first|default:user.username|first|upper }}</span>{% endif %}
+      </div>
+    </div>
+    <div class="pr-info">
+      <h2>{{ user.get_full_name|default:user.username }}</h2>
+      <div class="pr-email">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        {{ user.email|default:"—" }}
+      </div>
+      <div class="pr-stats">
+        <span class="pr-stat">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+          {{ orders|length }} {% if current_lang == 'uz' %}buyurtma{% elif current_lang == 'en' %}orders{% else %}заказов{% endif %}
+        </span>
+        {% if profile.phone %}
+        <span class="pr-stat">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          {{ profile.phone }}
+        </span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="pr-tabs" role="tablist">
+    <button class="pr-tab active" onclick="switchTab('edit',this)" role="tab" aria-selected="true">
+      <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      {% if current_lang == 'uz' %}Tahrirlash{% elif current_lang == 'en' %}Edit{% else %}Редактировать{% endif %}
+    </button>
+    <button class="pr-tab" onclick="switchTab('orders',this)" role="tab" aria-selected="false">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      {% if current_lang == 'uz' %}Buyurtmalar{% elif current_lang == 'en' %}Orders{% else %}Заказы{% endif %}
+      {% if orders %}<span style="background:var(--rose);color:#fff;border-radius:1rem;padding:.1rem .45rem;font-size:.65rem;margin-left:.2rem">{{ orders|length }}</span>{% endif %}
+    </button>
+  </div>
+
+  <!-- ── EDIT TAB ── -->
+  <div id="tab-edit">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <!-- Avatar -->
+      <div class="pr-card">
+        <div class="pr-card-title">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          {% if current_lang == 'uz' %}Profil rasmi{% elif current_lang == 'en' %}Profile photo{% else %}Фото профиля{% endif %}
+        </div>
+        <label class="pr-avatar-field" for="avatarInput">
+          <div class="pr-avatar-preview" id="avatarPreview">
+            {% if profile.avatar %}<img src="{{ profile.avatar.url }}" alt="" id="avatarImg">
+            {% else %}<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="rgba(240,235,224,.3)" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>{% endif %}
+          </div>
+          <div class="pr-avatar-text">
+            <strong>{% if current_lang == 'uz' %}Rasm yuklash{% elif current_lang == 'en' %}Upload photo{% else %}Загрузить фото{% endif %}</strong>
+            <span>{% if current_lang == 'uz' %}JPG, PNG yoki WEBP, max 10MB{% elif current_lang == 'en' %}JPG, PNG or WEBP, max 10MB{% else %}JPG, PNG или WEBP, макс. 10MB{% endif %}</span>
+          </div>
+          <input type="file" name="avatar" id="avatarInput" accept="image/jpeg,image/png,image/webp">
+        </label>
+      </div>
+
+      <!-- Personal info -->
+      <div class="pr-card">
+        <div class="pr-card-title">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          {% if current_lang == 'uz' %}Shaxsiy ma'lumotlar{% elif current_lang == 'en' %}Personal info{% else %}Личные данные{% endif %}
+        </div>
+        <div class="pr-field-row">
+          <div class="pr-field">
+            <label>{% if current_lang == 'uz' %}Ism{% elif current_lang == 'en' %}First name{% else %}Имя{% endif %}</label>
+            <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="{% if current_lang == 'uz' %}Ismingiz{% elif current_lang == 'en' %}Your name{% else %}Ваше имя{% endif %}">
+          </div>
+          <div class="pr-field">
+            <label>{% if current_lang == 'uz' %}Familiya{% elif current_lang == 'en' %}Last name{% else %}Фамилия{% endif %}</label>
+            <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="{% if current_lang == 'uz' %}Familiyangiz{% elif current_lang == 'en' %}Your last name{% else %}Ваша фамилия{% endif %}">
+          </div>
+        </div>
+        <div class="pr-field">
+          <label>Email</label>
+          <input type="email" name="email" value="{{ user.email }}" placeholder="email@example.com">
+        </div>
+      </div>
+
+      <!-- Contacts -->
+      <div class="pr-card">
+        <div class="pr-card-title">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81"/></svg>
+          {% if current_lang == 'uz' %}Kontakt{% elif current_lang == 'en' %}Contact{% else %}Контакты{% endif %}
+        </div>
+        <div class="pr-field">
+          <label>{% if current_lang == 'uz' %}Telefon{% elif current_lang == 'en' %}Phone{% else %}Телефон{% endif %}</label>
+          <input type="tel" name="phone" value="{{ profile.phone }}" placeholder="+998 90 000 00 00" inputmode="tel">
+        </div>
+        <div class="pr-field">
+          <label>{% if current_lang == 'uz' %}Manzil{% elif current_lang == 'en' %}Address{% else %}Адрес доставки{% endif %}</label>
+          <input type="text" name="address" value="{{ profile.address }}" placeholder="{% if current_lang == 'uz' %}Yetkazib berish manzili{% elif current_lang == 'en' %}Delivery address{% else %}Адрес для доставки{% endif %}">
+        </div>
+      </div>
+
+      <button type="submit" class="pr-save-btn">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        {% if current_lang == 'uz' %}Saqlash{% elif current_lang == 'en' %}Save changes{% else %}Сохранить изменения{% endif %}
+      </button>
+    </form>
+  </div>
+
+  <!-- ── ORDERS TAB ── -->
+  <div id="tab-orders" style="display:none">
+    {% if orders %}
+      {% for order in orders %}
+      <div class="order-card">
+        <div class="order-head">
+          <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+            <span class="order-id">{% if current_lang == 'uz' %}Buyurtma{% elif current_lang == 'en' %}Order{% else %}Заказ{% endif %} #{{ order.id }}</span>
+            <span class="order-code">{{ order.receipt_code }}</span>
+          </div>
+          <span class="order-status s-{{ order.status }}">
+            {% if order.status == 'new' %}🆕 {% if current_lang == 'uz' %}Yangi{% elif current_lang == 'en' %}New{% else %}Новый{% endif %}
+            {% elif order.status == 'processing' %}⏳ {% if current_lang == 'uz' %}Jarayonda{% elif current_lang == 'en' %}Processing{% else %}В обработке{% endif %}
+            {% elif order.status == 'paid' %}✅ {% if current_lang == 'uz' %}To'langan{% elif current_lang == 'en' %}Paid{% else %}Оплачен{% endif %}
+            {% elif order.status == 'delivered' %}🎉 {% if current_lang == 'uz' %}Yetkazildi{% elif current_lang == 'en' %}Delivered{% else %}Доставлен{% endif %}
+            {% elif order.status == 'cancelled' %}❌ {% if current_lang == 'uz' %}Bekor{% elif current_lang == 'en' %}Cancelled{% else %}Отменён{% endif %}
+            {% endif %}
+          </span>
+        </div>
+        <div class="order-meta">
+          <span class="order-meta-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            {{ order.created_at|date:"d.m.Y, H:i" }}
+          </span>
+          <span class="order-meta-item">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            {{ order.address|truncatechars:30 }}
+          </span>
+        </div>
+        {% if order.items.all %}
+        <div class="order-items-list">
+          {% for item in order.items.all %}
+          <div class="order-item-row">
+            <span>{{ item.flower.name }} × {{ item.quantity }}</span>
+            <span>{{ item.price }} {% t 'price' %}</span>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="order-total">
+          <span>{% if current_lang == 'uz' %}Jami{% elif current_lang == 'en' %}Total{% else %}Итого{% endif %}:</span>
+          <strong>{{ order.total_price }} {% t 'price' %}</strong>
+        </div>
+        <div class="order-actions">
+          <a href="{% url 'check_receipt' %}?code={{ order.receipt_code }}" class="order-action-btn btn-receipt">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            {% if current_lang == 'uz' %}Chek{% elif current_lang == 'en' %}Receipt{% else %}Чек{% endif %}
+          </a>
+          {% if order.status == 'new' or order.status == 'processing' %}
+          <a href="{% url 'pay' order.id %}" class="order-action-btn btn-pay-now">
+            <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            {% if current_lang == 'uz' %}To'lash{% elif current_lang == 'en' %}Pay now{% else %}Оплатить{% endif %}
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="orders-empty">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <p style="font-size:1rem;color:var(--cream);margin-bottom:.5rem;font-weight:600">{% if current_lang == 'uz' %}Buyurtmalar yo'q{% elif current_lang == 'en' %}No orders yet{% else %}Заказов пока нет{% endif %}</p>
+        <p style="font-size:.85rem;margin-bottom:1.2rem">{% if current_lang == 'uz' %}Birinchi guldastangizni buyurtma qiling!{% elif current_lang == 'en' %}Order your first bouquet!{% else %}Закажите свой первый букет!{% endif %}</p>
+        <a href="{% url 'catalog' %}" class="btn btn-primary">{% t 'view_catalog' %}</a>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+<script>
+function switchTab(name, btn){
+  document.getElementById('tab-edit').style.display='none';
+  document.getElementById('tab-orders').style.display='none';
+  document.getElementById('tab-'+name).style.display='block';
+  document.querySelectorAll('.pr-tab').forEach(function(b){b.classList.remove('active');b.setAttribute('aria-selected','false');});
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
+  btn.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+}
+// Avatar preview
+document.getElementById('avatarInput').addEventListener('change',function(){
+  if(this.files&&this.files[0]){
+    var r=new FileReader();
+    r.onload=function(e){
+      var p=document.getElementById('avatarPreview');
+      p.innerHTML='<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover">';
+    };
+    r.readAsDataURL(this.files[0]);
+  }
+});
+</script>
+{% endblock %}
