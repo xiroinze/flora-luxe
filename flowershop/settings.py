@@ -131,7 +131,7 @@ if DEBUG:
 else:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = f"https://outxcubmyntwohxzbvbf.supabase.co/storage/v1/object/public/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # ================= SECURITY HEADERS =================
