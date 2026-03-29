@@ -185,6 +185,7 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
 
 
 # ================= SUPABASE S3 STORAGE =================
+# ================= SUPABASE S3 STORAGE =================
 if not DEBUG:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_ACCESS_KEY')
@@ -195,6 +196,5 @@ if not DEBUG:
     AWS_DEFAULT_ACL = 'public-read'
     AWS_S3_FILE_OVERWRITE = False
     AWS_QUERYSTRING_AUTH = False
-    AWS_S3_CUSTOM_DOMAIN = 'outxcubmyntwohxzbvbf.supabase.co/storage/v1/object/public/media'
     MEDIA_URL = 'https://outxcubmyntwohxzbvbf.supabase.co/storage/v1/object/public/media/'
 
