@@ -186,7 +186,7 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
 
 # ================= SUPABASE S3 STORAGE =================
 # ================= SUPABASE S3 STORAGE =================
-if not DEBUG:
+if True:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_ACCESS_KEY')
     AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_SECRET_KEY')
