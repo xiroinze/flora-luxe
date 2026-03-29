@@ -1,2 +1,2 @@
 web: gunicorn flowershop.wsgi --bind 0.0.0.0:$PORT --workers 2 --timeout 120
-release: python manage.py migrate --no-input && python manage.py collectstatic --no-input --clear
+release: python manage.py migrate --no-input && python manage.py collectstatic --no-input --clear && python flowershop/create_admin.py
