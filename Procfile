@@ -1,2 +1,2 @@
 web: gunicorn flowershop.wsgi --bind 0.0.0.0:$PORT --workers 2 --timeout 120
-release: python manage.py migrate --no-input && python manage.py collectstatic --no-input --clear && python flowershop/create_admin.py
+release: python manage.py migrate --no-input && python manage.py collectstatic --no-input --clear && python -c "import os,django; os.environ.setdefault('DJANGO_SETTINGS_MODULE','flowershop.settings'); django.setup(); from django.contrib.auth.models import User; User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@floraluxe.uz', 'Admin2026!')"
