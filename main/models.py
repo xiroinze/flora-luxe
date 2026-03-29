@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import string
 import random
+import uuid
 
 
 def generate_receipt_code():
@@ -14,8 +15,17 @@ def generate_receipt_code():
         candidate = f"FL-{code}"
         if not Order.objects.filter(receipt_code=candidate).exists():
             return candidate
-    # Запасной вариант: 12 символов
     return "FL-" + ''.join(random.choices(chars, k=12))
+
+
+def flower_image_path(instance, filename):
+    ext = filename.split('.')[-1].lower()
+    return f'flowers/{uuid.uuid4().hex}.{ext}'
+
+
+def avatar_image_path(instance, filename):
+    ext = filename.split('.')[-1].lower()
+    return f'avatars/{uuid.uuid4().hex}.{ext}'
 
 
 class Category(models.Model):
@@ -35,7 +45,7 @@ class Flower(models.Model):
     name = models.CharField(max_length=200, verbose_name="Название")
     price = models.DecimalField(max_digits=12, decimal_places=0, verbose_name="Цена (сум)")
     description = models.TextField(verbose_name="Описание")
-    image = models.ImageField(upload_to='flowers/', blank=True, null=True, verbose_name="Изображение")
+    image = models.ImageField(upload_to=flower_image_path, blank=True, null=True, verbose_name="Изображение")
     available = models.BooleanField(default=True, db_index=True, verbose_name="В наличии")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
@@ -64,12 +74,7 @@ class Order(models.Model):
         ('click', 'Click'),
     ]
     transaction_id = models.CharField(max_length=100, blank=True, null=True)
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='new',
-        db_index=True,
-    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new', db_index=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders', verbose_name="Пользователь")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата заказа")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
@@ -119,7 +124,7 @@ class Profile(models.Model):
     )
     phone = models.CharField(max_length=20, blank=True, verbose_name="Телефон")
     address = models.TextField(blank=True, verbose_name="Адрес")
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True, verbose_name="Фото профиля")
+    avatar = models.ImageField(upload_to=avatar_image_path, blank=True, null=True, verbose_name="Фото профиля")
 
     class Meta:
         verbose_name = "Профиль"
@@ -144,7 +149,6 @@ class Review(models.Model):
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
         ordering = ['-created_at']
-        # Один отзыв на товар от пользователя
         unique_together = [('user', 'flower')]
 
     def __str__(self):
