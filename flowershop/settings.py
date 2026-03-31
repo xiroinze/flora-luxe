@@ -123,16 +123,38 @@ TIME_ZONE = 'Asia/Tashkent'
 USE_I18N = True
 USE_TZ = True
 
-# ================= STATIC & MEDIA =================
+# ================= STATIC =================
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-if DEBUG:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-else:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = f"https://outxcubmyntwohxzbvbf.supabase.co/storage/v1/object/public/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# ================= MEDIA / SUPABASE S3 =================
+AWS_ACCESS_KEY_ID       = os.environ.get('SUPABASE_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY   = os.environ.get('SUPABASE_SECRET_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET', 'media')
+AWS_S3_ENDPOINT_URL     = os.environ.get('SUPABASE_S3_ENDPOINT')
+AWS_S3_REGION_NAME      = 'ap-southeast-2'
+AWS_DEFAULT_ACL         = 'public-read'
+AWS_S3_FILE_OVERWRITE   = False
+AWS_QUERYSTRING_AUTH    = False
+
+# Django 4.2+ использует STORAGES вместо DEFAULT_FILE_STORAGE
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": (
+            "whitenoise.storage.CompressedStaticFilesStorage"
+            if DEBUG else
+            "whitenoise.storage.CompressedManifestStaticFilesStorage"
+        ),
+    },
+}
+
+# Публичный URL для отображения файлов в браузере
+_supabase_host   = os.environ.get('SUPABASE_URL', 'https://outxcubmyntwohxzbvbf.supabase.co')
+_supabase_bucket = os.environ.get('SUPABASE_BUCKET', 'media')
+MEDIA_URL = f'{_supabase_host}/storage/v1/object/public/{_supabase_bucket}/'
 
 # ================= SECURITY HEADERS =================
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -182,19 +204,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Максимальный размер загружаемого файла — 10MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
-
-
-# ================= SUPABASE S3 STORAGE =================
-# ================= SUPABASE S3 STORAGE =================
-if True:
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_ACCESS_KEY')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_SECRET_KEY')
-    AWS_STORAGE_BUCKET_NAME = 'media'
-    AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_S3_ENDPOINT')
-    AWS_S3_REGION_NAME = 'ap-southeast-2'
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_FILE_OVERWRITE = False
-    AWS_QUERYSTRING_AUTH = False
-    MEDIA_URL = 'https://outxcubmyntwohxzbvbf.supabase.co/storage/v1/object/public/media/'
-
