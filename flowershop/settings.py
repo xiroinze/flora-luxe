@@ -128,14 +128,21 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # ================= MEDIA / SUPABASE S3 =================
+_supabase_url    = os.environ.get('SUPABASE_URL', 'https://outxcubmyntwohxzbvbf.supabase.co')
+_supabase_bucket = os.environ.get('SUPABASE_BUCKET', 'media')
+
 AWS_ACCESS_KEY_ID       = os.environ.get('SUPABASE_ACCESS_KEY')
 AWS_SECRET_ACCESS_KEY   = os.environ.get('SUPABASE_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET', 'media')
+AWS_STORAGE_BUCKET_NAME = _supabase_bucket
 AWS_S3_ENDPOINT_URL     = os.environ.get('SUPABASE_S3_ENDPOINT')
 AWS_S3_REGION_NAME      = 'ap-southeast-2'
 AWS_DEFAULT_ACL         = 'public-read'
 AWS_S3_FILE_OVERWRITE   = False
 AWS_QUERYSTRING_AUTH    = False
+AWS_S3_CUSTOM_DOMAIN    = f'{_supabase_url.replace("https://", "")}/storage/v1/object/public/{_supabase_bucket}'
+
+# Публичный URL для отображения файлов в браузере
+MEDIA_URL = f'{_supabase_url}/storage/v1/object/public/{_supabase_bucket}/'
 
 # Django 4.2+ использует STORAGES вместо DEFAULT_FILE_STORAGE
 STORAGES = {
@@ -150,11 +157,6 @@ STORAGES = {
         ),
     },
 }
-
-# Публичный URL для отображения файлов в браузере
-_supabase_host   = os.environ.get('SUPABASE_URL', 'https://outxcubmyntwohxzbvbf.supabase.co')
-_supabase_bucket = os.environ.get('SUPABASE_BUCKET', 'media')
-MEDIA_URL = f'{_supabase_host}/storage/v1/object/public/{_supabase_bucket}/'
 
 # ================= SECURITY HEADERS =================
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
