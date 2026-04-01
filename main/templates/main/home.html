@@ -420,48 +420,176 @@ body {
   50% { transform: translateY(6px); }
 }
 
-/* Переключатель тем */
+/* ================== ПЕРЕКЛЮЧАТЕЛЬ ТЕМ (МОБИЛЬНЫЙ + ДЕСКТОП) ================== */
 .theme-switcher {
   position: fixed;
   bottom: 20px;
-  left: 20px;
-  z-index: 100;
+  right: 20px;
+  z-index: 1000;
   display: flex;
-  gap: 10px;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(10px);
-  padding: 8px 12px;
-  border-radius: 50px;
-  border: 1px solid var(--border-gold);
-  transition: all 0.3s;
-}
-
-.theme-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  cursor: pointer;
+  flex-direction: column;
+  gap: 8px;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-.theme-btn.rose {
+.theme-toggle-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.theme-toggle-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--gold-primary);
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.05);
+  background: rgba(0,0,0,0.8);
+}
+
+.theme-menu {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-gold);
+  border-radius: 24px;
+  padding: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 999;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  animation: menuSlideIn 0.2s ease-out;
+}
+
+.theme-menu.open {
+  display: flex;
+}
+
+@keyframes menuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid transparent;
+}
+
+.theme-option:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-2px);
+}
+
+.theme-option.active {
+  border-color: var(--gold-primary);
+  background: rgba(207,196,154,0.15);
+}
+
+.theme-color-preview {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.theme-color-preview.rose {
   background: linear-gradient(135deg, #b87c6b, #8b5a4c);
 }
 
-.theme-btn.emerald {
+.theme-color-preview.emerald {
   background: linear-gradient(135deg, #3f7864, #2a5a4a);
 }
 
-.theme-btn.active {
-  border-color: var(--gold-primary);
-  transform: scale(1.1);
-  box-shadow: 0 0 12px rgba(207,196,154,0.5);
+.theme-option span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gold-primary);
 }
 
-.theme-btn:hover {
-  transform: scale(1.05);
+/* Для десктопа показываем кнопки всегда, для мобильных - меню */
+@media(min-width: 769px) {
+  .theme-switcher {
+    bottom: 20px;
+    left: 20px;
+    right: auto;
+    flex-direction: row;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    padding: 8px 12px;
+    border-radius: 50px;
+    border: 1px solid var(--border-gold);
+  }
+
+  .theme-toggle-btn {
+    display: none;
+  }
+
+  .theme-menu {
+    position: static;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    padding: 0;
+    display: flex !important;
+    flex-direction: row;
+    gap: 10px;
+    box-shadow: none;
+  }
+
+  .theme-option {
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .theme-color-preview {
+    width: 24px;
+    height: 24px;
+  }
+
+  .theme-option span {
+    font-size: 0.75rem;
+  }
+}
+
+@media(max-width: 768px) {
+  .theme-switcher {
+    bottom: 20px;
+    right: 20px;
+    left: auto;
+  }
+
+  .theme-option span {
+    font-size: 0.8rem;
+  }
 }
 
 /* Адаптив */
@@ -473,17 +601,6 @@ body {
 
   .hero-scroll {
     bottom: 1rem;
-  }
-
-  .theme-switcher {
-    bottom: 12px;
-    left: 12px;
-    padding: 6px 10px;
-  }
-
-  .theme-btn {
-    width: 32px;
-    height: 32px;
   }
 }
 
@@ -566,35 +683,88 @@ body {
   </div>
 </section>
 
-<!-- Переключатель тем -->
+<!-- ================== ПЕРЕКЛЮЧАТЕЛЬ ТЕМ (РАБОТАЕТ НА ТЕЛЕФОНЕ) ================== -->
 <div class="theme-switcher" id="themeSwitcher">
-  <button class="theme-btn rose" data-theme="rose" title="Ethereal Rose"></button>
-  <button class="theme-btn emerald" data-theme="emerald" title="Emerald Royale"></button>
+  <button class="theme-toggle-btn" id="themeToggleBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+    </svg>
+  </button>
+  <div class="theme-menu" id="themeMenu">
+    <div class="theme-option" data-theme="rose">
+      <div class="theme-color-preview rose"></div>
+      <span>🌹 Ethereal Rose</span>
+    </div>
+    <div class="theme-option" data-theme="emerald">
+      <div class="theme-color-preview emerald"></div>
+      <span>💎 Emerald Royale</span>
+    </div>
+  </div>
 </div>
 
 <!-- Остальной контент (trust-strip, stats-bar, flowers-section, ai-widget, cta-wrap) -->
 <!-- ... вставьте сюда остальной код из вашего шаблона ... -->
 
 <script>
-// ================== ИНИЦИАЛИЗАЦИЯ ТЕМ ==================
+// ================== ИНИЦИАЛИЗАЦИЯ ТЕМ (РАБОТАЕТ НА ТЕЛЕФОНЕ) ==================
 (function initTheme() {
   const savedTheme = localStorage.getItem('flora_luxe_theme') || 'rose';
   document.body.classList.add(`theme-${savedTheme}`);
 
-  document.querySelectorAll('.theme-btn').forEach(btn => {
-    if(btn.dataset.theme === savedTheme) {
-      btn.classList.add('active');
+  // Обновляем активный класс в меню
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    if(opt.dataset.theme === savedTheme) {
+      opt.classList.add('active');
     }
-    btn.addEventListener('click', function() {
+    opt.addEventListener('click', function(e) {
+      e.stopPropagation();
       const theme = this.dataset.theme;
       document.body.classList.remove('theme-rose', 'theme-emerald');
       document.body.classList.add(`theme-${theme}`);
 
-      document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.theme-option').forEach(o => o.classList.remove('active'));
       this.classList.add('active');
 
       localStorage.setItem('flora_luxe_theme', theme);
+
+      // Закрываем меню на мобильных после выбора
+      if(window.innerWidth <= 768) {
+        document.getElementById('themeMenu')?.classList.remove('open');
+      }
     });
+  });
+
+  // Открытие/закрытие меню на мобильных
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  const menu = document.getElementById('themeMenu');
+
+  if(toggleBtn && menu) {
+    toggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+
+    // Закрытие при клике вне меню
+    document.addEventListener('click', function(e) {
+      if(!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+  }
+
+  // На десктопе меню всегда открыто
+  if(window.innerWidth > 768) {
+    if(menu) menu.classList.add('open');
+  }
+
+  // При изменении размера окна
+  window.addEventListener('resize', function() {
+    if(window.innerWidth > 768) {
+      if(menu) menu.classList.add('open');
+    } else {
+      if(menu) menu.classList.remove('open');
+    }
   });
 })();
 
@@ -603,30 +773,34 @@ body {
   const container = document.getElementById('heroPetals');
   if(!container) return;
 
-  // Лепестки
+  // Лепестки (уменьшено количество для мобильных)
+  const isMobile = window.innerWidth <= 768;
+  const petalCount = isMobile ? 20 : 35;
+  const sparkCount = isMobile ? 8 : 15;
+
   const types = ['petal-a', 'petal-b', 'petal-c'];
-  for(let i = 0; i < 35; i++) {
+  for(let i = 0; i < petalCount; i++) {
     const el = document.createElement('div');
     el.className = 'petal ' + types[i % 3];
-    const size = 8 + Math.random() * 14;
+    const size = 8 + Math.random() * (isMobile ? 10 : 14);
     el.style.cssText = [
       `left: ${Math.random() * 100}%`,
       `width: ${size}px`,
       `height: ${size * (0.6 + Math.random() * 0.8)}px`,
-      `animation-duration: ${12 + Math.random() * 14}s`,
+      `animation-duration: ${12 + Math.random() * (isMobile ? 10 : 14)}s`,
       `animation-delay: ${Math.random() * 8}s`
     ].join(';');
     container.appendChild(el);
   }
 
   // Искры
-  for(let i = 0; i < 15; i++) {
+  for(let i = 0; i < sparkCount; i++) {
     const sp = document.createElement('div');
     sp.className = 'spark';
     sp.style.cssText = [
       `left: ${10 + Math.random() * 80}%`,
       `bottom: ${Math.random() * 40 + 10}%`,
-      `animation-duration: ${5 + Math.random() * 8}s`,
+      `animation-duration: ${5 + Math.random() * (isMobile ? 6 : 8)}s`,
       `animation-delay: ${Math.random() * 5}s`
     ].join(';');
     container.appendChild(sp);
