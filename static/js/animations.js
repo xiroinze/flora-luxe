@@ -1,52 +1,51 @@
-'use strict';
-
-/* SCROLL REVEAL */
-function initScrollReveal(){
-  if(!window.IntersectionObserver) return;
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+// ================== THEME SWITCHER ==================
+(function() {
+  // Создаем переключатель тем
+  const switcher = document.createElement('div');
+  switcher.className = 'theme-switcher';
+  switcher.innerHTML = `
+    <button class="theme-btn rose" data-theme="rose" title="Ethereal Rose"></button>
+    <button class="theme-btn emerald" data-theme="emerald" title="Emerald Royale"></button>
+  `;
+  document.body.appendChild(switcher);
+  
+  // Получаем сохраненную тему или используем rose по умолчанию
+  const savedTheme = localStorage.getItem('flora_luxe_theme') || 'rose';
+  
+  // Применяем тему
+  function applyTheme(theme) {
+    // Удаляем существующие классы тем
+    document.body.classList.remove('theme-rose', 'theme-emerald');
+    // Добавляем новую тему
+    document.body.classList.add(`theme-${theme}`);
+    
+    // Обновляем активную кнопку
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      if (btn.dataset.theme === theme) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
     });
-  },{threshold:.1});
-  document.querySelectorAll('.reveal,.stagger').forEach(function(el){io.observe(el);});
-}
-
-/* NAVBAR SCROLL */
-function initNavbar(){
-  var nav=document.getElementById('mainNav');
-  if(!nav)return;
-  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>50);},{passive:true});
-}
-
-/* RIPPLE on buttons */
-function initRipple(){
-  var st=document.createElement('style');
-  st.textContent='.rhost{position:relative;overflow:hidden}.rdot{position:absolute;border-radius:50%;background:rgba(255,255,255,.25);transform:scale(0);animation:rpl .45s linear;pointer-events:none}@keyframes rpl{to{transform:scale(4);opacity:0}}';
-  document.head.appendChild(st);
-  document.addEventListener('click',function(e){
-    var btn=e.target.closest('.btn-primary,.btn-auth,.btn-amber,[data-ripple]');
-    if(!btn)return;
-    btn.classList.add('rhost');
-    var r=btn.getBoundingClientRect(),d=Math.max(r.width,r.height);
-    var dot=document.createElement('span');dot.className='rdot';
-    Object.assign(dot.style,{width:d+'px',height:d+'px',left:(e.clientX-r.left-d/2)+'px',top:(e.clientY-r.top-d/2)+'px'});
-    btn.appendChild(dot);dot.addEventListener('animationend',function(){dot.remove();});
+    
+    // Сохраняем тему
+    localStorage.setItem('flora_luxe_theme', theme);
+  }
+  
+  // Добавляем обработчики для кнопок
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const theme = btn.dataset.theme;
+      applyTheme(theme);
+      
+      // Небольшая анимация для плавного перехода
+      document.body.style.transition = 'background 0.4s ease';
+      setTimeout(() => {
+        document.body.style.transition = '';
+      }, 400);
+    });
   });
-}
-
-/* AUTO-DISMISS MESSAGES */
-function initMessages(){
-  document.querySelectorAll('.message').forEach(function(el){
-    setTimeout(function(){
-      el.style.transition='opacity .4s';el.style.opacity='0';
-      setTimeout(function(){el.remove();},420);
-    },4500);
-  });
-}
-
-document.addEventListener('DOMContentLoaded',function(){
-  initScrollReveal();
-  initNavbar();
-  initRipple();
-  initMessages();
-});
+  
+  // Применяем сохраненную тему
+  applyTheme(savedTheme);
+})();

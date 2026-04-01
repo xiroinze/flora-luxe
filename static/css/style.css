@@ -1,283 +1,423 @@
-/* ================== FLORA LUXE — SERVER ROSE & GOLD LUMINANCE ================== */
+/* ================== FLORA LUXE — DUAL THEME SYSTEM ================== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 
-/* ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ */
-:root{
-  --gold-primary:#f3d572;
-  --gold-deep:#e0b55a;
-  --gold-dark:#c8963c;
-  --gold-glow:0 0 8px rgba(243,213,114,0.5), 0 0 16px rgba(224,181,90,0.3);
-  --gold-glow-intense:0 0 12px rgba(243,213,114,0.7), 0 0 24px rgba(224,181,90,0.5);
-  --bg-gray-rose:#2a2428;
-  --bg-card:#2f292e;
-  --border-gold:rgba(243,213,114,0.25);
+/* ================== THEME 1: ETHEREAL ROSE (СЕРО-РОЗОВЫЙ) ================== */
+.theme-rose {
+  /* Основные цвета */
+  --gold-primary: #e8d0a8;
+  --gold-deep: #c9af7b;
+  --gold-dark: #b8965a;
+  --gold-glow: 0 0 6px rgba(232,208,168,0.4), 0 0 12px rgba(201,175,123,0.25);
+  --gold-glow-intense: 0 0 8px rgba(232,208,168,0.5), 0 0 16px rgba(201,175,123,0.35);
+
+  /* Фоны */
+  --bg-primary: #2d262b;
+  --bg-secondary: #241f23;
+  --bg-card: #332c31;
+  --bg-elevated: #3d353b;
+  --border-gold: rgba(232,208,168,0.2);
+
+  /* Акценты */
+  --accent-rose: #b87c6b;
+  --accent-rose-light: #d6a28f;
+
+  background: linear-gradient(135deg, #2d262b 0%, #241f23 50%, #2a2328 100%);
 }
 
-body{
-  font-family:'DM Sans',sans-serif;
-  background:linear-gradient(135deg, #2a2428 0%, #1f1b1e 50%, #2a2428 100%);
-  min-height:100vh;
-  color:var(--gold-primary);
-  -webkit-font-smoothing:antialiased;
-  text-shadow:var(--gold-glow);
-  position:relative;
+/* ================== THEME 2: EMERALD ROYALE (ТЕМНО-ИЗУМРУДНЫЙ С ЗОЛОТОМ) ================== */
+.theme-emerald {
+  /* Основные цвета — приглушенное золото */
+  --gold-primary: #cfc49a;
+  --gold-deep: #b5a56e;
+  --gold-dark: #9b874b;
+  --gold-glow: 0 0 6px rgba(207,196,154,0.35), 0 0 10px rgba(181,165,110,0.25);
+  --gold-glow-intense: 0 0 8px rgba(207,196,154,0.45), 0 0 14px rgba(181,165,110,0.3);
+
+  /* Фоны — глубокий изумрудный */
+  --bg-primary: #1a2a24;
+  --bg-secondary: #14201b;
+  --bg-card: #1f322a;
+  --bg-elevated: #2a4036;
+  --border-gold: rgba(207,196,154,0.2);
+
+  /* Акценты — изумрудный */
+  --accent-emerald: #3f7864;
+  --accent-emerald-light: #5c9b82;
+
+  background: linear-gradient(135deg, #1a2a24 0%, #0f1f19 50%, #182822 100%);
 }
 
-/* ЭФФЕКТ ЗОЛОТОЙ ПЫЛИ (декоративный) */
-body::before{
-  content:'';
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  background:radial-gradient(circle at 20% 40%, rgba(243,213,114,0.03) 0%, transparent 50%),
-             radial-gradient(circle at 80% 70%, rgba(224,181,90,0.03) 0%, transparent 50%);
-  z-index:0;
+/* Базовые стили для body */
+body {
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  color: var(--gold-primary);
+  -webkit-font-smoothing: antialiased;
+  text-shadow: var(--gold-glow);
+  position: relative;
+  transition: background 0.4s ease, color 0.3s ease;
 }
 
-/* ВСЕ ЗАГОЛОВКИ — ЗОЛОТОЕ СИЯНИЕ */
-h1, h2, h3, h4, h5, h6, .heading-gold{
-  color:var(--gold-primary);
-  text-shadow:var(--gold-glow-intense);
-  letter-spacing:-0.02em;
-  font-weight:600;
+/* Декоративный эффект золотой пыли (приглушенный) */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 40%, rgba(232,208,168,0.02) 0%, transparent 60%),
+              radial-gradient(circle at 80% 70%, rgba(201,175,123,0.02) 0%, transparent 60%);
+  z-index: 0;
 }
 
-h1{font-size:clamp(2.5rem, 5vw, 4rem);}
-h2{font-size:clamp(2rem, 4vw, 3rem); border-bottom:2px solid var(--border-gold); display:inline-block; padding-bottom:0.5rem; margin-bottom:1.5rem;}
-h3{font-size:clamp(1.5rem, 3vw, 2rem);}
-
-/* ПАРАГРАФЫ И ОБЫЧНЫЙ ТЕКСТ */
-p, li, span:not(.badge):not(.price), .text-content{
-  color:rgba(243,213,114,0.9);
-  text-shadow:0 0 4px rgba(243,213,114,0.2);
-  line-height:1.6;
+.theme-emerald body::before {
+  background: radial-gradient(circle at 20% 40%, rgba(207,196,154,0.02) 0%, transparent 60%),
+              radial-gradient(circle at 80% 70%, rgba(181,165,110,0.02) 0%, transparent 60%);
 }
 
-/* КНОПКИ — СОВЕРШЕННЫЕ ЗОЛОТЫЕ */
-.btn,.btn-primary,.hero-btn-rose,.f-btn.buy,.ai-send{
-  background:linear-gradient(135deg, #c8963c 0%, #e0b55a 50%, #f3d572 100%);
-  color:#1a1418 !important;
-  font-weight:600;
-  border:none;
-  border-radius:50px;
-  padding:12px 32px;
-  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position:relative;
-  overflow:hidden;
-  letter-spacing:0.5px;
-  box-shadow:0 4px 15px rgba(224,181,90,0.3);
+/* ================== ЗАГОЛОВКИ ================== */
+h1, h2, h3, h4, h5, h6, .heading-gold {
+  color: var(--gold-primary);
+  text-shadow: var(--gold-glow-intense);
+  letter-spacing: -0.02em;
+  font-weight: 600;
 }
 
-/* Эффект свечения кнопок */
-.btn::before,.btn-primary::before,.hero-btn-rose::before,.f-btn.buy::before,.ai-send::before{
-  content:'';
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:100%;
-  height:100%;
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  transition:left 0.5s ease;
+h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); }
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  border-bottom: 2px solid var(--border-gold);
+  display: inline-block;
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
+
+/* ================== ТЕКСТ ================== */
+p, li, span:not(.badge):not(.price), .text-content {
+  color: rgba(207,196,154,0.85);
+  text-shadow: 0 0 3px rgba(207,196,154,0.15);
+  line-height: 1.6;
 }
 
-.btn:hover::before,.btn-primary:hover::before,.hero-btn-rose:hover::before,.f-btn.buy:hover::before,.ai-send:hover::before{
-  left:100%;
+.theme-rose p, .theme-rose li, .theme-rose span:not(.badge):not(.price) {
+  color: rgba(232,208,168,0.85);
 }
 
-.btn:hover,.btn-primary:hover,.hero-btn-rose:hover,.f-btn.buy:hover,.ai-send:hover{
-  transform:translateY(-3px) scale(1.02);
-  box-shadow:0 8px 25px rgba(224,181,90,0.5);
-  color:#1a1418 !important;
+/* ================== КНОПКИ ================== */
+.btn, .btn-primary, .hero-btn-rose, .f-btn.buy, .ai-send {
+  background: linear-gradient(135deg, #b8965a 0%, #c9af7b 50%, #e8d0a8 100%);
+  color: #1a1518 !important;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 28px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.4px;
+  box-shadow: 0 3px 12px rgba(185, 145, 85, 0.25);
+  cursor: pointer;
 }
 
-.btn-outline{
-  background:transparent;
-  color:var(--gold-primary);
-  border:2px solid var(--gold-deep);
-  box-shadow:none;
+.theme-emerald .btn, .theme-emerald .btn-primary,
+.theme-emerald .hero-btn-rose, .theme-emerald .f-btn.buy,
+.theme-emerald .ai-send {
+  background: linear-gradient(135deg, #9b874b 0%, #b5a56e 50%, #cfc49a 100%);
+  color: #121c18 !important;
+  box-shadow: 0 3px 12px rgba(155, 135, 75, 0.25);
 }
 
-.btn-outline:hover{
-  background:rgba(224,181,90,0.1);
-  border-color:var(--gold-primary);
-  color:var(--gold-primary);
-  text-shadow:var(--gold-glow);
-  transform:translateY(-2px);
-  box-shadow:0 4px 15px rgba(224,181,90,0.2);
+.btn::before, .btn-primary::before, .hero-btn-rose::before,
+.f-btn.buy::before, .ai-send::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
 }
 
-/* КАРТОЧКИ — ЭЛЕГАНТНЫЕ */
-.f-card{
-  background:linear-gradient(135deg, rgba(47,41,46,0.95) 0%, rgba(37,32,36,0.95) 100%);
-  border:1px solid var(--border-gold);
-  border-radius:24px;
-  overflow:hidden;
-  box-shadow:0 8px 20px rgba(0,0,0,0.3);
-  transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter:blur(4px);
+.btn:hover::before, .btn-primary:hover::before, .hero-btn-rose:hover::before,
+.f-btn.buy:hover::before, .ai-send:hover::before {
+  left: 100%;
 }
 
-.f-card:hover{
-  transform:translateY(-12px) scale(1.02);
-  border-color:var(--gold-deep);
-  box-shadow:0 20px 40px rgba(224,181,90,0.2), 0 0 20px rgba(243,213,114,0.1);
+.btn:hover, .btn-primary:hover, .hero-btn-rose:hover,
+.f-btn.buy:hover, .ai-send:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 6px 20px rgba(185, 145, 85, 0.4);
+  color: #1a1518 !important;
 }
 
-.f-card-img{
-  width:100%;
-  height:240px;
-  object-fit:cover;
-  display:block;
-  transition:transform 0.5s ease;
+.btn-outline {
+  background: transparent;
+  color: var(--gold-primary);
+  border: 1.5px solid var(--gold-deep);
+  box-shadow: none;
 }
 
-.f-card:hover .f-card-img{
-  transform:scale(1.05);
+.btn-outline:hover {
+  background: rgba(207,196,154,0.08);
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  text-shadow: var(--gold-glow);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 10px rgba(207,196,154,0.15);
 }
 
-.f-card-body{
-  padding:1.5rem;
-  background:linear-gradient(135deg, rgba(47,41,46,0.8) 0%, rgba(37,32,36,0.9) 100%);
+/* ================== КАРТОЧКИ ================== */
+.f-card {
+  background: linear-gradient(135deg, rgba(51,44,49,0.92) 0%, rgba(36,31,35,0.92) 100%);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(4px);
 }
 
-.f-card-name{
-  font-size:1.25rem;
-  margin-bottom:0.5rem;
-  color:var(--gold-primary);
-  text-shadow:var(--gold-glow);
-  font-weight:600;
+.theme-emerald .f-card {
+  background: linear-gradient(135deg, rgba(31,50,42,0.92) 0%, rgba(20,32,27,0.92) 100%);
 }
 
-.f-card-price{
-  color:var(--gold-deep);
-  font-weight:800;
-  font-size:1.3rem;
-  text-shadow:0 0 8px rgba(224,181,90,0.4);
-  letter-spacing:0.5px;
+.f-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: var(--gold-deep);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 15px rgba(207,196,154,0.1);
 }
 
-/* GLASS МОРФИЗМ */
-.glass{
-  background:rgba(42,36,40,0.45);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid var(--border-gold);
-  border-radius:24px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.2);
+.f-card-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
 }
 
-/* FADE-IN АНИМАЦИЯ */
-.fade-in{
-  opacity:0;
-  transform:translateY(30px);
-  transition:opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+.f-card:hover .f-card-img {
+  transform: scale(1.05);
 }
 
-.fade-in.show,.fade-in.visible{
-  opacity:1;
-  transform:translateY(0);
+.f-card-body {
+  padding: 1.2rem;
+  background: linear-gradient(135deg, rgba(51,44,49,0.7) 0%, rgba(36,31,35,0.8) 100%);
 }
 
-/* ССЫЛКИ */
-a:not(.btn):not(.btn-primary):not(.hero-btn-rose):not(.f-btn){
-  color:var(--gold-deep);
-  text-decoration:none;
-  transition:all 0.3s ease;
-  border-bottom:1px solid transparent;
+.f-card-name {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: var(--gold-primary);
+  text-shadow: var(--gold-glow);
+  font-weight: 600;
 }
 
-a:not(.btn):not(.btn-primary):not(.hero-btn-rose):not(.f-btn):hover{
-  color:var(--gold-primary);
-  text-shadow:var(--gold-glow);
-  border-bottom-color:var(--gold-deep);
+.f-card-price {
+  color: var(--gold-deep);
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-shadow: 0 0 4px rgba(207,196,154,0.3);
+  letter-spacing: 0.3px;
 }
 
-/* ФОРМЫ И ИНПУТЫ */
-input, textarea, select{
-  background:rgba(42,36,40,0.8);
-  border:1px solid var(--border-gold);
-  border-radius:12px;
-  padding:12px 16px;
-  color:var(--gold-primary);
-  transition:all 0.3s ease;
+/* ================== GLASS МОРФИЗМ ================== */
+.glass {
+  background: rgba(42,36,40,0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
 }
 
-input:focus, textarea:focus, select:focus{
-  outline:none;
-  border-color:var(--gold-deep);
-  box-shadow:0 0 0 3px rgba(224,181,90,0.2);
-  background:rgba(42,36,40,0.95);
+.theme-emerald .glass {
+  background: rgba(26,42,36,0.4);
 }
 
-input::placeholder, textarea::placeholder{
-  color:rgba(243,213,114,0.4);
+/* ================== FADE-IN АНИМАЦИЯ ================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* БЭЙДЖИ И ТЕГИ */
-.badge-gold{
-  background:linear-gradient(135deg, rgba(200,150,60,0.2), rgba(224,181,90,0.1));
-  border:1px solid var(--border-gold);
-  color:var(--gold-primary);
-  padding:4px 12px;
-  border-radius:50px;
-  font-size:0.85rem;
-  text-shadow:none;
+.fade-in.show, .fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* АДАПТИВ */
-@media(max-width:768px){
-  body{
-    background:linear-gradient(135deg, #2f292e 0%, #231f23 100%);
+/* ================== ССЫЛКИ ================== */
+a:not(.btn):not(.btn-primary):not(.hero-btn-rose):not(.f-btn) {
+  color: var(--gold-deep);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+a:not(.btn):not(.btn-primary):not(.hero-btn-rose):not(.f-btn):hover {
+  color: var(--gold-primary);
+  text-shadow: var(--gold-glow);
+  border-bottom-color: var(--gold-deep);
+}
+
+/* ================== ФОРМЫ И ИНПУТЫ ================== */
+input, textarea, select {
+  background: rgba(42,36,40,0.7);
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: var(--gold-primary);
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.theme-emerald input, .theme-emerald textarea, .theme-emerald select {
+  background: rgba(26,42,36,0.7);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--gold-deep);
+  box-shadow: 0 0 0 2px rgba(207,196,154,0.15);
+  background: rgba(42,36,40,0.85);
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(207,196,154,0.35);
+}
+
+/* ================== БЭЙДЖИ ================== */
+.badge-gold {
+  background: linear-gradient(135deg, rgba(185,145,85,0.15), rgba(207,196,154,0.08));
+  border: 1px solid var(--border-gold);
+  color: var(--gold-primary);
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  text-shadow: none;
+}
+
+/* ================== ПЕРЕКЛЮЧАТЕЛЬ ТЕМ ================== */
+.theme-switcher {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1000;
+  display: flex;
+  gap: 10px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(8px);
+  padding: 8px 12px;
+  border-radius: 50px;
+  border: 1px solid var(--border-gold);
+}
+
+.theme-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.theme-btn.rose {
+  background: linear-gradient(135deg, #b87c6b, #8b5a4c);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.theme-btn.emerald {
+  background: linear-gradient(135deg, #3f7864, #2a5a4a);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.theme-btn.active {
+  border-color: var(--gold-primary);
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(207,196,154,0.5);
+}
+
+.theme-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ================== АДАПТИВ ================== */
+@media(max-width: 768px) {
+  .f-card-img {
+    height: 180px;
   }
 
-  .f-card-img{
-    height:200px;
+  .btn, .btn-primary, .hero-btn-rose, .f-btn.buy, .ai-send {
+    padding: 8px 20px;
   }
 
-  .btn,.btn-primary,.hero-btn-rose,.f-btn.buy,.ai-send{
-    padding:10px 24px;
-  }
-}
-
-@media(max-width:480px){
-  .f-card-body{
-    padding:1rem;
+  .theme-switcher {
+    bottom: 16px;
+    left: 16px;
+    padding: 6px 10px;
   }
 
-  h2{
-    font-size:1.75rem;
+  .theme-btn {
+    width: 32px;
+    height: 32px;
   }
 }
 
-/* СКРОЛЛБАР */
-::-webkit-scrollbar{
-  width:8px;
-  height:8px;
+@media(max-width: 480px) {
+  .f-card-body {
+    padding: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 
-::-webkit-scrollbar-track{
-  background:#2a2428;
+/* ================== СКРОЛЛБАР ================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-::-webkit-scrollbar-thumb{
-  background:linear-gradient(135deg, #c8963c, #e0b55a);
-  border-radius:4px;
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
 }
 
-::-webkit-scrollbar-thumb:hover{
-  background:linear-gradient(135deg, #e0b55a, #f3d572);
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-deep));
+  border-radius: 4px;
 }
 
-/* АНИМАЦИЯ ПОЯВЛЕНИЯ ЗОЛОТОГО СВЕЧЕНИЯ */
-@keyframes goldPulse{
-  0%{text-shadow:0 0 5px rgba(243,213,114,0.3);}
-  100%{text-shadow:0 0 15px rgba(243,213,114,0.6);}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--gold-deep), var(--gold-primary));
 }
 
-.gold-pulse{
-  animation:goldPulse 2s ease-in-out infinite alternate;
+/* ================== АНИМАЦИИ ================== */
+@keyframes goldPulse {
+  0% { text-shadow: 0 0 3px rgba(207,196,154,0.3); }
+  100% { text-shadow: 0 0 8px rgba(207,196,154,0.5); }
+}
+
+.gold-pulse {
+  animation: goldPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes fadeScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-scale {
+  animation: fadeScale 0.4s ease-out forwards;
 }
