@@ -3,24 +3,16 @@
 {% block title %}Flora Luxe — {% t 'shop_name' %}{% endblock %}
 {% block extra_head %}
 <style>
-/* HERO */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse at 30% 40%,rgba(255,182,193,.5) 0%,transparent 55%),
-    radial-gradient(ellipse at 75% 65%,rgba(255,105,135,.3) 0%,transparent 55%),
-    linear-gradient(160deg,#fff5f8 0%,#ffe0ec 50%,#ffc8dc 100%)
-}
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.25) saturate(1.5)}
-.hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(165deg,rgba(255,245,248,.1) 0%,rgba(255,200,220,.35) 55%,rgba(255,180,200,.7) 100%)}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 30% 40%,rgba(255,182,193,.6) 0%,transparent 55%),radial-gradient(ellipse at 75% 65%,rgba(255,105,135,.3) 0%,transparent 55%),linear-gradient(160deg,#fff5f8 0%,#ffe0ec 50%,#ffc8dc 100%)}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.22) saturate(1.5)}
+.hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(165deg,rgba(255,245,248,.1) 0%,rgba(255,200,220,.35) 55%,rgba(255,180,200,.65) 100%)}
 
-/* ═══ ЛЕПЕСТКИ — розовые ═══ */
 .hero-particles{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
 .petal{position:absolute;bottom:-60px;opacity:0;will-change:transform,opacity;animation:floatPetal linear infinite}
-.petal-a{width:12px;height:18px;background:linear-gradient(135deg,rgba(255,182,193,.9),rgba(255,105,135,.7));border-radius:50% 0 50% 0;box-shadow:0 0 8px rgba(255,150,170,.5)}
-.petal-b{width:9px;height:14px;background:linear-gradient(135deg,rgba(255,150,180,.8),rgba(255,200,220,.6));border-radius:50% 50% 0 50%;box-shadow:0 0 6px rgba(255,130,160,.4)}
-.petal-c{width:16px;height:10px;background:linear-gradient(135deg,rgba(255,220,230,.9),rgba(255,160,180,.6));border-radius:50%;box-shadow:0 0 5px rgba(255,180,200,.4)}
+.petal-a{width:12px;height:18px;background:linear-gradient(135deg,rgba(255,182,193,.95),rgba(255,105,135,.75));border-radius:50% 0 50% 0;box-shadow:0 0 8px rgba(255,150,170,.5)}
+.petal-b{width:9px;height:14px;background:linear-gradient(135deg,rgba(255,150,180,.85),rgba(255,200,220,.65));border-radius:50% 50% 0 50%;box-shadow:0 0 6px rgba(255,130,160,.4)}
+.petal-c{width:16px;height:10px;background:linear-gradient(135deg,rgba(255,220,230,.95),rgba(255,160,180,.65));border-radius:50%;box-shadow:0 0 5px rgba(255,180,200,.4)}
 @keyframes floatPetal{
   0%{transform:translateY(0) translateX(0) rotate(0deg) scale(.6);opacity:0;filter:blur(2px)}
   8%{opacity:.9;filter:blur(0)}
@@ -31,43 +23,15 @@
   100%{transform:translateY(-115vh) translateX(-15px) rotate(540deg) scale(.7);opacity:0;filter:blur(3px)}
 }
 .spark{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,150,170,.95);box-shadow:0 0 8px 3px rgba(255,150,170,.5);opacity:0;animation:sparkFloat linear infinite;will-change:transform,opacity}
-@keyframes sparkFloat{
-  0%{transform:translateY(0) scale(0);opacity:0}
-  15%{opacity:1;transform:translateY(-15px) scale(1)}
-  80%{opacity:.5}
-  100%{transform:translateY(-55vh) scale(.2);opacity:0}
-}
+@keyframes sparkFloat{0%{transform:translateY(0) scale(0);opacity:0}15%{opacity:1;transform:translateY(-15px) scale(1)}80%{opacity:.5}100%{transform:translateY(-55vh) scale(.2);opacity:0}}
 
-/* ═══ HERO CONTENT ═══ */
 .hero-content{position:relative;z-index:3;text-align:center;padding:2rem 1.5rem;max-width:860px;width:100%}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:.45rem;font-size:.75rem;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;color:#b5312a;
-  background:rgba(255,255,255,.7);border:1px solid rgba(200,100,120,.3);
-  padding:.38rem 1rem;border-radius:2rem;margin-bottom:1.3rem;
-  animation:eyebrowIn .9s cubic-bezier(.34,1.56,.64,1) .1s both;
-  backdrop-filter:blur(8px);
-}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.45rem;font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b5312a;background:rgba(255,255,255,.75);border:1px solid rgba(200,100,120,.25);padding:.38rem 1rem;border-radius:2rem;margin-bottom:1.3rem;animation:eyebrowIn .9s cubic-bezier(.34,1.56,.64,1) .1s both;backdrop-filter:blur(8px)}
 @keyframes eyebrowIn{from{opacity:0;transform:translateY(20px) scale(.85)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-.hero-h1{
-  font-family:var(--serif);font-size:clamp(2.8rem,7vw,5.8rem);font-weight:700;
-  color:#2d0a1a;line-height:1.08;letter-spacing:-.02em;
-  text-shadow:0 2px 20px rgba(255,255,255,.8);
-  animation:titleReveal 1.1s cubic-bezier(.22,1,.36,1) .25s both;
-}
+.hero-h1{font-family:var(--serif);font-size:clamp(2.8rem,7vw,5.8rem);font-weight:700;color:#2d0a1a;line-height:1.08;letter-spacing:-.02em;text-shadow:0 2px 20px rgba(255,255,255,.7);animation:titleReveal 1.1s cubic-bezier(.22,1,.36,1) .25s both}
 @keyframes titleReveal{from{opacity:0;transform:translateY(40px) skewY(2deg);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
-
-.hero-h1 em{
-  font-style:italic;
-  background:linear-gradient(90deg,#c8963c,#e05080,#c8963c);
-  background-size:250%;-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shimmer 5s linear infinite;
-  filter:drop-shadow(0 2px 8px rgba(200,100,120,.3));
-}
+.hero-h1 em{font-style:italic;background:linear-gradient(90deg,#c8963c,#e05080,#c8963c);background-size:250%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 5s linear infinite;filter:drop-shadow(0 2px 8px rgba(200,100,120,.3))}
 @keyframes shimmer{0%{background-position:0%}100%{background-position:250%}}
-
 .hero-sub{font-size:clamp(1rem,2.4vw,1.2rem);color:rgba(45,10,26,.65);margin:1.2rem 0 2.5rem;line-height:1.65;animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .45s both}
 .hero-actions{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .6s both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}}
@@ -78,16 +42,16 @@
 .hero-btn-rose:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 18px 48px rgba(200,150,60,.6);color:#fff}
 .hero-btn-rose::after{content:'';position:absolute;inset:-4px;border-radius:3rem;border:2px solid rgba(200,150,60,.4);animation:ringPulse 2.5s ease-in-out 1.8s infinite}
 @keyframes ringPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.06);opacity:0}}
-.hero-btn-ghost{background:rgba(255,255,255,.65);backdrop-filter:blur(10px);border:1.5px solid rgba(200,100,120,.25);color:#2d0a1a}
-.hero-btn-ghost:hover{background:rgba(255,255,255,.9);transform:translateY(-4px) scale(1.03);color:#2d0a1a}
+.hero-btn-ghost{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1.5px solid rgba(200,100,120,.25);color:#2d0a1a}
+.hero-btn-ghost:hover{background:rgba(255,255,255,.92);transform:translateY(-4px) scale(1.03);color:#2d0a1a}
 
 .hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.3rem;color:rgba(181,49,42,.4);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;animation:scrollFadeIn 1s 2s both}
 .hero-scroll svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;animation:bounce 2.8s ease-in-out infinite}
 @keyframes scrollFadeIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}}
 @keyframes bounce{0%,100%{transform:translateY(0)}55%{transform:translateY(9px)}}
 
-/* ═══ TRUST STRIP ═══ */
-.trust-strip{background:rgba(255,255,255,.7);border-top:1px solid rgba(255,150,180,.2);border-bottom:1px solid rgba(255,150,180,.2);padding:1.4rem 1.5rem;backdrop-filter:blur(8px)}
+/* TRUST */
+.trust-strip{background:rgba(255,255,255,.75);border-top:1px solid rgba(255,150,180,.2);border-bottom:1px solid rgba(255,150,180,.2);padding:1.4rem 1.5rem;backdrop-filter:blur(8px)}
 .trust-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
 .trust-item{display:flex;align-items:center;gap:.65rem;padding:.7rem;border-radius:var(--r-md);transition:background .2s}
 .trust-item:hover{background:rgba(255,182,193,.2)}
@@ -97,13 +61,20 @@
 .trust-text span{font-size:.73rem;color:rgba(45,10,26,.55)}
 @media(max-width:700px){.trust-inner{grid-template-columns:repeat(2,1fr)}}
 
-/* ═══ FLOWERS ═══ */
+/* STATS */
+.stats-bar{background:rgba(255,255,255,.65);border-top:1px solid rgba(255,150,180,.2);border-bottom:1px solid rgba(255,150,180,.2);padding:2.5rem 1.5rem;backdrop-filter:blur(8px)}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center}
+.stat-item .stat-n{font-family:var(--serif);font-size:2.6rem;font-weight:700;color:#c8963c;line-height:1}
+.stat-item .stat-l{font-size:.73rem;color:rgba(45,10,26,.55);margin-top:.3rem;text-transform:uppercase;letter-spacing:.07em}
+@media(max-width:640px){.stats-inner{grid-template-columns:repeat(2,1fr)}}
+
+/* FLOWERS */
 .flowers-section{max-width:1280px;margin:0 auto;padding:5rem 1.5rem 3rem}
 .sec-header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.8rem}
 .sec-header p{color:rgba(45,10,26,.55);font-size:.88rem;margin-top:.5rem;max-width:380px}
 .flowers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:1.4rem}
 
-.f-card{background:rgba(255,255,255,.9);border:1px solid rgba(255,150,180,.2);border-radius:1.4rem;overflow:hidden;box-shadow:0 4px 20px rgba(255,100,150,.1);position:relative;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s;display:block;text-decoration:none;color:inherit}
+.f-card{background:rgba(255,255,255,.9);border:1px solid rgba(255,150,180,.2);border-radius:1.4rem;overflow:hidden;box-shadow:0 4px 20px rgba(255,100,150,.08);position:relative;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s;display:block;text-decoration:none;color:inherit}
 .f-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(200,150,60,.2);border-color:rgba(200,150,60,.4)}
 .f-card-img-wrap{width:100%;height:220px;overflow:hidden;position:relative}
 .f-card-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
@@ -123,14 +94,7 @@
 .f-btn.buy{background:linear-gradient(135deg,#a07828,#c8963c);color:#fff;border-color:transparent;box-shadow:0 3px 12px rgba(200,150,60,.35)}
 .f-btn.buy:hover{opacity:.88;color:#fff;transform:translateY(-1px)}
 
-/* ═══ STATS ═══ */
-.stats-bar{background:rgba(255,255,255,.6);border-top:1px solid rgba(255,150,180,.2);border-bottom:1px solid rgba(255,150,180,.2);padding:2.5rem 1.5rem;backdrop-filter:blur(8px)}
-.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center}
-.stat-item .stat-n{font-family:var(--serif);font-size:2.6rem;font-weight:700;color:#c8963c;line-height:1}
-.stat-item .stat-l{font-size:.73rem;color:rgba(45,10,26,.55);margin-top:.3rem;text-transform:uppercase;letter-spacing:.07em}
-@media(max-width:640px){.stats-inner{grid-template-columns:repeat(2,1fr)}}
-
-/* ═══ AI CHAT ═══ */
+/* AI */
 .ai-widget{max-width:680px;margin:0 auto 4rem;padding:0 1.5rem}
 .ai-box{background:rgba(255,255,255,.85);border:1px solid rgba(255,150,180,.2);border-radius:var(--r-xl);overflow:hidden;box-shadow:0 8px 32px rgba(255,100,150,.1);backdrop-filter:blur(12px)}
 .ai-header{display:flex;align-items:center;gap:.75rem;padding:1.2rem 1.4rem;border-bottom:1px solid rgba(255,150,180,.15);background:linear-gradient(90deg,rgba(255,240,245,.9),rgba(255,255,255,.9))}
@@ -138,8 +102,8 @@
 .ai-avatar svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round}
 .ai-header-text strong{display:block;font-size:.9rem;font-weight:600;color:#2d0a1a}
 .ai-header-text span{font-size:.75rem;color:rgba(45,10,26,.55)}
-.ai-online{margin-left:auto;display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:#2ecc71;font-weight:600}
-.ai-online::before{content:'';width:7px;height:7px;border-radius:50%;background:#2ecc71;animation:pulse 2s ease-in-out infinite}
+.ai-online{margin-left:auto;display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:#27ae60;font-weight:600}
+.ai-online::before{content:'';width:7px;height:7px;border-radius:50%;background:#27ae60;animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .ai-msgs{padding:1rem 1.2rem;min-height:100px;max-height:220px;overflow-y:auto}
 .ai-msg{display:flex;gap:.55rem;margin-bottom:.75rem}
@@ -149,7 +113,7 @@
 .ai-bubble.user-b{background:linear-gradient(135deg,#a07828,#c8963c);color:#fff;border-radius:var(--r-md) var(--r-md) .25rem var(--r-md)}
 .ai-suggestions{display:flex;gap:.4rem;flex-wrap:wrap;padding:.6rem 1.2rem .8rem}
 .ai-sug{padding:.3rem .75rem;background:rgba(255,240,245,.8);border:1px solid rgba(255,150,180,.25);border-radius:2rem;font-size:.74rem;color:#b5312a;cursor:pointer;transition:all .2s;white-space:nowrap}
-.ai-sug:hover{background:rgba(255,182,193,.3);color:#b5312a;border-color:rgba(181,49,42,.3)}
+.ai-sug:hover{background:rgba(255,182,193,.3);border-color:rgba(181,49,42,.3)}
 .ai-input-row{display:flex;gap:.5rem;padding:.8rem 1rem;border-top:1px solid rgba(255,150,180,.15)}
 .ai-input{flex:1;padding:.6rem .9rem;border:1.5px solid rgba(255,150,180,.25);border-radius:var(--r-xl);background:rgba(255,245,248,.8);color:#2d0a1a;font-family:var(--sans);font-size:.84rem;outline:none;transition:border-color .2s;min-height:42px}
 .ai-input::placeholder{color:rgba(181,49,42,.3)}
@@ -158,9 +122,9 @@
 .ai-send:hover{transform:scale(1.08);opacity:.9}
 .ai-send svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
 
-/* ═══ CTA ═══ */
+/* CTA */
 .cta-wrap{max-width:940px;margin:3rem auto 6rem;padding:0 1.5rem}
-.cta-box{background:linear-gradient(140deg,rgba(255,255,255,.9),rgba(255,220,235,.8));border:1px solid rgba(200,150,60,.2);border-radius:var(--r-2xl);padding:3.8rem 2rem;text-align:center;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(255,100,150,.15);backdrop-filter:blur(12px)}
+.cta-box{background:linear-gradient(140deg,rgba(255,255,255,.9),rgba(255,220,235,.8));border:1px solid rgba(200,150,60,.2);border-radius:var(--r-2xl);padding:3.8rem 2rem;text-align:center;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(255,100,150,.12);backdrop-filter:blur(12px)}
 .cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,182,193,.3),transparent 65%);pointer-events:none}
 .cta-deco{position:absolute;bottom:1rem;right:1.8rem;opacity:.1;font-size:3.2rem;letter-spacing:.5rem;pointer-events:none}
 .cta-box h2{font-family:var(--serif);font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;color:#c8963c;margin-bottom:.7rem;position:relative}
@@ -179,15 +143,8 @@
   .ai-widget{padding:0 .75rem}
   .trust-inner{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:380px){
-  .flowers-grid{grid-template-columns:1fr!important}
-  .f-card-img-wrap,.f-card-ph{height:180px}
-}
-@media(prefers-reduced-motion:reduce){
-  .petal,.spark{display:none}
-  .hero-eyebrow,.hero-h1,.hero-sub,.hero-actions,.hero-scroll{animation:none;opacity:1;transform:none}
-  .hero-btn-rose::after{display:none}
-}
+@media(max-width:380px){.flowers-grid{grid-template-columns:1fr!important}.f-card-img-wrap,.f-card-ph{height:180px}}
+@media(prefers-reduced-motion:reduce){.petal,.spark{display:none}.hero-eyebrow,.hero-h1,.hero-sub,.hero-actions,.hero-scroll{animation:none;opacity:1;transform:none}.hero-btn-rose::after{display:none}}
 </style>
 {% endblock %}
 
@@ -205,7 +162,9 @@
       Premium Flower Shop
     </div>
     <h1 class="hero-h1">
-      {% if current_lang == 'uz' %}Tabiat go'zalligi<br>har bir <em>guldastada</em>{% elif current_lang == 'en' %}Nature's beauty<br>in every <em>bouquet</em>{% else %}Красота природы<br>в каждом <em>букете</em>{% endif %}
+      {% if current_lang == 'uz' %}Tabiat go'zalligi<br>har bir <em>guldastada</em>
+      {% elif current_lang == 'en' %}Nature's beauty<br>in every <em>bouquet</em>
+      {% else %}Красота природы<br>в каждом <em>букете</em>{% endif %}
     </h1>
     <p class="hero-sub">{% t 'slogan' %}</p>
     <div class="hero-actions">
@@ -255,7 +214,7 @@
       {% else %}<div class="f-card-ph"><svg viewBox="0 0 80 80" fill="none"><path d="M40 10C40 10 28 18 28 30C28 39.4 33 43.5 40 46C47 43.5 52 39.4 52 30C52 18 40 10 40 10Z" fill="#e05080" opacity=".4"/><path d="M40 46L40 68" stroke="#c8963c" stroke-width="3" stroke-linecap="round"/></svg></div>{% endif %}
       <div class="f-card-ribbon">New</div>
       <div class="f-card-body">
-        <div class="f-card-cat"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>{{ flower.category.name }}</div>
+        <div class="f-card-cat"><svg viewBox="0 0 24 24" fill="none" stroke="#e05080" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>{{ flower.category.name }}</div>
         <div class="f-card-name">{{ flower.name }}</div>
         <div class="f-card-price">{{ flower.price }} {% t 'price' %}</div>
         <div class="f-card-actions">
@@ -304,75 +263,56 @@
 
 <script>
 (function(){
-  var c = document.getElementById('heroPetals');
-  if(!c) return;
-  var types = ['petal-a','petal-b','petal-c'];
-  for(var i = 0; i < 30; i++){
-    var el = document.createElement('div');
-    el.className = 'petal ' + types[i % 3];
-    var size = 8 + Math.random() * 12;
-    el.style.cssText = [
-      'left:' + (Math.random() * 100) + '%',
-      'width:' + size + 'px',
-      'height:' + (size * (0.7 + Math.random() * 0.9)) + 'px',
-      'animation-duration:' + (10 + Math.random() * 12) + 's',
-      'animation-delay:' + (Math.random() * 8) + 's'
-    ].join(';');
+  var c=document.getElementById('heroPetals');if(!c)return;
+  var types=['petal-a','petal-b','petal-c'];
+  for(var i=0;i<30;i++){
+    var el=document.createElement('div');
+    el.className='petal '+types[i%3];
+    var size=8+Math.random()*12;
+    el.style.cssText=['left:'+(Math.random()*100)+'%','width:'+size+'px','height:'+(size*(0.7+Math.random()*0.9))+'px','animation-duration:'+(10+Math.random()*12)+'s','animation-delay:'+(Math.random()*8)+'s'].join(';');
     c.appendChild(el);
   }
-  for(var j = 0; j < 12; j++){
-    var sp = document.createElement('div');
-    sp.className = 'spark';
-    sp.style.cssText = [
-      'left:' + (10 + Math.random() * 80) + '%',
-      'bottom:' + (Math.random() * 25) + '%',
-      'animation-duration:' + (5 + Math.random() * 8) + 's',
-      'animation-delay:' + (Math.random() * 6) + 's'
-    ].join(';');
+  for(var j=0;j<12;j++){
+    var sp=document.createElement('div');sp.className='spark';
+    sp.style.cssText=['left:'+(10+Math.random()*80)+'%','bottom:'+(Math.random()*25)+'%','animation-duration:'+(5+Math.random()*8)+'s','animation-delay:'+(Math.random()*6)+'s'].join(';');
     c.appendChild(sp);
   }
-  var v = document.getElementById('heroVid');
-  if(v) setTimeout(function(){ if(v.readyState < 2) v.style.display='none'; }, 7000);
+  var v=document.getElementById('heroVid');
+  if(v)setTimeout(function(){if(v.readyState<2)v.style.display='none';},7000);
 })();
-
-function quickCart(pk, btn){
-  var orig = btn.innerHTML;
-  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg>';
-  btn.style.background = 'linear-gradient(135deg,#a07828,#c8963c)';
-  fetch('/cart/add/'+pk+'/', {headers:{'X-Requested-With':'XMLHttpRequest'}}).catch(function(){});
-  setTimeout(function(){ btn.innerHTML = orig; btn.style.background = ''; window.location.href = '/cart/add/'+pk+'/'; }, 900);
+function quickCart(pk,btn){
+  var orig=btn.innerHTML;
+  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg>';
+  btn.style.background='linear-gradient(135deg,#a07828,#c8963c)';
+  fetch('/cart/add/'+pk+'/',{headers:{'X-Requested-With':'XMLHttpRequest'}}).catch(function(){});
+  setTimeout(function(){btn.innerHTML=orig;btn.style.background='';window.location.href='/cart/add/'+pk+'/';},900);
 }
-function appendMsg(text, role){
-  var msgs = document.getElementById('aiMsgs');
-  var div = document.createElement('div');
-  div.className = 'ai-msg' + (role==='user' ? ' user' : '');
-  div.innerHTML = '<div class="ai-bubble ' + (role==='user' ? 'user-b' : 'bot') + '">' + text + '</div>';
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
+function appendMsg(text,role){
+  var msgs=document.getElementById('aiMsgs');
+  var div=document.createElement('div');
+  div.className='ai-msg'+(role==='user'?' user':'');
+  div.innerHTML='<div class="ai-bubble '+(role==='user'?'user-b':'bot')+'">'+text+'</div>';
+  msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
 }
-function askAI(q){ document.getElementById('aiInput').value = q; sendAI(); }
+function askAI(q){document.getElementById('aiInput').value=q;sendAI();}
 function sendAI(){
-  var inp = document.getElementById('aiInput');
-  var q = inp.value.trim(); if(!q) return;
-  appendMsg(q, 'user'); inp.value = '';
-  document.getElementById('aiSugs').style.display = 'none';
-  var wait = document.createElement('div');
-  wait.className = 'ai-msg'; wait.id = 'aiTyping';
-  wait.innerHTML = '<div class="ai-bubble bot" style="opacity:.5">{% t "typing" %}</div>';
+  var inp=document.getElementById('aiInput');
+  var q=inp.value.trim();if(!q)return;
+  appendMsg(q,'user');inp.value='';
+  document.getElementById('aiSugs').style.display='none';
+  var wait=document.createElement('div');wait.className='ai-msg';wait.id='aiTyping';
+  wait.innerHTML='<div class="ai-bubble bot" style="opacity:.5">{% t "typing" %}</div>';
   document.getElementById('aiMsgs').appendChild(wait);
-  document.getElementById('aiMsgs').scrollTop = 9999;
-  fetch("{% url 'ai_chat' %}", {
-    method:'POST',
-    headers:{'Content-Type':'application/json','X-CSRFToken':'{{ csrf_token }}'},
-    body: JSON.stringify({question: q})
-  }).then(function(r){ return r.json(); }).then(function(d){
-    var t = document.getElementById('aiTyping'); if(t) t.remove();
-    appendMsg(d.response, 'bot');
+  document.getElementById('aiMsgs').scrollTop=9999;
+  fetch("{% url 'ai_chat' %}",{method:'POST',headers:{'Content-Type':'application/json','X-CSRFToken':'{{ csrf_token }}'},body:JSON.stringify({question:q})})
+  .then(function(r){return r.json();}).then(function(d){
+    var t=document.getElementById('aiTyping');if(t)t.remove();
+    appendMsg(d.response,'bot');
   }).catch(function(){
-    var t = document.getElementById('aiTyping'); if(t) t.remove();
-    appendMsg('{% if current_lang == "uz" %}Xatolik{% elif current_lang == "en" %}Error{% else %}Ошибка{% endif %}', 'bot');
+    var t=document.getElementById('aiTyping');if(t)t.remove();
+    appendMsg('{% if current_lang == "uz" %}Xatolik{% elif current_lang == "en" %}Error{% else %}Ошибка{% endif %}','bot');
   });
 }
-document.getElementById('aiInput').addEventListener('keydown', function(e){ if(e.key==='Enter') sendAI(); });
+document.getElementById('aiInput').addEventListener('keydown',function(e){if(e.key==='Enter')sendAI();});
 </script>
 {% endblock %}

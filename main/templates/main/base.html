@@ -19,21 +19,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
   :root {
-    --ink:#0d0118; --ink2:#130020; --ink3:#1e0530; --ink4:#2a0a3e;
-    --surface:rgba(13,1,24,.97);
-    --rose:#b5312a; --rose2:#d94035; --rose3:#e85d52;
-    --amber:#c8963c; --amber2:#e0b55a; --amber3:#f5d080;
-    --sage:#6b21a8; --sage2:#9d4edd;
-    --cream:#f0ebe0; --cream2:#d4cfc4;
-    --mist:rgba(240,235,224,.55);
-    --edge:rgba(90,24,154,.2); --edge2:rgba(90,24,154,.2);
+    --ink:#fff5f8; --ink2:#ffe8f0; --ink3:#ffd6e7; --ink4:#ffc8dc;
+    --surface:rgba(255,245,248,.97);
+    --rose:#e05080; --rose2:#d63060; --rose3:#c8963c;
+    --amber:#c8963c; --amber2:#b5312a; --amber3:#e05080;
+    --sage:#b5312a; --sage2:#c8963c;
+    --cream:#2d0a1a; --cream2:#4a1525;
+    --mist:rgba(45,10,26,.55);
+    --edge:rgba(255,150,180,.2); --edge2:rgba(200,150,60,.15);
     --nav-h:64px;
     --bottom-nav-h:64px;
     --r-xs:.5rem; --r-sm:.75rem; --r-md:1rem; --r-lg:1.4rem; --r-xl:1.8rem; --r-2xl:2.5rem;
     --sh-sm:0 2px 12px rgba(0,0,0,.4); --sh-md:0 8px 32px rgba(0,0,0,.55); --sh-lg:0 20px 60px rgba(0,0,0,.7);
     --serif:'Cormorant Garamond',Georgia,serif;
     --sans:'DM Sans',-apple-system,sans-serif;
-    --grad-rose:linear-gradient(135deg,#8e2218,#b5312a,#d94035);
+    --grad-rose:linear-gradient(135deg,#a07828,#c8963c,#e0b55a);
     --grad-amber:linear-gradient(135deg,#a07828,#c8963c,#e0b55a);
     /* Соцсети */
     --ig: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
@@ -44,8 +44,8 @@
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
-  body{font-family:var(--sans);background:var(--ink);color:var(--cream);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding-bottom:var(--bottom-nav-h)}
-  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 800px 600px at 15% 20%,rgba(181,49,42,.07) 0%,transparent 100%),radial-gradient(ellipse 600px 800px at 85% 75%,rgba(30,80,35,.09) 0%,transparent 100%)}
+  body{font-family:var(--sans);background:linear-gradient(160deg,#ffffff 0%,#fff0f5 40%,#ffd6e7 100%);color:#2d0a1a;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding-bottom:var(--bottom-nav-h)}
+  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 800px 600px at 15% 20%,rgba(255,182,193,.15) 0%,transparent 100%),radial-gradient(ellipse 600px 800px at 85% 75%,rgba(255,150,170,.1) 0%,transparent 100%)}
   a{color:var(--rose3);text-decoration:none;transition:color .2s}
   a:hover{color:var(--amber2)}
   img{max-width:100%;display:block}
@@ -95,11 +95,11 @@
   .user-init{font-size:.78rem;font-weight:700;color:var(--amber2);text-transform:uppercase;line-height:1}
   .user-init img{width:100%;height:100%;object-fit:cover}
   /* dropdown */
-  .user-drop{display:none;position:absolute;top:calc(100% + 10px);right:0;min-width:210px;background:#0b1610;border:1px solid rgba(200,150,60,.18);border-radius:var(--r-lg);padding:.85rem .45rem .65rem;box-shadow:0 40px 100px rgba(0,0,0,.85);z-index:2000}
+  .user-drop{display:none;position:absolute;top:calc(100% + 10px);right:0;min-width:210px;background:#fff5f8;border:1px solid rgba(255,150,180,.25);border-radius:var(--r-lg);padding:.85rem .45rem .65rem;box-shadow:0 40px 100px rgba(0,0,0,.85);z-index:2000}
   .user-drop.open{display:block;animation:dropIn .2s cubic-bezier(.22,1,.36,1)}
   @keyframes dropIn{from{opacity:0;transform:translateY(-8px) scale(.97)}}
   .drop-close{position:absolute;top:.4rem;right:.5rem;width:22px;height:22px;border-radius:50%;background:rgba(181,49,42,.18);border:none;color:var(--rose3);font-size:.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
-  .drop-name{font-size:.78rem;font-weight:600;color:var(--amber2);padding:.05rem .65rem .65rem;border-bottom:1px solid rgba(200,150,60,.1);margin-bottom:.4rem}
+  .drop-name{font-size:.78rem;font-weight:600;color:#c8963c;padding:.05rem .65rem .65rem;border-bottom:1px solid rgba(200,150,60,.1);margin-bottom:.4rem}
   .drop-item{display:flex;align-items:center;gap:.5rem;padding:.48rem .65rem;border-radius:var(--r-xs);color:var(--mist);font-size:.83rem;font-weight:500;text-decoration:none;transition:all .18s}
   .drop-item svg{width:15px;height:15px;flex-shrink:0}
   .drop-item:hover{background:rgba(200,150,60,.07);color:var(--cream)}
@@ -198,7 +198,7 @@
   /* ═══════════════════════════════════════
      FOOTER
   ═══════════════════════════════════════ */
-  footer{background:var(--ink2);border-top:1px solid var(--edge);padding:4rem 1.5rem 2.5rem;margin-top:6rem;position:relative;z-index:1}
+  footer{background:rgba(255,232,240,.9);border-top:1px solid rgba(255,150,180,.2);padding:4rem 1.5rem 2.5rem;margin-top:6rem;position:relative;z-index:1}
   .footer-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:3rem}
   .footer-brand .brand-logo{font-family:var(--serif);font-size:1.55rem;font-weight:700;color:var(--amber2);display:flex;align-items:center;gap:.5rem;margin-bottom:.7rem}
   .footer-brand p{font-size:.82rem;color:var(--mist);line-height:1.75;margin-bottom:1.1rem}
