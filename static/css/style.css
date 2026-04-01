@@ -1,37 +1,283 @@
-/* ================== FLORA LUXE — PINK WHITE THEME ================== */
+/* ================== FLORA LUXE — SERVER ROSE & GOLD LUMINANCE ================== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:linear-gradient(160deg,#ffffff 0%,#fff0f5 40%,#ffd6e7 100%);min-height:100vh;color:#2d0a1a;-webkit-font-smoothing:antialiased}
 
-/* КНОПКИ — ЗОЛОТЫЕ */
+/* ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ */
+:root{
+  --gold-primary:#f3d572;
+  --gold-deep:#e0b55a;
+  --gold-dark:#c8963c;
+  --gold-glow:0 0 8px rgba(243,213,114,0.5), 0 0 16px rgba(224,181,90,0.3);
+  --gold-glow-intense:0 0 12px rgba(243,213,114,0.7), 0 0 24px rgba(224,181,90,0.5);
+  --bg-gray-rose:#2a2428;
+  --bg-card:#2f292e;
+  --border-gold:rgba(243,213,114,0.25);
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:linear-gradient(135deg, #2a2428 0%, #1f1b1e 50%, #2a2428 100%);
+  min-height:100vh;
+  color:var(--gold-primary);
+  -webkit-font-smoothing:antialiased;
+  text-shadow:var(--gold-glow);
+  position:relative;
+}
+
+/* ЭФФЕКТ ЗОЛОТОЙ ПЫЛИ (декоративный) */
+body::before{
+  content:'';
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  background:radial-gradient(circle at 20% 40%, rgba(243,213,114,0.03) 0%, transparent 50%),
+             radial-gradient(circle at 80% 70%, rgba(224,181,90,0.03) 0%, transparent 50%);
+  z-index:0;
+}
+
+/* ВСЕ ЗАГОЛОВКИ — ЗОЛОТОЕ СИЯНИЕ */
+h1, h2, h3, h4, h5, h6, .heading-gold{
+  color:var(--gold-primary);
+  text-shadow:var(--gold-glow-intense);
+  letter-spacing:-0.02em;
+  font-weight:600;
+}
+
+h1{font-size:clamp(2.5rem, 5vw, 4rem);}
+h2{font-size:clamp(2rem, 4vw, 3rem); border-bottom:2px solid var(--border-gold); display:inline-block; padding-bottom:0.5rem; margin-bottom:1.5rem;}
+h3{font-size:clamp(1.5rem, 3vw, 2rem);}
+
+/* ПАРАГРАФЫ И ОБЫЧНЫЙ ТЕКСТ */
+p, li, span:not(.badge):not(.price), .text-content{
+  color:rgba(243,213,114,0.9);
+  text-shadow:0 0 4px rgba(243,213,114,0.2);
+  line-height:1.6;
+}
+
+/* КНОПКИ — СОВЕРШЕННЫЕ ЗОЛОТЫЕ */
 .btn,.btn-primary,.hero-btn-rose,.f-btn.buy,.ai-send{
-  background:linear-gradient(135deg,#a07828,#c8963c,#e0b55a);
-  color:#fff !important;
-  box-shadow:0 6px 20px rgba(200,150,60,.35);
-  border-color:transparent;
+  background:linear-gradient(135deg, #c8963c 0%, #e0b55a 50%, #f3d572 100%);
+  color:#1a1418 !important;
+  font-weight:600;
+  border:none;
+  border-radius:50px;
+  padding:12px 32px;
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position:relative;
+  overflow:hidden;
+  letter-spacing:0.5px;
+  box-shadow:0 4px 15px rgba(224,181,90,0.3);
 }
-.btn:hover,.btn-primary:hover,.hero-btn-rose:hover,.f-btn.buy:hover{
-  color:#fff !important;
-  transform:translateY(-3px);
-  box-shadow:0 12px 32px rgba(200,150,60,.55);
-  opacity:.92;
+
+/* Эффект свечения кнопок */
+.btn::before,.btn-primary::before,.hero-btn-rose::before,.f-btn.buy::before,.ai-send::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition:left 0.5s ease;
 }
-.btn-outline{background:transparent;color:#b5312a;border:1.5px solid rgba(181,49,42,.3)}
-.btn-outline:hover{border-color:#c8963c;color:#c8963c;background:rgba(200,150,60,.06)}
 
-/* КАРТОЧКИ */
-.f-card{background:rgba(255,255,255,.9);border:1px solid rgba(255,150,180,.2);border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(255,100,150,.08);transition:transform .3s,box-shadow .3s,border-color .3s}
-.f-card:hover{transform:translateY(-8px) scale(1.01);border-color:rgba(200,150,60,.4);box-shadow:0 20px 50px rgba(200,150,60,.18)}
-.f-card-img{width:100%;height:220px;object-fit:cover;display:block}
-.f-card-body{padding:1.2rem;background:rgba(255,255,255,.95)}
-.f-card-name{font-size:1.15rem;margin-bottom:.4rem;color:#2d0a1a}
-.f-card-price{color:#c8963c;font-weight:700}
+.btn:hover::before,.btn-primary:hover::before,.hero-btn-rose:hover::before,.f-btn.buy:hover::before,.ai-send:hover::before{
+  left:100%;
+}
 
-/* GLASS */
-.glass{background:rgba(255,255,255,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,150,180,.2)}
+.btn:hover,.btn-primary:hover,.hero-btn-rose:hover,.f-btn.buy:hover,.ai-send:hover{
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 8px 25px rgba(224,181,90,0.5);
+  color:#1a1418 !important;
+}
 
-/* FADE-IN */
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
-.fade-in.show,.fade-in.visible{opacity:1;transform:none}
+.btn-outline{
+  background:transparent;
+  color:var(--gold-primary);
+  border:2px solid var(--gold-deep);
+  box-shadow:none;
+}
 
-@media(max-width:768px){body{background:linear-gradient(160deg,#fff5f8 0%,#ffe0ec 100%)}}
+.btn-outline:hover{
+  background:rgba(224,181,90,0.1);
+  border-color:var(--gold-primary);
+  color:var(--gold-primary);
+  text-shadow:var(--gold-glow);
+  transform:translateY(-2px);
+  box-shadow:0 4px 15px rgba(224,181,90,0.2);
+}
+
+/* КАРТОЧКИ — ЭЛЕГАНТНЫЕ */
+.f-card{
+  background:linear-gradient(135deg, rgba(47,41,46,0.95) 0%, rgba(37,32,36,0.95) 100%);
+  border:1px solid var(--border-gold);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter:blur(4px);
+}
+
+.f-card:hover{
+  transform:translateY(-12px) scale(1.02);
+  border-color:var(--gold-deep);
+  box-shadow:0 20px 40px rgba(224,181,90,0.2), 0 0 20px rgba(243,213,114,0.1);
+}
+
+.f-card-img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  display:block;
+  transition:transform 0.5s ease;
+}
+
+.f-card:hover .f-card-img{
+  transform:scale(1.05);
+}
+
+.f-card-body{
+  padding:1.5rem;
+  background:linear-gradient(135deg, rgba(47,41,46,0.8) 0%, rgba(37,32,36,0.9) 100%);
+}
+
+.f-card-name{
+  font-size:1.25rem;
+  margin-bottom:0.5rem;
+  color:var(--gold-primary);
+  text-shadow:var(--gold-glow);
+  font-weight:600;
+}
+
+.f-card-price{
+  color:var(--gold-deep);
+  font-weight:800;
+  font-size:1.3rem;
+  text-shadow:0 0 8px rgba(224,181,90,0.4);
+  letter-spacing:0.5px;
+}
+
+/* GLASS МОРФИЗМ */
+.glass{
+  background:rgba(42,36,40,0.45);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--border-gold);
+  border-radius:24px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.2);
+}
+
+/* FADE-IN АНИМАЦИЯ */
+.fade-in{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in.show,.fade-in.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ССЫЛКИ */
+a:not(.btn):not(.btn-primary):not(.hero-btn-rose):not(.f-btn){
+  color:var(--gold-deep);
+  text-decoration:none;
+  transition:all 0.3s ease;
+  border-bottom:1px solid transparent;
+}
+
+a:not(.btn):not(.btn-primary):not(.hero-btn-rose):not(.f-btn):hover{
+  color:var(--gold-primary);
+  text-shadow:var(--gold-glow);
+  border-bottom-color:var(--gold-deep);
+}
+
+/* ФОРМЫ И ИНПУТЫ */
+input, textarea, select{
+  background:rgba(42,36,40,0.8);
+  border:1px solid var(--border-gold);
+  border-radius:12px;
+  padding:12px 16px;
+  color:var(--gold-primary);
+  transition:all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus{
+  outline:none;
+  border-color:var(--gold-deep);
+  box-shadow:0 0 0 3px rgba(224,181,90,0.2);
+  background:rgba(42,36,40,0.95);
+}
+
+input::placeholder, textarea::placeholder{
+  color:rgba(243,213,114,0.4);
+}
+
+/* БЭЙДЖИ И ТЕГИ */
+.badge-gold{
+  background:linear-gradient(135deg, rgba(200,150,60,0.2), rgba(224,181,90,0.1));
+  border:1px solid var(--border-gold);
+  color:var(--gold-primary);
+  padding:4px 12px;
+  border-radius:50px;
+  font-size:0.85rem;
+  text-shadow:none;
+}
+
+/* АДАПТИВ */
+@media(max-width:768px){
+  body{
+    background:linear-gradient(135deg, #2f292e 0%, #231f23 100%);
+  }
+
+  .f-card-img{
+    height:200px;
+  }
+
+  .btn,.btn-primary,.hero-btn-rose,.f-btn.buy,.ai-send{
+    padding:10px 24px;
+  }
+}
+
+@media(max-width:480px){
+  .f-card-body{
+    padding:1rem;
+  }
+
+  h2{
+    font-size:1.75rem;
+  }
+}
+
+/* СКРОЛЛБАР */
+::-webkit-scrollbar{
+  width:8px;
+  height:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:#2a2428;
+}
+
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(135deg, #c8963c, #e0b55a);
+  border-radius:4px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(135deg, #e0b55a, #f3d572);
+}
+
+/* АНИМАЦИЯ ПОЯВЛЕНИЯ ЗОЛОТОГО СВЕЧЕНИЯ */
+@keyframes goldPulse{
+  0%{text-shadow:0 0 5px rgba(243,213,114,0.3);}
+  100%{text-shadow:0 0 15px rgba(243,213,114,0.6);}
+}
+
+.gold-pulse{
+  animation:goldPulse 2s ease-in-out infinite alternate;
+}
