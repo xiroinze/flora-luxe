@@ -1,100 +1,79 @@
-/* ================== FLORA LUXE FINAL CSS ================== */
+/* ================== FLORA LUXE — ЗОЛОТЫЕ КНОПКИ ================== */
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:#1a0a2e;   /* фиолетово-чёрный базовый */
-  color:#f5ede0;
-  -webkit-font-smoothing:antialiased;
-}
+body{font-family:'DM Sans',sans-serif;background:#1a0a2e;color:#f5ede0;-webkit-font-smoothing:antialiased}
 
 /* ================== HERO ================== */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(90,24,154,.35), transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(40,10,80,.4), transparent 50%),
-    linear-gradient(160deg, #0d0118 0%, #1a0a2e 50%, #0d0118 100%);
-}
-
-.hero::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 20%, rgba(90,24,154,.12), transparent 60%);
-  pointer-events:none;z-index:1;
-}
-
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 20% 30%,rgba(90,24,154,.3),transparent 50%),radial-gradient(circle at 80% 70%,rgba(40,10,80,.4),transparent 50%),linear-gradient(160deg,#0d0118 0%,#1a0a2e 50%,#0d0118 100%)}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 20%,rgba(200,150,60,.06),transparent 60%);pointer-events:none;z-index:1}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.3) saturate(1.3) hue-rotate(260deg)}
 .hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(13,1,24,.2),rgba(13,1,24,.85))}
 .hero-content{position:relative;z-index:3;text-align:center;padding:2rem 1.2rem;max-width:800px}
-
 .hero-h1{font-size:clamp(2.4rem,7vw,5rem);font-weight:700;line-height:1.1}
-.hero-h1 em{
-  font-style:italic;
-  background:linear-gradient(90deg,#c77dff,#9d4edd,#e0aaff,#c77dff);
-  background-size:200%;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shimmer 4s linear infinite;
-}
+.hero-h1 em{font-style:italic;background:linear-gradient(90deg,#f5d080,#c8963c,#e0b55a,#f5d080);background-size:200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s linear infinite}
 @keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
-
 .hero-sub{color:rgba(245,237,224,.7);margin:1.2rem 0 2.2rem;font-size:1rem}
 
-/* ================== BUTTONS ================== */
-.hero-btn{
-  padding:.9rem 2rem;border-radius:50px;font-weight:600;
-  text-decoration:none;display:inline-block;
-  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;
+/* ================== КНОПКИ — ЗОЛОТЫЕ ================== */
+.btn-primary,
+.hero-btn-rose,
+.hero-btn-red,
+.f-btn.buy,
+.ai-send{
+  background:linear-gradient(135deg,#a07828,#c8963c,#e0b55a) !important;
+  color:#111 !important;
+  box-shadow:0 8px 25px rgba(200,150,60,.4) !important;
+  border-color:transparent !important;
 }
-.hero-btn-red{
-  background:linear-gradient(135deg,#5a189a,#7b2fbe);
-  color:#fff;box-shadow:0 8px 25px rgba(90,24,154,.45);
+.btn-primary:hover,
+.hero-btn-rose:hover,
+.hero-btn-red:hover,
+.f-btn.buy:hover{
+  color:#111 !important;
+  transform:translateY(-3px);
+  box-shadow:0 14px 40px rgba(200,150,60,.6) !important;
+  opacity:.95;
 }
-.hero-btn-red:hover{color:#fff;transform:translateY(-3px);box-shadow:0 14px 40px rgba(90,24,154,.65)}
+.btn-outline{
+  background:transparent;
+  color:#c8963c;
+  border:1.5px solid rgba(200,150,60,.45);
+}
+.btn-outline:hover{
+  border-color:#c8963c;
+  background:rgba(200,150,60,.08);
+  color:#e0b55a;
+}
+
+.hero-btn{padding:.9rem 2rem;border-radius:50px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.45rem;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,opacity .2s;min-height:52px;border:none;font-size:.92rem;cursor:pointer}
+.hero-btn svg{width:16px;height:16px}
+.hero-btn-ghost{background:rgba(200,150,60,.1) !important;backdrop-filter:blur(10px);border:1.5px solid rgba(200,150,60,.3) !important;color:rgba(245,237,224,.9) !important;box-shadow:none !important}
+.hero-btn-ghost:hover{background:rgba(200,150,60,.2) !important;color:#fff !important;transform:translateY(-3px)}
+
+/* Пульсирующее кольцо вокруг главной кнопки */
+.hero-btn-rose{position:relative}
+.hero-btn-rose::after{content:'';position:absolute;inset:-4px;border-radius:3rem;border:2px solid rgba(200,150,60,.5);animation:ringPulse 2.5s ease-in-out 1.8s infinite}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.06);opacity:0}}
 
 /* ================== CARDS ================== */
-.f-card{
-  position:relative;background:#150824;
-  border:1px solid rgba(90,24,154,.25);
-  border-radius:20px;overflow:hidden;
-  transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s;
-}
-.f-card:hover{
-  transform:translateY(-8px) scale(1.01);
-  border-color:rgba(90,24,154,.6);
-  box-shadow:0 25px 60px rgba(90,24,154,.35);
-}
+.f-card{position:relative;background:#150824;border:1px solid rgba(200,150,60,.15);border-radius:20px;overflow:hidden;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s}
+.f-card:hover{transform:translateY(-8px) scale(1.01);border-color:rgba(200,150,60,.45);box-shadow:0 25px 60px rgba(200,150,60,.2)}
 .f-card-img{width:100%;height:220px;object-fit:cover;display:block}
 .f-card-body{padding:1.2rem}
 .f-card-name{font-size:1.15rem;margin-bottom:.4rem;color:#f0ebe0}
-.f-card-price{color:#c77dff;font-weight:700}
-
-/* glow border */
-.f-card::before{
-  content:'';position:absolute;inset:0;border-radius:inherit;
-  background:linear-gradient(120deg,transparent,rgba(90,24,154,.25),transparent);
-  opacity:0;transition:opacity .3s;pointer-events:none;z-index:0;
-}
+.f-card-price{color:#c8963c;font-weight:700}
+.f-card::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,transparent,rgba(200,150,60,.12),transparent);opacity:0;transition:opacity .3s;pointer-events:none;z-index:0}
 .f-card:hover::before{opacity:1}
 .f-card-img,.f-card-body{position:relative;z-index:1}
 
 /* ================== CTA ================== */
-.cta-inner{
-  background:linear-gradient(135deg,#0d0118,#1a0830);
-  border:1px solid rgba(90,24,154,.3);border-radius:30px;
-  padding:2.5rem;text-align:center;box-shadow:0 20px 60px rgba(90,24,154,.3);
-}
-.cta-inner h2{color:#c77dff;margin-bottom:1rem}
+.cta-inner{background:linear-gradient(135deg,#0d0118,#1a0830);border:1px solid rgba(200,150,60,.25);border-radius:30px;padding:2.5rem;text-align:center;box-shadow:0 20px 60px rgba(200,150,60,.15)}
+.cta-inner h2{color:#c8963c;margin-bottom:1rem}
 
 /* ================== GLASS ================== */
-.glass{
-  background:rgba(90,24,154,.08);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(90,24,154,.2);
-}
+.glass{background:rgba(200,150,60,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(200,150,60,.15)}
 
 /* ================== FADE-IN ================== */
 .fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
@@ -108,5 +87,3 @@ body{
   .f-card-img{height:180px}
   .cta-inner{padding:1.8rem}
 }
-
-button,a{transition:all .25s ease}
