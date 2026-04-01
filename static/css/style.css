@@ -1,253 +1,112 @@
 /* ================== FLORA LUXE FINAL CSS ================== */
 
-/* ===== RESET ===== */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: #020403;
-  color: #f5ede0;
-  -webkit-font-smoothing: antialiased;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#1a0a2e;   /* фиолетово-чёрный базовый */
+  color:#f5ede0;
+  -webkit-font-smoothing:antialiased;
 }
 
 /* ================== HERO ================== */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
 
-/* BACKGROUND */
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(212,168,67,.15), transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(40,90,60,.18), transparent 45%),
-    linear-gradient(160deg, #020403 0%, #0a120c 50%, #020403 100%);
+    radial-gradient(circle at 20% 30%, rgba(90,24,154,.35), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(40,10,80,.4), transparent 50%),
+    linear-gradient(160deg, #0d0118 0%, #1a0a2e 50%, #0d0118 100%);
 }
 
-/* GOLD LIGHT */
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 20%, rgba(212,168,67,.07), transparent 60%);
-  pointer-events: none;
-  z-index: 1;
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 20%, rgba(90,24,154,.12), transparent 60%);
+  pointer-events:none;z-index:1;
 }
 
-.hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  filter: brightness(.35) saturate(1.2);
-}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.3) saturate(1.3) hue-rotate(260deg)}
+.hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(13,1,24,.2),rgba(13,1,24,.85))}
+.hero-content{position:relative;z-index:3;text-align:center;padding:2rem 1.2rem;max-width:800px}
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.8));
+.hero-h1{font-size:clamp(2.4rem,7vw,5rem);font-weight:700;line-height:1.1}
+.hero-h1 em{
+  font-style:italic;
+  background:linear-gradient(90deg,#c77dff,#9d4edd,#e0aaff,#c77dff);
+  background-size:200%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shimmer 4s linear infinite;
 }
+@keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
 
-.hero-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  padding: 2rem 1.2rem;
-  max-width: 800px;
-}
-
-/* TEXT */
-.hero-h1 {
-  font-size: clamp(2.4rem, 7vw, 5rem);
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.hero-h1 em {
-  font-style: italic;
-  background: linear-gradient(90deg, #f5d67a, #d4a843, #f5d67a);
-  background-size: 200%;
-  -webkit-background-clip: text;
-  background-clip: text;          /* FIX 1: добавлен стандартный background-clip */
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 4s linear infinite;
-}
-
-@keyframes shimmer {
-  0%   { background-position: 0% }
-  100% { background-position: 200% }
-}
-
-.hero-sub {
-  color: rgba(245,237,224,.7);
-  margin: 1.2rem 0 2.2rem;
-  font-size: 1rem;
-}
+.hero-sub{color:rgba(245,237,224,.7);margin:1.2rem 0 2.2rem;font-size:1rem}
 
 /* ================== BUTTONS ================== */
-.hero-btn {
-  padding: .9rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-block;
-  transition: transform .25s ease, box-shadow .25s ease;  /* FIX 2: убран transition:all — конфликт с base.html */
+.hero-btn{
+  padding:.9rem 2rem;border-radius:50px;font-weight:600;
+  text-decoration:none;display:inline-block;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;
 }
-
-/* FIX 3: переименован в hero-btn-gold (был hero-btn-red, но цвет золотой) */
-.hero-btn-gold,
-.hero-btn-red {          /* оставлен алиас для обратной совместимости */
-  background: linear-gradient(135deg, #d4a843, #b8962e);
-  color: #111;
-  box-shadow: 0 8px 25px rgba(212,168,67,.3);
+.hero-btn-red{
+  background:linear-gradient(135deg,#5a189a,#7b2fbe);
+  color:#fff;box-shadow:0 8px 25px rgba(90,24,154,.45);
 }
-
-.hero-btn-gold:hover,
-.hero-btn-red:hover {
-  color: #111;            /* FIX 4: без этого base.html перекрашивает ховер в amber2 */
-  transform: translateY(-3px);
-  box-shadow: 0 14px 40px rgba(212,168,67,.5);
-}
+.hero-btn-red:hover{color:#fff;transform:translateY(-3px);box-shadow:0 14px 40px rgba(90,24,154,.65)}
 
 /* ================== CARDS ================== */
-.f-card {
-  position: relative;    /* FIX 5: обязателен для ::before с position:absolute */
-  background: #0a120c;
-  border: 1px solid rgba(255,255,255,.07);
-  border-radius: 20px;
-  overflow: hidden;
-  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;  /* FIX 6: точные свойства вместо .3s */
+.f-card{
+  position:relative;background:#150824;
+  border:1px solid rgba(90,24,154,.25);
+  border-radius:20px;overflow:hidden;
+  transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s;
 }
+.f-card:hover{
+  transform:translateY(-8px) scale(1.01);
+  border-color:rgba(90,24,154,.6);
+  box-shadow:0 25px 60px rgba(90,24,154,.35);
+}
+.f-card-img{width:100%;height:220px;object-fit:cover;display:block}
+.f-card-body{padding:1.2rem}
+.f-card-name{font-size:1.15rem;margin-bottom:.4rem;color:#f0ebe0}
+.f-card-price{color:#c77dff;font-weight:700}
 
-.f-card:hover {
-  transform: translateY(-8px) scale(1.01);
-  border-color: rgba(212,168,67,.4);
-  box-shadow: 0 25px 60px rgba(0,0,0,.7);
+/* glow border */
+.f-card::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(120deg,transparent,rgba(90,24,154,.25),transparent);
+  opacity:0;transition:opacity .3s;pointer-events:none;z-index:0;
 }
-
-.f-card-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;        /* FIX 7: убирает inline-gap под картинкой */
-}
-
-.f-card-body {
-  padding: 1.2rem;
-}
-
-.f-card-name {
-  font-size: 1.15rem;
-  margin-bottom: .4rem;
-  color: #f5ede0;        /* FIX 8: явный цвет — не наследует rose3 из base.html */
-}
-
-.f-card-price {
-  color: #d4a843;
-  font-weight: 700;
-}
+.f-card:hover::before{opacity:1}
+.f-card-img,.f-card-body{position:relative;z-index:1}
 
 /* ================== CTA ================== */
-.cta-inner {
-  background: linear-gradient(135deg, #0a140f, #1a1408);
-  border: 1px solid rgba(212,168,67,.2);
-  border-radius: 30px;
-  padding: 2.5rem;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,.7);
+.cta-inner{
+  background:linear-gradient(135deg,#0d0118,#1a0830);
+  border:1px solid rgba(90,24,154,.3);border-radius:30px;
+  padding:2.5rem;text-align:center;box-shadow:0 20px 60px rgba(90,24,154,.3);
 }
-
-.cta-inner h2 {
-  color: #d4a843;
-  margin-bottom: 1rem;
-}
+.cta-inner h2{color:#c77dff;margin-bottom:1rem}
 
 /* ================== GLASS ================== */
-.glass {
-  background: rgba(255,255,255,.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);   /* FIX 9: добавлен webkit-prefix для Safari */
-  border: 1px solid rgba(255,255,255,.08);
-}
-
-/* ================== MOBILE ================== */
-@media (max-width: 768px) {
-
-  .hero {
-    min-height: 90vh;
-  }
-
-  .hero-h1 {
-    font-size: 2.2rem;
-  }
-
-  .hero-sub {
-    font-size: .9rem;
-  }
-
-  .f-card-img {
-    height: 180px;
-  }
-
-  .cta-inner {
-    padding: 1.8rem;
-  }
-}
-
-/* ================== GLOWING BORDER ================== */
-.f-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(120deg, transparent, rgba(212,168,67,.2), transparent);
-  opacity: 0;
-  transition: opacity .3s ease;
-  pointer-events: none;   /* FIX 10: не перехватывает клики */
-  z-index: 0;
-}
-
-.f-card:hover::before {
-  opacity: 1;
-}
-
-/* Контент карточки поверх glow-слоя */
-.f-card-img,
-.f-card-body {
-  position: relative;
-  z-index: 1;
+.glass{
+  background:rgba(90,24,154,.08);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(90,24,154,.2);
 }
 
 /* ================== FADE-IN ================== */
-/* FIX 11: оставлен как алиас поверх .reveal из base.html */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .6s ease, transform .6s ease;
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.show,.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ================== MOBILE ================== */
+@media(max-width:768px){
+  .hero{min-height:90vh}
+  .hero-h1{font-size:2.2rem}
+  .hero-sub{font-size:.9rem}
+  .f-card-img{height:180px}
+  .cta-inner{padding:1.8rem}
 }
 
-.fade-in.show,
-.fade-in.visible {     /* поддержка обоих классов-триггеров */
-  opacity: 1;
-  transform: translateY(0);
-}
+button,a{transition:all .25s ease}
