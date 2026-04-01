@@ -3,54 +3,549 @@
 {% block title %}{% if current_lang == 'uz' %}Kirish{% elif current_lang == 'en' %}Sign In{% else %}Войти{% endif %} — Flora Luxe{% endblock %}
 {% block extra_head %}
 <style>
-.auth-wrap{min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;justify-content:center;padding:2rem 1rem;position:relative;z-index:1}
-.auth-wrap::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(181,49,42,.07),transparent 55%),radial-gradient(ellipse at 70% 30%,rgba(30,80,35,.07),transparent 55%);pointer-events:none;z-index:0}
-.auth-box{width:100%;max-width:420px;position:relative;z-index:1}
+:root {
+  --bg-dark: #2a2428;
+  --bg-card: #2f292e;
+  --bg-elevated: #3a3338;
+  --text-gold: #f3d572;
+  --text-gold-soft: rgba(243,213,114,0.7);
+  --gold-primary: #e0b55a;
+  --gold-dark: #c8963c;
+  --border-gold: rgba(243,213,114,0.25);
+  --grad-gold: linear-gradient(135deg, #c8963c 0%, #e0b55a 50%, #f3d572 100%);
+  --shadow-gold: 0 4px 15px rgba(224,181,90,0.2);
+  --shadow-gold-lg: 0 8px 25px rgba(224,181,90,0.3);
+  --shadow-dark: 0 8px 20px rgba(0,0,0,0.3);
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-xl: 24px;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', sans-serif;
+}
 
-/* LOGO TOP */
-.auth-brand{text-align:center;margin-bottom:1.8rem}
-.auth-brand-logo{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--amber2);display:flex;align-items:center;justify-content:center;gap:.5rem;text-shadow:0 0 40px rgba(200,150,60,.25)}
-.auth-brand-logo svg{width:28px;height:28px}
-.auth-brand-sub{font-size:.78rem;color:var(--mist);margin-top:.3rem;letter-spacing:.06em}
+.auth-wrap {
+  min-height: calc(100svh - var(--nav-h, 80px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 1;
+}
 
-/* CARD */
-.auth-card{background:var(--ink2);border:1px solid var(--edge);border-radius:var(--r-xl);padding:2.2rem 2rem;box-shadow:var(--sh-lg);animation:authIn .5s cubic-bezier(.22,1,.36,1)}
-@keyframes authIn{from{opacity:0;transform:translateY(24px)}}
-.auth-heading{margin-bottom:1.6rem}
-.auth-heading h1{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:var(--cream);margin-bottom:.2rem;letter-spacing:-.01em}
-.auth-heading p{font-size:.83rem;color:var(--mist)}
+/* Защищенный фон с золотым свечением */
+.auth-wrap::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(224,181,90,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 65%, rgba(243,213,114,0.06) 0%, transparent 60%),
+    repeating-linear-gradient(45deg, rgba(224,181,90,0.02) 0px, rgba(224,181,90,0.02) 2px, transparent 2px, transparent 8px);
+  pointer-events: none;
+  z-index: 0;
+}
 
-/* GOOGLE BTN */
-.btn-google{width:100%;padding:.78rem 1rem;border:1.5px solid var(--edge);border-radius:var(--r-sm);background:var(--ink3);color:var(--cream);font-family:var(--sans);font-size:.87rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;transition:all .2s;text-decoration:none;min-height:48px;margin-bottom:1.2rem}
-.btn-google:hover{border-color:rgba(200,150,60,.35);background:var(--ink4);color:var(--cream)}
-.btn-google svg{width:18px;height:18px;flex-shrink:0}
-.btn-google span{font-weight:600}
+/* Анимация защищенного фона */
+@keyframes securePulse {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
 
-/* DIVIDER */
-.auth-or{display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem}
-.auth-or::before,.auth-or::after{content:'';flex:1;height:1px;background:var(--edge)}
-.auth-or span{font-size:.72rem;color:var(--mist);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.auth-wrap::after {
+  content: '🔒';
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 1.5rem;
+  opacity: 0.15;
+  pointer-events: none;
+  animation: securePulse 3s ease-in-out infinite alternate;
+}
 
-/* FIELDS */
-.auth-field{margin-bottom:1rem}
-.auth-field label{display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--mist);margin-bottom:.35rem}
-.auth-field input{width:100%;padding:.72rem 1rem;border:1.5px solid var(--edge);border-radius:var(--r-sm);background:var(--ink3);color:var(--cream);font-family:var(--sans);font-size:.9rem;outline:none;transition:border-color .2s;min-height:48px;-webkit-appearance:none}
-.auth-field input::placeholder{color:rgba(240,235,224,.22)}
-.auth-field input:focus{border-color:var(--rose)}
-.auth-field .errorlist{list-style:none;margin-top:.3rem}
-.auth-field .errorlist li{font-size:.75rem;color:var(--rose3);padding:.2rem 0}
-.non-field-errors{font-size:.8rem;color:var(--rose3);background:rgba(181,49,42,.1);border:1px solid var(--edge2);border-radius:var(--r-xs);padding:.6rem .9rem;margin-bottom:.9rem}
+.auth-box {
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  z-index: 1;
+}
 
-/* SUBMIT */
-.btn-auth{width:100%;padding:.82rem;border:none;border-radius:var(--r-sm);background:var(--grad-rose);color:#fff;font-family:var(--sans);font-size:.93rem;font-weight:600;cursor:pointer;box-shadow:0 6px 20px rgba(181,49,42,.35);transition:all .2s;min-height:48px;margin-top:.3rem;letter-spacing:.01em}
-.btn-auth:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 8px 26px rgba(181,49,42,.48)}
+/* Бренд с золотым свечением */
+.auth-brand {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
 
-/* FOOTER */
-.auth-foot{text-align:center;margin-top:1.3rem;font-size:.83rem;color:var(--mist)}
-.auth-foot a{color:var(--amber2);font-weight:600;transition:color .2s}
-.auth-foot a:hover{color:var(--amber3)}
+.auth-brand-logo {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  text-shadow: 0 0 20px rgba(243,213,114,0.4), 0 0 40px rgba(224,181,90,0.2);
+  letter-spacing: -0.02em;
+}
 
-@media(max-width:440px){.auth-card{padding:1.8rem 1.3rem}}
+.auth-brand-logo svg {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 0 5px rgba(224,181,90,0.5));
+}
+
+.auth-brand-sub {
+  font-size: .78rem;
+  color: var(--text-gold-soft);
+  margin-top: .3rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-shadow: 0 0 3px rgba(243,213,114,0.2);
+}
+
+/* Карточка входа с защищенным эффектом */
+.auth-card {
+  background: linear-gradient(135deg, rgba(47,41,46,0.98) 0%, rgba(37,32,36,0.98) 100%);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem 2.2rem;
+  box-shadow: var(--shadow-dark), 0 0 0 1px rgba(243,213,114,0.1) inset;
+  animation: authIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Защищенная рамка с золотым свечением */
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--gold-dark), var(--text-gold), var(--gold-dark));
+  border-radius: var(--radius-xl);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.auth-card:hover::before {
+  opacity: 0.1;
+}
+
+/* Защищенный замок в углу */
+.auth-card::after {
+  content: '🔒';
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  font-size: 1rem;
+  opacity: 0.1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.auth-card:hover::after {
+  opacity: 0.2;
+}
+
+@keyframes authIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-heading {
+  margin-bottom: 1.8rem;
+}
+
+.auth-heading h1 {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--text-gold);
+  margin-bottom: .3rem;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 10px rgba(243,213,114,0.3);
+}
+
+.auth-heading p {
+  font-size: .85rem;
+  color: var(--text-gold-soft);
+  text-shadow: 0 0 2px rgba(243,213,114,0.1);
+}
+
+/* Google кнопка */
+.btn-google {
+  width: 100%;
+  padding: .82rem 1rem;
+  border: 1.5px solid var(--border-gold);
+  border-radius: var(--radius-sm);
+  background: rgba(42,36,40,0.6);
+  color: var(--text-gold);
+  font-family: var(--font-sans);
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  min-height: 52px;
+  margin-bottom: 1.2rem;
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-google::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(243,213,114,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-google:hover::before {
+  left: 100%;
+}
+
+.btn-google:hover {
+  border-color: var(--gold-primary);
+  background: rgba(224,181,90,0.1);
+  color: var(--text-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(224,181,90,0.2);
+}
+
+.btn-google svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.btn-google span {
+  font-weight: 600;
+}
+
+/* Разделитель */
+.auth-or {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin-bottom: 1.4rem;
+}
+
+.auth-or::before,
+.auth-or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+}
+
+.auth-or span {
+  font-size: .75rem;
+  color: var(--text-gold-soft);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* Поля формы */
+.auth-field {
+  margin-bottom: 1.1rem;
+}
+
+.auth-field label {
+  display: block;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-gold-soft);
+  margin-bottom: .4rem;
+  text-shadow: 0 0 2px rgba(243,213,114,0.2);
+}
+
+.auth-field input {
+  width: 100%;
+  padding: .85rem 1rem;
+  border: 1.5px solid var(--border-gold);
+  border-radius: var(--radius-sm);
+  background: rgba(42,36,40,0.8);
+  color: var(--text-gold);
+  font-family: var(--font-sans);
+  font-size: .95rem;
+  outline: none;
+  transition: all 0.3s ease;
+  min-height: 52px;
+  -webkit-appearance: none;
+}
+
+.auth-field input::placeholder {
+  color: rgba(243,213,114,0.25);
+}
+
+.auth-field input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 3px rgba(224,181,90,0.15);
+  background: rgba(42,36,40,0.95);
+  transform: translateY(-1px);
+}
+
+.auth-field .errorlist {
+  list-style: none;
+  margin-top: .4rem;
+}
+
+.auth-field .errorlist li {
+  font-size: .75rem;
+  color: #ffb347;
+  padding: .2rem 0;
+}
+
+.non-field-errors {
+  font-size: .82rem;
+  color: #ffb347;
+  background: rgba(224,181,90,0.1);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-sm);
+  padding: .8rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Кнопка входа */
+.btn-auth {
+  width: 100%;
+  padding: .95rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--grad-gold);
+  color: #1a1418;
+  font-family: var(--font-sans);
+  font-size: .98rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(224,181,90,0.3);
+  transition: all 0.3s ease;
+  min-height: 54px;
+  margin-top: .5rem;
+  letter-spacing: .02em;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Эффект волны на кнопке */
+.btn-auth::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-auth:hover::before {
+  left: 100%;
+}
+
+.btn-auth:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(224,181,90,0.5);
+  filter: brightness(1.02);
+}
+
+.btn-auth:active {
+  transform: translateY(0);
+}
+
+/* Футер со ссылкой */
+.auth-foot {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: .85rem;
+  color: var(--text-gold-soft);
+}
+
+.auth-foot a {
+  color: var(--gold-primary);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.auth-foot a:hover {
+  color: var(--text-gold);
+  text-shadow: 0 0 8px rgba(243,213,114,0.4);
+  border-bottom-color: var(--gold-primary);
+}
+
+/* Индикатор защищенного соединения */
+.security-badge {
+  text-align: center;
+  margin-top: 1.2rem;
+  font-size: 0.7rem;
+  color: rgba(243,213,114,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.security-badge span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.security-badge svg {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+}
+
+/* Анимация для полей при фокусе */
+.auth-field input:focus {
+  animation: fieldGlow 0.3s ease-out;
+}
+
+@keyframes fieldGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(224,181,90,0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 3px rgba(224,181,90,0.15);
+  }
+}
+
+/* Стили для пароля */
+.auth-field input[type="password"] {
+  letter-spacing: 0.05em;
+}
+
+/* Адаптивность */
+@media(max-width: 500px) {
+  .auth-card {
+    padding: 1.8rem 1.3rem;
+  }
+
+  .auth-heading h1 {
+    font-size: 1.6rem;
+  }
+
+  .auth-brand-logo {
+    font-size: 1.6rem;
+  }
+
+  .auth-brand-logo svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .btn-auth, .btn-google {
+    min-height: 48px;
+  }
+
+  .security-badge {
+    font-size: 0.65rem;
+    gap: 0.4rem;
+  }
+}
+
+@media(max-width: 380px) {
+  .auth-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .auth-field input {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+}
+
+/* Анимация загрузки */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn-auth.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.btn-auth.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: 2px solid rgba(26,20,24,0.2);
+  border-top-color: #1a1418;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Всплывающее уведомление */
+.notification-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--grad-gold);
+  color: #1a1418;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  box-shadow: var(--shadow-gold-lg);
+  z-index: 1000;
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Стили для чекбокса "Запомнить меня" (если есть в форме) */
+.auth-field input[type="checkbox"] {
+  width: auto;
+  min-height: auto;
+  margin-right: 0.5rem;
+  accent-color: var(--gold-primary);
+}
 </style>
 {% endblock %}
 {% block content %}
@@ -58,7 +553,12 @@
   <div class="auth-box">
     <div class="auth-brand">
       <div class="auth-brand-logo">
-        <svg viewBox="0 0 32 32" fill="none"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#c8963c"/><path d="M16 3C16 3 23 7 24.5 13.5C25.7 18.5 23.5 22.5 19.5 24C20.2 21 19.5 18 17.5 15.2C16.5 13.7 16.2 10 16 3Z" fill="#e0b55a" opacity=".7"/><path d="M16 24.2L16 30" stroke="#4a6e50" stroke-width="2" stroke-linecap="round"/><path d="M16 28C16 28 12 25.8 10 28" stroke="#4a6e50" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#c8963c"/>
+          <path d="M16 3C16 3 23 7 24.5 13.5C25.7 18.5 23.5 22.5 19.5 24C20.2 21 19.5 18 17.5 15.2C16.5 13.7 16.2 10 16 3Z" fill="#e0b55a" opacity=".7"/>
+          <path d="M16 24.2L16 30" stroke="#e0b55a" stroke-width="2" stroke-linecap="round"/>
+          <path d="M16 28C16 28 12 25.8 10 28" stroke="#e0b55a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        </svg>
         Flora Luxe
       </div>
       <div class="auth-brand-sub">Premium Flower Shop</div>
@@ -72,16 +572,25 @@
 
       <!-- Google -->
       <a href="{% url 'google_login' %}" class="btn-google">
-        <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.2 1.2 8.3 3.2l6.2-6.2C34.7 3 29.7 1 24 1 15.4 1 8 6 4.3 13.3l7.3 5.7C13.3 13.5 18.2 9.5 24 9.5z"/><path fill="#4285F4" d="M46.6 24.5c0-1.6-.1-3.2-.4-4.7H24v8.9h12.7c-.6 3-2.3 5.5-4.7 7.2l7.3 5.7C43.4 37.5 46.6 31.5 46.6 24.5z"/><path fill="#FBBC04" d="M11.6 28.9C11 27.3 10.6 25.7 10.6 24s.4-3.3 1-4.9L4.3 13.3C2.3 17 1 20.9 1 24s1.3 7 3.3 10.7l7.3-5.8z"/><path fill="#34A853" d="M24 47c5.7 0 10.6-1.9 14.1-5.1l-7.3-5.7c-1.9 1.3-4.4 2-6.8 2-5.8 0-10.7-4-12.4-9.3L4.3 34.7C8 42 15.4 47 24 47z"/></svg>
+        <svg viewBox="0 0 48 48">
+          <path fill="#EA4335" d="M24 9.5c3.5 0 6.2 1.2 8.3 3.2l6.2-6.2C34.7 3 29.7 1 24 1 15.4 1 8 6 4.3 13.3l7.3 5.7C13.3 13.5 18.2 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.6 24.5c0-1.6-.1-3.2-.4-4.7H24v8.9h12.7c-.6 3-2.3 5.5-4.7 7.2l7.3 5.7C43.4 37.5 46.6 31.5 46.6 24.5z"/>
+          <path fill="#FBBC04" d="M11.6 28.9C11 27.3 10.6 25.7 10.6 24s.4-3.3 1-4.9L4.3 13.3C2.3 17 1 20.9 1 24s1.3 7 3.3 10.7l7.3-5.8z"/>
+          <path fill="#34A853" d="M24 47c5.7 0 10.6-1.9 14.1-5.1l-7.3-5.7c-1.9 1.3-4.4 2-6.8 2-5.8 0-10.7-4-12.4-9.3L4.3 34.7C8 42 15.4 47 24 47z"/>
+        </svg>
         <span>{% if current_lang == 'uz' %}Google orqali kirish{% elif current_lang == 'en' %}Continue with Google{% else %}Войти через Google{% endif %}</span>
       </a>
 
       <div class="auth-or"><span>{% if current_lang == 'uz' %}yoki{% elif current_lang == 'en' %}or{% else %}или{% endif %}</span></div>
 
-      <form method="post">
+      <form method="post" id="loginForm">
         {% csrf_token %}
         {% if form.non_field_errors %}
-          <div class="non-field-errors">{{ form.non_field_errors }}</div>
+          <div class="non-field-errors">
+            {% for error in form.non_field_errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
         {% endif %}
         {% for field in form %}
         <div class="auth-field">
@@ -90,7 +599,7 @@
           {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
         </div>
         {% endfor %}
-        <button type="submit" class="btn-auth">
+        <button type="submit" class="btn-auth" id="loginBtn">
           {% if current_lang == 'uz' %}Kirish{% elif current_lang == 'en' %}Sign In{% else %}Войти{% endif %}
         </button>
       </form>
@@ -98,7 +607,70 @@
       <div class="auth-foot">
         {% if current_lang == 'uz' %}Hisob yo'qmi? <a href="{% url 'register' %}">Ro'yxatdan o'tish</a>{% elif current_lang == 'en' %}No account? <a href="{% url 'register' %}">Sign up</a>{% else %}Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a>{% endif %}
       </div>
+
+      <div class="security-badge">
+        <span>🔒 Secure Login</span>
+        <span>•</span>
+        <span>✨ SSL Encrypted</span>
+        <span>•</span>
+        <span>🛡️ Protected</span>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+// Form submit with loading state
+document.getElementById('loginForm')?.addEventListener('submit', function(e) {
+  const loginBtn = document.getElementById('loginBtn');
+  if (loginBtn) {
+    const originalText = loginBtn.innerHTML;
+    loginBtn.innerHTML = '⏳ {% if current_lang == 'uz' %}Kutilmoqda...{% elif current_lang == 'en' %}Please wait...{% else %}Пожалуйста, подождите...{% endif %}';
+    loginBtn.classList.add('loading');
+    loginBtn.disabled = true;
+
+    // Восстановить кнопку в случае ошибки (через 10 секунд)
+    setTimeout(() => {
+      if (loginBtn.disabled) {
+        loginBtn.innerHTML = originalText;
+        loginBtn.classList.remove('loading');
+        loginBtn.disabled = false;
+      }
+    }, 10000);
+  }
+});
+
+// Добавляем анимацию для полей при фокусе
+document.querySelectorAll('.auth-field input').forEach(input => {
+  input.addEventListener('focus', function() {
+    this.parentElement.classList.add('focused');
+  });
+  input.addEventListener('blur', function() {
+    this.parentElement.classList.remove('focused');
+  });
+});
+
+// Клавиатурная навигация
+document.querySelectorAll('.auth-field input').forEach((input, index, arr) => {
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const nextInput = arr[index + 1];
+      if (nextInput) {
+        nextInput.focus();
+      } else {
+        document.getElementById('loginForm')?.submit();
+      }
+    }
+  });
+});
+
+// Автофокус на первом поле
+setTimeout(() => {
+  const firstInput = document.querySelector('.auth-field input');
+  if (firstInput) {
+    firstInput.focus();
+  }
+}, 100);
+</script>
 {% endblock %}
