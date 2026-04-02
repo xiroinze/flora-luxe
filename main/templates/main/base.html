@@ -3,280 +3,309 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#e8d5dc">
+  <meta name="theme-color" content="#d9c2cc">
   <meta name="description" content="Flora Luxe — премиальный цветочный магазин. Свежие цветы с доставкой по Бухаре.">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Flora Luxe">
-  <meta property="og:title" content="Flora Luxe — Premium Flower Shop">
-  <meta property="og:description" content="Свежие цветы и авторские букеты с доставкой">
-  <meta property="og:type" content="website">
-  <title>Flora Luxe — {% block title %}Flower Shop{% endblock %}</title>
+  <title>Flora Luxe — О компании</title>
   {% load static %}
   {% load i18n_tags %}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-  :root {
-    /* Глубокая серо-розовая гамма — насыщенный, но элегантный фон, отличная читаемость */
-    --ink:#1e1a1c;        /* глубокий угольно-розовый для основного текста */
-    --ink2:#3c2e33;       /* насыщенный тёмный */
-    --ink3:#c7b2bb;       /* средний серо-розовый для элементов */
-    --ink4:#e0cfd7;       /* светлый акцент */
-    --surface:rgba(230, 215, 222, 0.96); /* панели с легкой дымкой */
-    --rose:#b26274;       /* приглушенная роза, но сочная */
-    --rose2:#9e4d60;      /* глубокий розовый */
-    --rose3:#c47b8c;      /* мягкий акцент */
-    --amber:#b58a6b;      /* тёплый беж с розовым подтоном */
-    --amber2:#9e6f50;     /* насыщенный карамельный */
-    --amber3:#c99a78;
-    --sage:#5e5b5c;       /* нейтральный серо-коричневый */
-    --sage2:#7b6e72;
-    --cream:#fcf6f8;      /* почти белый с розовым отливом */
-    --cream2:#e8d5dc;     /* ОСНОВНОЙ ФОН: насыщенный серо-розовый, не бледный */
-    --mist:rgba(30, 26, 28, 0.7); /* полупрозрачный для подписей, но читаемый */
-    --edge:rgba(178, 98, 116, 0.35);
-    --edge2:rgba(158, 111, 80, 0.25);
-    --nav-h:64px;
-    --bottom-nav-h:64px;
-    --r-xs:.5rem; --r-sm:.75rem; --r-md:1rem; --r-lg:1.4rem; --r-xl:1.8rem; --r-2xl:2.5rem;
-    --sh-sm:0 4px 14px rgba(0,0,0,0.12);
-    --sh-md:0 12px 30px rgba(0,0,0,0.2);
-    --sh-lg:0 24px 48px rgba(0,0,0,0.25);
-    --serif:'Cormorant Garamond',Georgia,serif;
-    --sans:'DM Sans',-apple-system,sans-serif;
-    --grad-rose:linear-gradient(135deg, #b26274, #c47b8c, #d9a1ae);
-    --grad-amber:linear-gradient(135deg, #b58a6b, #c99a78, #e0b898);
-    --ig:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
-    --tg:#229ED9; --fb:#1877F2; --wa:#25D366; --yt:#FF0000;
-  }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
-  body{
-    font-family:var(--sans);
-    background: #e8d5dc;  /* насыщенный серо-розовый фон, текст читается идеально */
-    color:var(--ink);
-    min-height:100vh;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-    padding-bottom:var(--bottom-nav-h)
-  }
-  /* деликатные радиальные акценты, не перебивающие фон */
-  body::before{
-    content:'';
-    position:fixed;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-    background:radial-gradient(ellipse 900px 700px at 15% 10%, rgba(178,98,116,0.12) 0%, transparent 70%),
-               radial-gradient(ellipse 800px 900px at 90% 85%, rgba(158,111,80,0.1) 0%, transparent 75%);
-  }
-  a{color:var(--rose3);text-decoration:none;transition:color .2s}
-  a:hover{color:var(--amber2)}
-  img{max-width:100%;display:block}
-  main{position:relative;z-index:1}
-  button,input,textarea,select{font-family:var(--sans)}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* SPLASH — обновлён под основной фон */
-  #splash{position:fixed;inset:0;z-index:9999;background:var(--cream2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;pointer-events:none}
-  #splash.done{animation:splashOut .6s .1s forwards}
-  @keyframes splashOut{to{opacity:0;visibility:hidden}}
-  .splash-svg{width:72px;height:72px;animation:splashPop .7s cubic-bezier(.22,1,.36,1)}
-  .splash-name{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--amber2);letter-spacing:-.02em;animation:splashPop .7s .1s cubic-bezier(.22,1,.36,1) both;text-shadow:0 2px 12px rgba(0,0,0,0.08)}
-  .splash-sub{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);animation:splashPop .7s .18s cubic-bezier(.22,1,.36,1) both}
-  .splash-bar{width:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--amber2),transparent);animation:splashPop .1s .25s both,barGrow 2s .3s ease-out forwards}
-  @keyframes splashPop{from{opacity:0;transform:translateY(16px)}}
-  @keyframes barGrow{to{width:160px}}
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #cbb7c0;  /* более тёмный насыщенный серо-розовый фон */
+      color: #1a1517;
+      line-height: 1.5;
+    }
 
-  /* DESKTOP NAV */
-  .nav{position:sticky;top:0;z-index:1000;height:var(--nav-h);background:var(--surface);backdrop-filter:blur(28px) saturate(1.6);-webkit-backdrop-filter:blur(28px);border-bottom:1px solid var(--edge);transition:box-shadow .3s,border-color .3s}
-  .nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,0.12);border-bottom-color:var(--edge2)}
-  .nav-inner{max-width:1320px;margin:0 auto;height:100%;padding:0 1.5rem;display:flex;align-items:center;gap:.5rem}
-  .nav-logo{display:flex;align-items:center;gap:.5rem;font-family:var(--serif);font-size:1.45rem;font-weight:700;color:var(--amber2);white-space:nowrap;letter-spacing:-.01em;margin-right:auto;transition:color .2s;flex-shrink:0}
-  .nav-logo:hover{color:var(--rose3)}
-  .logo-svg{width:34px;height:34px;flex-shrink:0}
-  .nav-links{display:flex;align-items:center;gap:.1rem;list-style:none}
-  .nav-links a{display:flex;align-items:center;gap:.32rem;font-size:.82rem;font-weight:500;color:var(--mist);padding:.42rem .78rem;border-radius:2rem;transition:all .2s;white-space:nowrap}
-  .nav-links a svg{width:14px;height:14px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .nav-links a:hover,.nav-links a.active{background:rgba(178,98,116,0.2);color:var(--ink)}
-  .nav-links a.active{color:var(--rose2);font-weight:600}
-  .nav-cart{position:relative;padding:.38rem .55rem;border-radius:var(--r-sm);display:flex;align-items:center;color:var(--mist);transition:all .2s;min-width:44px;min-height:44px;justify-content:center}
-  .nav-cart svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
-  .nav-cart:hover{background:rgba(178,98,116,0.15);color:var(--ink)}
-  .cart-badge{position:absolute;top:2px;right:2px;background:var(--rose);color:#fff;font-size:.58rem;font-weight:800;min-width:.95rem;height:.95rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--surface)}
-  .lang-pills{display:flex;gap:.2rem}
-  .lang-pill{font-size:.73rem;font-weight:700;padding:.32rem .6rem;border-radius:.75rem;border:1px solid var(--edge);color:var(--mist);transition:all .2s;cursor:pointer;background:transparent;letter-spacing:.04em}
-  .lang-pill:hover{border-color:var(--amber);color:var(--amber2)}
-  .lang-active{background:var(--rose)!important;color:#fff!important;border-color:var(--rose)!important}
-  .user-wrap{position:relative}
-  .user-btn{width:38px;height:38px;border-radius:50%;border:2px solid rgba(178,98,116,0.5);background:var(--ink4);cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all .2s}
-  .user-btn:hover{border-color:var(--amber2);box-shadow:0 0 12px rgba(158,111,80,0.3)}
-  .user-init{font-size:.78rem;font-weight:700;color:var(--amber2);text-transform:uppercase}
-  .user-init img{width:100%;height:100%;object-fit:cover}
-  .user-drop{display:none;position:absolute;top:calc(100% + 10px);right:0;min-width:210px;background:var(--cream2);border:1px solid var(--edge);border-radius:var(--r-lg);padding:.85rem .45rem .65rem;box-shadow:var(--sh-lg);z-index:2000}
-  .user-drop.open{display:block;animation:dropIn .2s cubic-bezier(.22,1,.36,1)}
-  @keyframes dropIn{from{opacity:0;transform:translateY(-8px) scale(.97)}}
-  .drop-close{position:absolute;top:.4rem;right:.5rem;width:22px;height:22px;border-radius:50%;background:rgba(178,98,116,0.2);border:none;color:var(--rose2);font-size:.65rem;cursor:pointer}
-  .drop-name{font-size:.78rem;font-weight:600;color:var(--amber2);padding:.05rem .65rem .65rem;border-bottom:1px solid rgba(158,111,80,0.25);margin-bottom:.4rem}
-  .drop-item{display:flex;align-items:center;gap:.5rem;padding:.48rem .65rem;border-radius:var(--r-xs);color:var(--mist);font-size:.83rem;font-weight:500;text-decoration:none;transition:all .18s}
-  .drop-item svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8}
-  .drop-item:hover{background:rgba(178,98,116,0.12);color:var(--ink)}
-  .drop-logout{color:var(--rose2);margin-top:.3rem;border-top:1px solid var(--edge2);padding-top:.55rem}
-  .drop-logout:hover{background:rgba(178,98,116,0.12);color:var(--rose2)}
-  .drop-badge{margin-left:auto;background:var(--rose);color:#fff;font-size:.58rem;font-weight:800;min-width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+    /* тёмная полупрозрачная подложка для всего контента, чтобы текст читался */
+    .content-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
 
-  /* MOBILE DRAWER */
-  .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1998;backdrop-filter:blur(5px)}
-  .drawer-overlay.open{display:block}
-  .drawer{position:fixed;top:0;left:0;bottom:0;width:min(85vw,340px);background:var(--cream2);z-index:1999;transform:translateX(-100%);transition:transform .3s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;box-shadow:8px 0 40px rgba(0,0,0,0.25);border-right:1px solid var(--edge)}
-  .drawer.open{transform:translateX(0)}
-  .drawer-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.2rem;border-bottom:1px solid var(--edge)}
-  .drawer-logo{display:flex;align-items:center;gap:.5rem;font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--amber2)}
-  .drawer-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--edge);background:rgba(178,98,116,0.15);color:var(--ink);cursor:pointer;font-size:1rem}
-  .drawer-close:hover{background:var(--rose);color:#fff}
-  .drawer-user{padding:1.1rem 1.2rem;border-bottom:1px solid var(--edge);display:flex;align-items:center;gap:.85rem}
-  .drawer-avatar{width:48px;height:48px;border-radius:50%;border:2px solid rgba(178,98,116,0.5);background:var(--ink4);display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .drawer-avatar-init{font-size:1.1rem;font-weight:700;color:var(--amber2);text-transform:uppercase}
-  .drawer-user-info strong{display:block;font-size:.9rem;color:var(--ink);font-weight:600}
-  .drawer-user-info span{font-size:.75rem;color:var(--mist)}
-  .drawer-user-btns{display:flex;gap:.4rem;margin-top:.5rem}
-  .drawer-user-btn{padding:.32rem .75rem;border-radius:.75rem;font-size:.73rem;font-weight:600;text-decoration:none}
-  .drawer-user-btn.primary{background:var(--rose);color:#fff}
-  .drawer-user-btn.outline{border:1px solid var(--edge);color:var(--mist)}
-  .drawer-nav{flex:1;overflow-y:auto;padding:.6rem .7rem}
-  .drawer-nav a{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;border-radius:var(--r-md);color:var(--ink2);font-size:.95rem;font-weight:500;text-decoration:none;margin-bottom:.15rem}
-  .drawer-nav a svg{width:18px;height:18px;stroke:var(--sage2);fill:none;stroke-width:1.8}
-  .drawer-nav a:hover{background:rgba(178,98,116,0.12);color:var(--ink)}
-  .drawer-nav a.active{background:rgba(178,98,116,0.18);color:var(--rose2)}
-  .drawer-nav a .d-badge{margin-left:auto;background:var(--rose);color:#fff;font-size:.6rem;font-weight:800;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center}
-  .drawer-sep{height:1px;background:var(--edge);margin:.5rem .5rem}
-  .drawer-lang{padding:.8rem 1.2rem;border-top:1px solid var(--edge)}
-  .drawer-lang-title{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);margin-bottom:.5rem}
-  .drawer-lang-pills{display:flex;gap:.4rem}
-  .drawer-lang-pill{flex:1;padding:.45rem;border-radius:.75rem;border:1px solid var(--edge);color:var(--mist);font-size:.8rem;font-weight:700;text-align:center;cursor:pointer;background:transparent}
-  .drawer-lang-pill.active,.drawer-lang-pill:hover{background:var(--rose);color:#fff;border-color:var(--rose)}
+    /* улучшенная читаемость текста — тени и контраст */
+    h1, h2, h3, p, li, .stat-number, .stat-label, .value-text, .team-name {
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    }
 
-  /* MOBILE TOPBAR */
-  .mobile-topbar{display:none;position:sticky;top:0;z-index:1000;height:var(--nav-h);background:var(--surface);backdrop-filter:blur(28px);border-bottom:1px solid var(--edge);align-items:center;justify-content:space-between;padding:0 1rem}
-  .topbar-menu-btn{width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center}
-  .topbar-menu-btn span{display:block;width:22px;height:2px;background:var(--ink2);border-radius:2px}
-  .topbar-logo{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--amber2)}
-  .topbar-right{display:flex;align-items:center;gap:.3rem}
-  .topbar-cart{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--mist)}
-  .topbar-cart svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
-  .topbar-cart-badge{position:absolute;top:6px;right:6px;background:var(--rose);color:#fff;font-size:.55rem;font-weight:800;min-width:.85rem;height:.85rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--surface)}
-  .topbar-user{width:36px;height:36px;border-radius:50%;border:2px solid rgba(178,98,116,0.5);background:var(--ink4);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
-  .topbar-user-init{font-size:.75rem;font-weight:700;color:var(--amber2);text-transform:uppercase}
+    /* Hero секция */
+    .hero {
+      background: linear-gradient(135deg, #b28a9a 0%, #d4bbc4 100%);
+      border-radius: 2rem;
+      padding: 4rem 3rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,240,0.3);
+    }
 
-  /* BOTTOM NAV */
-  .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:997;height:var(--bottom-nav-h);background:rgba(232,213,220,0.97);backdrop-filter:blur(24px);border-top:1px solid var(--edge);padding-bottom:env(safe-area-inset-bottom)}
-  .bottom-nav-inner{display:flex;height:100%;align-items:center}
-  .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:rgba(30,26,28,0.55);font-size:.58rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;padding:.4rem .2rem;position:relative}
-  .bn-item svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7}
-  .bn-item.active{color:var(--rose2)}
-  .bn-badge{position:absolute;top:6px;right:calc(50% - 14px);background:var(--rose);color:#fff;font-size:.52rem;font-weight:800;min-width:.85rem;height:.85rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--cream2)}
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: #2c1e24;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
 
-  /* MESSAGES */
-  .messages{max-width:680px;margin:.8rem auto;padding:0 1.25rem}
-  .message{padding:.72rem 1.1rem;border-radius:var(--r-sm);margin-bottom:.4rem;font-size:.85rem;background:var(--ink3);border-left:3px solid var(--rose);box-shadow:var(--sh-sm);color:var(--ink);font-weight:500}
-  .message.success{border-left-color:#7c9a7e}
-  .message.error{border-left-color:var(--rose2)}
+    .hero .since {
+      font-size: 1rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #4a2e38;
+      font-weight: 500;
+    }
 
-  /* FOOTER */
-  footer{background:rgba(220,200,210,0.96);border-top:1px solid var(--edge);padding:4rem 1.5rem 2.5rem;margin-top:6rem;position:relative;z-index:1}
-  .footer-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:3rem}
-  .footer-brand .brand-logo{font-family:var(--serif);font-size:1.55rem;font-weight:700;color:var(--amber2);display:flex;align-items:center;gap:.5rem;margin-bottom:.7rem}
-  .footer-brand p{font-size:.82rem;color:var(--ink2);line-height:1.75;margin-bottom:1.1rem}
-  .footer-social{display:flex;gap:.5rem;flex-wrap:wrap}
-  .social-btn{width:42px;height:42px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;transition:all .22s;color:#fff;overflow:hidden}
-  .social-btn svg{width:18px;height:18px;fill:currentColor}
-  .social-btn.ig{background:var(--ig)}.social-btn.tg{background:var(--tg)}.social-btn.fb{background:var(--fb)}.social-btn.wa{background:var(--wa)}.social-btn.yt{background:var(--yt)}
-  .social-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
-  .footer-col h4{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem}
-  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-  .footer-col a{font-size:.84rem;color:var(--ink2);transition:color .2s;display:flex;align-items:center;gap:.4rem}
-  .footer-col a:hover{color:var(--amber2)}
-  .footer-col a svg{width:12px;height:12px;stroke:var(--sage2);fill:none;stroke-width:2}
-  .footer-contact-item{display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:var(--ink2);margin-bottom:.6rem}
-  .footer-contact-item svg{width:15px;height:15px;stroke:var(--amber);fill:none;stroke-width:1.8}
-  .footer-bottom{max-width:1140px;margin:2.2rem auto 0;padding-top:1.3rem;border-top:1px solid var(--edge);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
-  .footer-bottom>span{font-size:.74rem;color:rgba(30,26,28,0.55)}
-  .footer-badges{display:flex;gap:.5rem}
-  .footer-badge{padding:.24rem .65rem;border-radius:.4rem;background:var(--ink3);border:1px solid var(--edge);font-size:.67rem;font-weight:600;color:var(--ink)}
-  @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr}footer{margin-top:4rem}}
-  @media(max-width:560px){.footer-inner{grid-template-columns:1fr}}
+    /* секции */
+    .section {
+      background: rgba(245, 235, 238, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,245,248,0.5);
+    }
 
-  /* REVEAL & BUTTONS */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
-  .reveal.visible{opacity:1;transform:none}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.72rem 1.5rem;border-radius:var(--r-sm);font-family:var(--sans);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .22s;border:none;min-height:46px}
-  .btn-primary{background:var(--grad-rose);color:#fff;box-shadow:0 4px 12px rgba(178,98,116,0.4)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(178,98,116,0.45);color:#fff}
-  .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--edge)}
-  .btn-outline:hover{border-color:var(--amber2);color:var(--amber2)}
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #6b3a48;
+      margin-bottom: 1.5rem;
+      border-left: 5px solid #b5737f;
+      padding-left: 1rem;
+    }
 
-  @media(max-width:900px){
-    body{padding-bottom:calc(var(--bottom-nav-h) + env(safe-area-inset-bottom))}
-    .nav{display:none}
-    .mobile-topbar{display:flex}
-    .bottom-nav{display:block}
-    footer{margin-top:2.5rem}
-  }
-  @media(min-width:901px){.bottom-nav,.mobile-topbar,.drawer,.drawer-overlay{display:none!important}}
-  @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+    /* статистика */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: rgba(255,250,242,0.9);
+      padding: 1.5rem;
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #9e5d6e;
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4a2e38;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ценности — карточки */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .value-card {
+      background: #fff8fa;
+      padding: 1.5rem;
+      border-radius: 1.25rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .value-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #7a4a58;
+      margin-bottom: 0.75rem;
+    }
+
+    .value-card p {
+      font-size: 0.9rem;
+      color: #2c1e24;
+      line-height: 1.4;
+    }
+
+    /* команда */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .team-card {
+      background: #fff8fa;
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+    }
+
+    .team-avatar {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #c89aab, #b5737f);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    .team-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #5e3543;
+    }
+
+    .team-role {
+      font-size: 0.8rem;
+      color: #8a6a74;
+      margin-top: 0.25rem;
+    }
+
+    /* текст о компании */
+    .about-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #1e1418;
+      margin-bottom: 1rem;
+    }
+
+    .highlight {
+      background: rgba(181,115,127,0.2);
+      padding: 0.1rem 0.3rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+    }
+
+    .delivery-badge {
+      display: inline-block;
+      background: #9e5d6e;
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    /* кнопка */
+    .btn-custom {
+      display: inline-block;
+      background: #8b5b68;
+      color: white;
+      padding: 0.75rem 1.8rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn-custom:hover {
+      background: #6b3a48;
+      transform: translateY(-2px);
+    }
+
+    /* адаптив */
+    @media (max-width: 900px) {
+      .stats-grid, .values-grid, .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero h1 { font-size: 2.5rem; }
+      .section { padding: 1.5rem; }
+    }
+    @media (max-width: 560px) {
+      .stats-grid, .values-grid, .team-grid {
+        grid-template-columns: 1fr;
+      }
+      .content-wrapper { padding: 1rem; }
+    }
   </style>
-  {% block extra_head %}{% endblock %}
 </head>
 <body>
 
-<div id="splash">
-  <svg class="splash-svg" viewBox="0 0 72 72" fill="none"><circle cx="36" cy="36" r="35" fill="rgba(178,98,116,0.1)" stroke="rgba(178,98,116,0.25)" stroke-width="1"/><path d="M36 14C36 14 26 21 26 31C26 38.8 30.2 42.8 36 45C41.8 42.8 46 38.8 46 31C46 21 36 14 36 14Z" fill="#b58a6b"/><path d="M36 14C36 14 46 19 48 29C49.6 37 46.8 42 42 44.4C43 41 42 37.4 39.8 34C38.4 31.8 37 28 36 14Z" fill="#c99a78" opacity=".75"/><path d="M36 45L36 59" stroke="#5e5b5c" stroke-width="3"/><path d="M36 53C36 53 29 49.5 25.5 53" stroke="#5e5b5c" stroke-width="2.2" fill="none"/></svg>
-  <div class="splash-name">Flora Luxe</div>
-  <div class="splash-sub">Premium Flower Shop</div>
-  <div class="splash-bar"></div>
+<div class="content-wrapper">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="since">SINCE 2010</div>
+    <h1>Flora Luxe</h1>
+    <p style="font-size: 1.1rem; max-width: 600px; margin: 1rem auto 0; color: #2c1e24; font-weight: 500;">
+      Самый надежный и современный цветочный магазин Бухары. Каждый букет — с душой.
+    </p>
+  </div>
+
+  <!-- Статистика -->
+  <div class="stats-grid">
+    <div class="stat-card"><span class="stat-number">5+</span><span class="stat-label">лет безупречной работы</span></div>
+    <div class="stat-card"><span class="stat-number">10k+</span><span class="stat-label">довольных клиентов</span></div>
+    <div class="stat-card"><span class="stat-number">200+</span><span class="stat-label">эксклюзивных букетов</span></div>
+    <div class="stat-card"><span class="stat-number">24/7</span><span class="stat-label">поддержка и забота</span></div>
+  </div>
+
+  <!-- Наша история -->
+  <div class="section">
+    <h2 class="section-title">Наша история</h2>
+    <p class="about-text"><strong>Flora Luxe</strong> — мы создали самый большой букет в 2008 году на международном уровне, а также единственный букет в мире «Близкая Китая». Сегодня мы делаем все возможное, чтобы каждый букет стал идеальным подарком.</p>
+    <p class="about-text">Наши покупатели любят нас не только за свежие цветы, но и за наш вкус и индивидуальный подход. Мы всегда рады предложить вам самые красивые композиции из нашей коллекции.</p>
+    <p class="about-text">Мы достойны вас всех! <span class="highlight">2 часа</span> — и ваш заказ уже у дверей.</p>
+    <p class="about-text">Мы всегда готовы помочь сделать ваш праздник ещё более ярким и особенным!</p>
+    <div class="delivery-badge">⚡ Быстрая доставка по Бухаре — от 2 часов</div>
+  </div>
+
+  <!-- Наши ценности -->
+  <div class="section">
+    <h2 class="section-title">Наши ценности</h2>
+    <div class="values-grid">
+      <div class="value-card"><h3>🌸 Гарантия свежести</h3><p>Мы гарантируем свежие и качественные цветы. Гарантия действует от 1 месяца.</p></div>
+      <div class="value-card"><h3>🚚 Быстрая доставка</h3><p>Доставка букетов за 2 часа по Бухаре. Всегда вовремя и с заботой.</p></div>
+      <div class="value-card"><h3>❤️ С душой</h3><p>Каждый букет создаётся с любовью и вниманием к деталям. Мы уверены — наш подарок будет незабываемым.</p></div>
+      <div class="value-card"><h3>📞 Всегда на связи</h3><p>Мы всегда поможем с выбором. Только у нас лучшие цветы и уникальные композиции.</p></div>
+    </div>
+  </div>
+
+  <!-- Команда -->
+  <div class="section">
+    <h2 class="section-title">Наша команда</h2>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-avatar">НР</div><div class="team-name">Нильофар Рахимова</div><div class="team-role">Основатель, флорист</div></div>
+      <div class="team-card"><div class="team-avatar">АМ</div><div class="team-name">Аджиур Мирзаев</div><div class="team-role">Креативный директор</div></div>
+      <div class="team-card"><div class="team-avatar">МК</div><div class="team-name">Мохира Каримова</div><div class="team-role">Старший флорист</div></div>
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="#" class="btn-custom">✨ Связаться с нами</a>
+    </div>
+  </div>
 </div>
 
-<!-- DESKTOP NAV (идентичная структура, цвета адаптированы) -->
-<nav class="nav" id="mainNav">
-  <div class="nav-inner">
-    <a href="{% url 'home' %}" class="nav-logo"><svg class="logo-svg" viewBox="0 0 32 32" fill="none"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#b58a6b"/><path d="M16 3C16 3 23 7 24.5 13.5C25.7 18.5 23.5 22.5 19.5 24C20.2 21 19.5 18 17.5 15.2C16.5 13.7 16.2 10 16 3Z" fill="#c99a78" opacity=".7"/><circle cx="16" cy="14.5" r="2.8" fill="rgba(255,255,240,.16)"/><path d="M16 24.2L16 30" stroke="#5e5b5c" stroke-width="2"/></svg>Flora Luxe</a>
-    <ul class="nav-links"><li><a href="{% url 'home' %}"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>{% t 'home' %}</a></li><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>{% t 'catalog' %}</a></li><li><a href="{% url 'about' %}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>{% t 'about' %}</a></li><li><a href="{% url 'contacts' %}"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>{% t 'contacts' %}</a></li></ul>
-    <div class="lang-pills"><button onclick="setLang('ru')" class="lang-pill {% if current_lang == 'ru' %}lang-active{% endif %}">RU</button><button onclick="setLang('uz')" class="lang-pill {% if current_lang == 'uz' %}lang-active{% endif %}">UZ</button><button onclick="setLang('en')" class="lang-pill {% if current_lang == 'en' %}lang-active{% endif %}">EN</button></div>
-    <a href="{% url 'cart' %}" class="nav-cart"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% if request.session.cart %}<span class="cart-badge">{{ request.session.cart|length }}</span>{% endif %}</a>
-    {% if user.is_authenticated %}<div class="user-wrap"><button class="user-btn" id="userBtn"><div class="user-init">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}">{% else %}{{ user.first_name|first|default:user.username|first|upper }}{% endif %}</div></button><div class="user-drop" id="userDrop"><button class="drop-close" id="dropClose">✕</button><div class="drop-name">{{ user.get_full_name|default:user.username }}</div><a href="{% url 'profile' %}" class="drop-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>{% t 'profile' %}</a><a href="{% url 'cart' %}" class="drop-item"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% t 'cart' %}{% if request.session.cart %}<span class="drop-badge">{{ request.session.cart|length }}</span>{% endif %}</a><a href="{% url 'check_receipt' %}" class="drop-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>{% if current_lang == 'uz' %}Chekni tekshirish{% elif current_lang == 'en' %}Check Receipt{% else %}Проверить чек{% endif %}</a>{% if user.is_staff %}<a href="/admin/" class="drop-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Админка</a>{% endif %}<a href="{% url 'logout' %}" class="drop-item drop-logout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>{% t 'logout' %}</a></div></div>{% else %}<a href="{% url 'login' %}" class="btn btn-primary" style="padding:.5rem 1.1rem;font-size:.82rem">{% t 'login' %}</a>{% endif %}
-  </div>
-</nav>
-
-<!-- MOBILE TOPBAR / DRAWER / BOTTOM NAV (структура сохранена) -->
-<div class="mobile-topbar" id="mobileTopbar"><button class="topbar-menu-btn" id="drawerToggle"><span></span><span></span><span></span></button><a href="{% url 'home' %}" class="topbar-logo">Flora Luxe</a><div class="topbar-right"><a href="{% url 'cart' %}" class="topbar-cart"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% if request.session.cart %}<span class="topbar-cart-badge">{{ request.session.cart|length }}</span>{% endif %}</a>{% if user.is_authenticated %}<button class="topbar-user" id="drawerUserToggle">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}">{% else %}<span class="topbar-user-init">{{ user.first_name|first|default:user.username|first|upper }}</span>{% endif %}</button>{% else %}<a href="{% url 'login' %}" class="btn btn-primary" style="padding:.4rem .9rem;font-size:.78rem">{% t 'login' %}</a>{% endif %}</div></div>
-<div class="drawer-overlay" id="drawerOverlay"></div>
-<div class="drawer" id="drawer"><div class="drawer-header"><a href="{% url 'home' %}" class="drawer-logo"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#b58a6b"/><path d="M16 24.2L16 30" stroke="#5e5b5c" stroke-width="2"/></svg>Flora Luxe</a><button class="drawer-close" id="drawerClose">✕</button></div><div class="drawer-user">{% if user.is_authenticated %}<div class="drawer-avatar">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}">{% else %}<span class="drawer-avatar-init">{{ user.first_name|first|default:user.username|first|upper }}</span>{% endif %}</div><div class="drawer-user-info"><strong>{{ user.get_full_name|default:user.username }}</strong><span>{{ user.email }}</span><div class="drawer-user-btns"><a href="{% url 'profile' %}" class="drawer-user-btn primary">{% t 'profile' %}</a><a href="{% url 'logout' %}" class="drawer-user-btn outline">{% t 'logout' %}</a></div></div>{% else %}<div style="display:flex;gap:.5rem;width:100%"><a href="{% url 'login' %}" class="drawer-user-btn primary" style="flex:1;text-align:center">{% t 'login' %}</a><a href="{% url 'register' %}" class="drawer-user-btn outline" style="flex:1;text-align:center">{% t 'register' %}</a></div>{% endif %}</div><nav class="drawer-nav"><a href="{% url 'home' %}"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>{% t 'home' %}</a><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>{% t 'catalog' %}</a><a href="{% url 'cart' %}"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% t 'cart' %}{% if request.session.cart %}<span class="d-badge">{{ request.session.cart|length }}</span>{% endif %}</a><div class="drawer-sep"></div><a href="{% url 'about' %}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>{% t 'about' %}</a><a href="{% url 'contacts' %}"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>{% t 'contacts' %}</a><a href="{% url 'check_receipt' %}"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>{% if current_lang == 'uz' %}Chekni tekshirish{% elif current_lang == 'en' %}Check Receipt{% else %}Проверить чек{% endif %}</a>{% if user.is_staff %}<div class="drawer-sep"></div><a href="/admin/"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Админка</a>{% endif %}</nav><div class="drawer-lang"><div class="drawer-lang-title">🌐 Язык</div><div class="drawer-lang-pills"><button onclick="setLang('ru')" class="drawer-lang-pill {% if current_lang == 'ru' %}active{% endif %}">RU</button><button onclick="setLang('uz')" class="drawer-lang-pill {% if current_lang == 'uz' %}active{% endif %}">UZ</button><button onclick="setLang('en')" class="drawer-lang-pill {% if current_lang == 'en' %}active{% endif %}">EN</button></div></div></div>
-<nav class="bottom-nav"><div class="bottom-nav-inner"><a href="{% url 'home' %}" class="bn-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>{% t 'home' %}</a><a href="{% url 'catalog' %}" class="bn-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>{% t 'catalog' %}</a><a href="{% url 'cart' %}" class="bn-item"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% t 'cart' %}{% if request.session.cart %}<span class="bn-badge">{{ request.session.cart|length }}</span>{% endif %}</a>{% if user.is_authenticated %}<a href="{% url 'profile' %}" class="bn-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>{% t 'profile' %}</a>{% else %}<a href="{% url 'login' %}" class="bn-item"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>{% t 'login' %}</a>{% endif %}<a href="{% url 'contacts' %}" class="bn-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>{% t 'contacts' %}</a></div></nav>
-
-<main>{% if messages %}<div class="messages">{% for message in messages %}<div class="message {{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}{% block content %}{% endblock %}</main>
-
-<footer><div class="footer-inner"><div class="footer-brand"><div class="brand-logo"><svg width="22" height="22" viewBox="0 0 32 32"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#b58a6b"/><path d="M16 24.2L16 30" stroke="#5e5b5c" stroke-width="2"/></svg>Flora Luxe</div><p>{% if current_lang == 'uz' %}Premium gullar va buyurtma guldastalar. Buxoro bo'ylab tezkor yetkazib berish.{% elif current_lang == 'en' %}Premium flowers and bespoke bouquets. Fast delivery across Bukhara.{% else %}Премиальные цветы и авторские букеты. Быстрая доставка по Бухаре.{% endif %}</p><div class="footer-social"><a href="#" class="social-btn ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" stroke-width="1.8"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke="white" stroke-width="1.8"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" stroke-width="2.2"/></svg></a><a href="#" class="social-btn tg"><svg viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 1 0 24 12 12.013 12.013 0 0 0 11.944 0zm5.08 8.4l-1.948 9.16c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.12 14.297l-2.96-.924c-.643-.202-.657-.643.136-.953l11.57-4.463c.536-.194 1.006.13.836.943z"/></svg></a><a href="#" class="social-btn fb"><svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a><a href="#" class="social-btn wa"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a></div></div><div class="footer-col"><h4>Страницы</h4><ul><li><a href="{% url 'home' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'home' %}</a></li><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'catalog' %}</a></li><li><a href="{% url 'about' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'about' %}</a></li><li><a href="{% url 'contacts' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'contacts' %}</a></li></ul></div><div class="footer-col"><h4>Услуги</h4><ul><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Букеты</a></li><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Свадебный декор</a></li><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Корпоративным</a></li></ul></div><div class="footer-col"><h4>{% t 'our_contacts' %}</h4><div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg><span>+998 90 123 45 67</span></div><div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>info@floraluxe.uz</span></div><div class="footer-contact-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>9:00–21:00, ежедневно</span></div></div></div><div class="footer-bottom"><span>© 2026 Flora Luxe. Все права защищены.</span><div class="footer-badges"><span class="footer-badge">🔒 SSL</span><span class="footer-badge">💳 Payme / Click</span><span class="footer-badge">🚚 Доставка 2ч</span></div></div></footer>
-
-<script>
-(function(){
-  var s=document.getElementById('splash'); if(s){if(sessionStorage.getItem('splashed')){s.style.display='none';}else{sessionStorage.setItem('splashed','1');setTimeout(function(){s.classList.add('done');setTimeout(function(){s.style.display='none';},700);},2200);}}
-  window.setLang=function(lang){fetch("{% url 'change_language' %}",{method:'POST',headers:{'X-CSRFToken':'{{ csrf_token }}','Content-Type':'application/x-www-form-urlencoded'},body:'language='+lang}).then(function(){location.reload();});};
-  var userBtn=document.getElementById('userBtn'),userDrop=document.getElementById('userDrop'),dropClose=document.getElementById('dropClose');
-  if(userBtn&&userDrop){userBtn.addEventListener('click',function(e){e.stopPropagation();userDrop.classList.toggle('open');});if(dropClose)dropClose.addEventListener('click',function(){userDrop.classList.remove('open');});document.addEventListener('click',function(e){if(!e.target.closest('.user-wrap'))userDrop.classList.remove('open');});}
-  var drawer=document.getElementById('drawer'),overlay=document.getElementById('drawerOverlay'),drawerToggle=document.getElementById('drawerToggle'),drawerClose=document.getElementById('drawerClose'),drawerUserToggle=document.getElementById('drawerUserToggle');
-  function openDrawer(){drawer.classList.add('open');overlay.classList.add('open');document.body.style.overflow='hidden';}
-  function closeDrawer(){drawer.classList.remove('open');overlay.classList.remove('open');document.body.style.overflow='';}
-  if(drawerToggle)drawerToggle.addEventListener('click',openDrawer);
-  if(drawerUserToggle)drawerUserToggle.addEventListener('click',openDrawer);
-  if(drawerClose)drawerClose.addEventListener('click',closeDrawer);
-  if(overlay)overlay.addEventListener('click',closeDrawer);
-  document.querySelectorAll('#drawerNav a').forEach(function(a){a.addEventListener('click',closeDrawer);});
-  var revEls=document.querySelectorAll('.reveal,.stagger');
-  if(revEls.length&&window.IntersectionObserver){var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.1});revEls.forEach(function(el){io.observe(el);});}else{revEls.forEach(function(el){el.classList.add('visible');});}
-  setTimeout(function(){document.querySelectorAll('.message').forEach(function(m){m.style.transition='opacity .5s';m.style.opacity='0';setTimeout(function(){if(m.parentNode)m.parentNode.removeChild(m);},500);});},5000);
-})();
-</script>
-{% block extra_scripts %}{% endblock %}
 </body>
 </html>
