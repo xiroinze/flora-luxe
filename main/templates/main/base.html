@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#f5e9ec">
+  <meta name="theme-color" content="#e8d5dc">
   <meta name="description" content="Flora Luxe — премиальный цветочный магазин. Свежие цветы с доставкой по Бухаре.">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -19,53 +19,71 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
   :root {
-    --ink:#2d2a2c;
-    --ink2:#4a4246;
-    --ink3:#e6d9de;
-    --ink4:#f0e4e9;
-    --surface:rgba(245,233,236,0.96);
-    --rose:#b5737f;
-    --rose2:#9f5e6b;
-    --rose3:#c28492;
-    --amber:#b5977a;
-    --amber2:#a07f62;
-    --amber3:#c89a74;
-    --sage:#5f6b64;
-    --sage2:#79867e;
-    --cream:#faf0f3;
-    --cream2:#f5e9ec;
-    --mist:rgba(45,42,44,0.65);
-    --edge:rgba(181,115,127,0.25);
-    --edge2:rgba(165,126,98,0.2);
+    /* Глубокая серо-розовая гамма — насыщенный, но элегантный фон, отличная читаемость */
+    --ink:#1e1a1c;        /* глубокий угольно-розовый для основного текста */
+    --ink2:#3c2e33;       /* насыщенный тёмный */
+    --ink3:#c7b2bb;       /* средний серо-розовый для элементов */
+    --ink4:#e0cfd7;       /* светлый акцент */
+    --surface:rgba(230, 215, 222, 0.96); /* панели с легкой дымкой */
+    --rose:#b26274;       /* приглушенная роза, но сочная */
+    --rose2:#9e4d60;      /* глубокий розовый */
+    --rose3:#c47b8c;      /* мягкий акцент */
+    --amber:#b58a6b;      /* тёплый беж с розовым подтоном */
+    --amber2:#9e6f50;     /* насыщенный карамельный */
+    --amber3:#c99a78;
+    --sage:#5e5b5c;       /* нейтральный серо-коричневый */
+    --sage2:#7b6e72;
+    --cream:#fcf6f8;      /* почти белый с розовым отливом */
+    --cream2:#e8d5dc;     /* ОСНОВНОЙ ФОН: насыщенный серо-розовый, не бледный */
+    --mist:rgba(30, 26, 28, 0.7); /* полупрозрачный для подписей, но читаемый */
+    --edge:rgba(178, 98, 116, 0.35);
+    --edge2:rgba(158, 111, 80, 0.25);
     --nav-h:64px;
     --bottom-nav-h:64px;
     --r-xs:.5rem; --r-sm:.75rem; --r-md:1rem; --r-lg:1.4rem; --r-xl:1.8rem; --r-2xl:2.5rem;
-    --sh-sm:0 2px 12px rgba(0,0,0,0.08);
-    --sh-md:0 8px 28px rgba(0,0,0,0.12);
-    --sh-lg:0 20px 40px rgba(0,0,0,0.15);
+    --sh-sm:0 4px 14px rgba(0,0,0,0.12);
+    --sh-md:0 12px 30px rgba(0,0,0,0.2);
+    --sh-lg:0 24px 48px rgba(0,0,0,0.25);
     --serif:'Cormorant Garamond',Georgia,serif;
     --sans:'DM Sans',-apple-system,sans-serif;
-    --grad-rose:linear-gradient(135deg,#b5737f,#c28492,#d6a0ae);
-    --grad-amber:linear-gradient(135deg,#b5977a,#c9aa8b,#e0c2a5);
+    --grad-rose:linear-gradient(135deg, #b26274, #c47b8c, #d9a1ae);
+    --grad-amber:linear-gradient(135deg, #b58a6b, #c99a78, #e0b898);
     --ig:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
     --tg:#229ED9; --fb:#1877F2; --wa:#25D366; --yt:#FF0000;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
-  body{font-family:var(--sans);background:#f5e9ec;color:var(--ink);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-bottom:var(--bottom-nav-h)}
-  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 800px 600px at 10% 20%,rgba(181,115,127,0.08) 0%,transparent 70%),radial-gradient(ellipse 700px 800px at 90% 80%,rgba(165,126,98,0.06) 0%,transparent 80%)}
+  body{
+    font-family:var(--sans);
+    background: #e8d5dc;  /* насыщенный серо-розовый фон, текст читается идеально */
+    color:var(--ink);
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:var(--bottom-nav-h)
+  }
+  /* деликатные радиальные акценты, не перебивающие фон */
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background:radial-gradient(ellipse 900px 700px at 15% 10%, rgba(178,98,116,0.12) 0%, transparent 70%),
+               radial-gradient(ellipse 800px 900px at 90% 85%, rgba(158,111,80,0.1) 0%, transparent 75%);
+  }
   a{color:var(--rose3);text-decoration:none;transition:color .2s}
   a:hover{color:var(--amber2)}
   img{max-width:100%;display:block}
   main{position:relative;z-index:1}
   button,input,textarea,select{font-family:var(--sans)}
 
-  /* SPLASH */
+  /* SPLASH — обновлён под основной фон */
   #splash{position:fixed;inset:0;z-index:9999;background:var(--cream2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;pointer-events:none}
   #splash.done{animation:splashOut .6s .1s forwards}
   @keyframes splashOut{to{opacity:0;visibility:hidden}}
   .splash-svg{width:72px;height:72px;animation:splashPop .7s cubic-bezier(.22,1,.36,1)}
-  .splash-name{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--amber2);letter-spacing:-.02em;animation:splashPop .7s .1s cubic-bezier(.22,1,.36,1) both}
+  .splash-name{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--amber2);letter-spacing:-.02em;animation:splashPop .7s .1s cubic-bezier(.22,1,.36,1) both;text-shadow:0 2px 12px rgba(0,0,0,0.08)}
   .splash-sub{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);animation:splashPop .7s .18s cubic-bezier(.22,1,.36,1) both}
   .splash-bar{width:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--amber2),transparent);animation:splashPop .1s .25s both,barGrow 2s .3s ease-out forwards}
   @keyframes splashPop{from{opacity:0;transform:translateY(16px)}}
@@ -73,7 +91,7 @@
 
   /* DESKTOP NAV */
   .nav{position:sticky;top:0;z-index:1000;height:var(--nav-h);background:var(--surface);backdrop-filter:blur(28px) saturate(1.6);-webkit-backdrop-filter:blur(28px);border-bottom:1px solid var(--edge);transition:box-shadow .3s,border-color .3s}
-  .nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,0.08);border-bottom-color:var(--edge2)}
+  .nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,0.12);border-bottom-color:var(--edge2)}
   .nav-inner{max-width:1320px;margin:0 auto;height:100%;padding:0 1.5rem;display:flex;align-items:center;gap:.5rem}
   .nav-logo{display:flex;align-items:center;gap:.5rem;font-family:var(--serif);font-size:1.45rem;font-weight:700;color:var(--amber2);white-space:nowrap;letter-spacing:-.01em;margin-right:auto;transition:color .2s;flex-shrink:0}
   .nav-logo:hover{color:var(--rose3)}
@@ -81,350 +99,171 @@
   .nav-links{display:flex;align-items:center;gap:.1rem;list-style:none}
   .nav-links a{display:flex;align-items:center;gap:.32rem;font-size:.82rem;font-weight:500;color:var(--mist);padding:.42rem .78rem;border-radius:2rem;transition:all .2s;white-space:nowrap}
   .nav-links a svg{width:14px;height:14px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .nav-links a:hover,.nav-links a.active{background:rgba(181,115,127,0.12);color:var(--ink)}
-  .nav-links a.active{color:var(--rose2)}
+  .nav-links a:hover,.nav-links a.active{background:rgba(178,98,116,0.2);color:var(--ink)}
+  .nav-links a.active{color:var(--rose2);font-weight:600}
   .nav-cart{position:relative;padding:.38rem .55rem;border-radius:var(--r-sm);display:flex;align-items:center;color:var(--mist);transition:all .2s;min-width:44px;min-height:44px;justify-content:center}
-  .nav-cart svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .nav-cart:hover{background:rgba(181,115,127,0.1);color:var(--ink)}
-  .cart-badge{position:absolute;top:2px;right:2px;background:var(--rose);color:#fff;font-size:.58rem;font-weight:800;min-width:.95rem;height:.95rem;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:1;border:1.5px solid var(--surface)}
+  .nav-cart svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
+  .nav-cart:hover{background:rgba(178,98,116,0.15);color:var(--ink)}
+  .cart-badge{position:absolute;top:2px;right:2px;background:var(--rose);color:#fff;font-size:.58rem;font-weight:800;min-width:.95rem;height:.95rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--surface)}
   .lang-pills{display:flex;gap:.2rem}
-  .lang-pill{font-size:.73rem;font-weight:700;padding:.32rem .6rem;border-radius:.75rem;border:1px solid var(--edge);color:var(--mist);transition:all .2s;cursor:pointer;background:transparent;letter-spacing:.04em;min-height:32px;display:inline-flex;align-items:center}
+  .lang-pill{font-size:.73rem;font-weight:700;padding:.32rem .6rem;border-radius:.75rem;border:1px solid var(--edge);color:var(--mist);transition:all .2s;cursor:pointer;background:transparent;letter-spacing:.04em}
   .lang-pill:hover{border-color:var(--amber);color:var(--amber2)}
   .lang-active{background:var(--rose)!important;color:#fff!important;border-color:var(--rose)!important}
   .user-wrap{position:relative}
-  .user-btn{width:38px;height:38px;border-radius:50%;border:2px solid rgba(181,115,127,0.4);background:var(--ink4);cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all .2s;padding:0;flex-shrink:0}
-  .user-btn:hover{border-color:var(--amber2);box-shadow:0 0 12px rgba(160,127,98,0.2)}
-  .user-init{font-size:.78rem;font-weight:700;color:var(--amber2);text-transform:uppercase;line-height:1}
+  .user-btn{width:38px;height:38px;border-radius:50%;border:2px solid rgba(178,98,116,0.5);background:var(--ink4);cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all .2s}
+  .user-btn:hover{border-color:var(--amber2);box-shadow:0 0 12px rgba(158,111,80,0.3)}
+  .user-init{font-size:.78rem;font-weight:700;color:var(--amber2);text-transform:uppercase}
   .user-init img{width:100%;height:100%;object-fit:cover}
-  .user-drop{display:none;position:absolute;top:calc(100% + 10px);right:0;min-width:210px;background:var(--cream2);border:1px solid rgba(181,115,127,0.3);border-radius:var(--r-lg);padding:.85rem .45rem .65rem;box-shadow:var(--sh-lg);z-index:2000}
+  .user-drop{display:none;position:absolute;top:calc(100% + 10px);right:0;min-width:210px;background:var(--cream2);border:1px solid var(--edge);border-radius:var(--r-lg);padding:.85rem .45rem .65rem;box-shadow:var(--sh-lg);z-index:2000}
   .user-drop.open{display:block;animation:dropIn .2s cubic-bezier(.22,1,.36,1)}
   @keyframes dropIn{from{opacity:0;transform:translateY(-8px) scale(.97)}}
-  .drop-close{position:absolute;top:.4rem;right:.5rem;width:22px;height:22px;border-radius:50%;background:rgba(181,115,127,0.15);border:none;color:var(--rose2);font-size:.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
-  .drop-name{font-size:.78rem;font-weight:600;color:var(--amber2);padding:.05rem .65rem .65rem;border-bottom:1px solid rgba(160,127,98,0.2);margin-bottom:.4rem}
+  .drop-close{position:absolute;top:.4rem;right:.5rem;width:22px;height:22px;border-radius:50%;background:rgba(178,98,116,0.2);border:none;color:var(--rose2);font-size:.65rem;cursor:pointer}
+  .drop-name{font-size:.78rem;font-weight:600;color:var(--amber2);padding:.05rem .65rem .65rem;border-bottom:1px solid rgba(158,111,80,0.25);margin-bottom:.4rem}
   .drop-item{display:flex;align-items:center;gap:.5rem;padding:.48rem .65rem;border-radius:var(--r-xs);color:var(--mist);font-size:.83rem;font-weight:500;text-decoration:none;transition:all .18s}
-  .drop-item svg{width:15px;height:15px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .drop-item:hover{background:rgba(181,115,127,0.08);color:var(--ink)}
+  .drop-item svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8}
+  .drop-item:hover{background:rgba(178,98,116,0.12);color:var(--ink)}
   .drop-logout{color:var(--rose2);margin-top:.3rem;border-top:1px solid var(--edge2);padding-top:.55rem}
-  .drop-logout:hover{background:rgba(181,115,127,0.1);color:var(--rose2)}
+  .drop-logout:hover{background:rgba(178,98,116,0.12);color:var(--rose2)}
   .drop-badge{margin-left:auto;background:var(--rose);color:#fff;font-size:.58rem;font-weight:800;min-width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 
   /* MOBILE DRAWER */
-  .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1998;backdrop-filter:blur(4px)}
-  .drawer-overlay.open{display:block;animation:fadeOverlay .25s ease}
-  @keyframes fadeOverlay{from{opacity:0}}
-  .drawer{position:fixed;top:0;left:0;bottom:0;width:min(85vw,340px);background:var(--cream2);z-index:1999;transform:translateX(-100%);transition:transform .3s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;box-shadow:8px 0 40px rgba(0,0,0,0.15);border-right:1px solid var(--edge)}
+  .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1998;backdrop-filter:blur(5px)}
+  .drawer-overlay.open{display:block}
+  .drawer{position:fixed;top:0;left:0;bottom:0;width:min(85vw,340px);background:var(--cream2);z-index:1999;transform:translateX(-100%);transition:transform .3s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;box-shadow:8px 0 40px rgba(0,0,0,0.25);border-right:1px solid var(--edge)}
   .drawer.open{transform:translateX(0)}
   .drawer-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.2rem;border-bottom:1px solid var(--edge)}
-  .drawer-logo{display:flex;align-items:center;gap:.5rem;font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--amber2);text-decoration:none}
-  .drawer-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--edge);background:rgba(181,115,127,0.1);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s}
-  .drawer-close:hover{background:var(--rose);border-color:var(--rose);color:#fff}
+  .drawer-logo{display:flex;align-items:center;gap:.5rem;font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--amber2)}
+  .drawer-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--edge);background:rgba(178,98,116,0.15);color:var(--ink);cursor:pointer;font-size:1rem}
+  .drawer-close:hover{background:var(--rose);color:#fff}
   .drawer-user{padding:1.1rem 1.2rem;border-bottom:1px solid var(--edge);display:flex;align-items:center;gap:.85rem}
-  .drawer-avatar{width:48px;height:48px;border-radius:50%;border:2px solid rgba(181,115,127,0.4);background:var(--ink4);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
-  .drawer-avatar img{width:100%;height:100%;object-fit:cover}
+  .drawer-avatar{width:48px;height:48px;border-radius:50%;border:2px solid rgba(178,98,116,0.5);background:var(--ink4);display:flex;align-items:center;justify-content:center;overflow:hidden}
   .drawer-avatar-init{font-size:1.1rem;font-weight:700;color:var(--amber2);text-transform:uppercase}
   .drawer-user-info strong{display:block;font-size:.9rem;color:var(--ink);font-weight:600}
   .drawer-user-info span{font-size:.75rem;color:var(--mist)}
   .drawer-user-btns{display:flex;gap:.4rem;margin-top:.5rem}
-  .drawer-user-btn{padding:.32rem .75rem;border-radius:.75rem;font-size:.73rem;font-weight:600;text-decoration:none;transition:all .2s}
+  .drawer-user-btn{padding:.32rem .75rem;border-radius:.75rem;font-size:.73rem;font-weight:600;text-decoration:none}
   .drawer-user-btn.primary{background:var(--rose);color:#fff}
   .drawer-user-btn.outline{border:1px solid var(--edge);color:var(--mist)}
   .drawer-nav{flex:1;overflow-y:auto;padding:.6rem .7rem}
-  .drawer-nav a{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;border-radius:var(--r-md);color:var(--ink2);font-size:.95rem;font-weight:500;text-decoration:none;transition:all .2s;margin-bottom:.15rem}
-  .drawer-nav a svg{width:18px;height:18px;flex-shrink:0;stroke:var(--sage2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .drawer-nav a:hover{background:rgba(181,115,127,0.08);color:var(--ink)}
-  .drawer-nav a.active{background:rgba(181,115,127,0.12);color:var(--rose2)}
-  .drawer-nav a .d-badge{margin-left:auto;background:var(--rose);color:#fff;font-size:.6rem;font-weight:800;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 .3rem}
+  .drawer-nav a{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;border-radius:var(--r-md);color:var(--ink2);font-size:.95rem;font-weight:500;text-decoration:none;margin-bottom:.15rem}
+  .drawer-nav a svg{width:18px;height:18px;stroke:var(--sage2);fill:none;stroke-width:1.8}
+  .drawer-nav a:hover{background:rgba(178,98,116,0.12);color:var(--ink)}
+  .drawer-nav a.active{background:rgba(178,98,116,0.18);color:var(--rose2)}
+  .drawer-nav a .d-badge{margin-left:auto;background:var(--rose);color:#fff;font-size:.6rem;font-weight:800;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center}
   .drawer-sep{height:1px;background:var(--edge);margin:.5rem .5rem}
   .drawer-lang{padding:.8rem 1.2rem;border-top:1px solid var(--edge)}
   .drawer-lang-title{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);margin-bottom:.5rem}
   .drawer-lang-pills{display:flex;gap:.4rem}
-  .drawer-lang-pill{flex:1;padding:.45rem;border-radius:.75rem;border:1px solid var(--edge);color:var(--mist);font-size:.8rem;font-weight:700;text-align:center;cursor:pointer;background:transparent;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.3rem}
+  .drawer-lang-pill{flex:1;padding:.45rem;border-radius:.75rem;border:1px solid var(--edge);color:var(--mist);font-size:.8rem;font-weight:700;text-align:center;cursor:pointer;background:transparent}
   .drawer-lang-pill.active,.drawer-lang-pill:hover{background:var(--rose);color:#fff;border-color:var(--rose)}
 
-  /* MOBILE TOP BAR */
-  .mobile-topbar{display:none;position:sticky;top:0;z-index:1000;height:var(--nav-h);background:var(--surface);backdrop-filter:blur(28px);border-bottom:1px solid var(--edge);align-items:center;justify-content:space-between;padding:0 1rem;transition:box-shadow .3s}
-  .mobile-topbar.scrolled{box-shadow:0 4px 20px rgba(0,0,0,0.08)}
-  .topbar-menu-btn{width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+  /* MOBILE TOPBAR */
+  .mobile-topbar{display:none;position:sticky;top:0;z-index:1000;height:var(--nav-h);background:var(--surface);backdrop-filter:blur(28px);border-bottom:1px solid var(--edge);align-items:center;justify-content:space-between;padding:0 1rem}
+  .topbar-menu-btn{width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center}
   .topbar-menu-btn span{display:block;width:22px;height:2px;background:var(--ink2);border-radius:2px}
-  .topbar-logo{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--amber2);text-decoration:none}
+  .topbar-logo{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--amber2)}
   .topbar-right{display:flex;align-items:center;gap:.3rem}
-  .topbar-cart{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--mist);border-radius:var(--r-sm)}
-  .topbar-cart svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .topbar-cart{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--mist)}
+  .topbar-cart svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
   .topbar-cart-badge{position:absolute;top:6px;right:6px;background:var(--rose);color:#fff;font-size:.55rem;font-weight:800;min-width:.85rem;height:.85rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--surface)}
-  .topbar-user{width:36px;height:36px;border-radius:50%;border:2px solid rgba(181,115,127,0.35);background:var(--ink4);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;padding:0}
-  .topbar-user img{width:100%;height:100%;object-fit:cover}
+  .topbar-user{width:36px;height:36px;border-radius:50%;border:2px solid rgba(178,98,116,0.5);background:var(--ink4);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
   .topbar-user-init{font-size:.75rem;font-weight:700;color:var(--amber2);text-transform:uppercase}
 
   /* BOTTOM NAV */
-  .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:997;height:var(--bottom-nav-h);background:rgba(245,233,236,0.97);backdrop-filter:blur(24px);border-top:1px solid var(--edge);padding-bottom:env(safe-area-inset-bottom)}
+  .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:997;height:var(--bottom-nav-h);background:rgba(232,213,220,0.97);backdrop-filter:blur(24px);border-top:1px solid var(--edge);padding-bottom:env(safe-area-inset-bottom)}
   .bottom-nav-inner{display:flex;height:100%;align-items:center}
-  .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:rgba(45,42,44,0.45);font-size:.58rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;padding:.4rem .2rem;position:relative;min-height:52px;transition:color .2s}
-  .bn-item svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:all .2s}
+  .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:rgba(30,26,28,0.55);font-size:.58rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;padding:.4rem .2rem;position:relative}
+  .bn-item svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7}
   .bn-item.active{color:var(--rose2)}
-  .bn-item.active svg{stroke:var(--rose2);filter:drop-shadow(0 0 4px rgba(181,115,127,0.4))}
   .bn-badge{position:absolute;top:6px;right:calc(50% - 14px);background:var(--rose);color:#fff;font-size:.52rem;font-weight:800;min-width:.85rem;height:.85rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--cream2)}
 
   /* MESSAGES */
   .messages{max-width:680px;margin:.8rem auto;padding:0 1.25rem}
-  .message{padding:.72rem 1.1rem;border-radius:var(--r-sm);margin-bottom:.4rem;font-size:.85rem;background:var(--ink3);border-left:3px solid var(--rose);box-shadow:var(--sh-sm);animation:msgIn .3s;color:var(--ink)}
-  @keyframes msgIn{from{opacity:0;transform:translateX(-12px)}}
+  .message{padding:.72rem 1.1rem;border-radius:var(--r-sm);margin-bottom:.4rem;font-size:.85rem;background:var(--ink3);border-left:3px solid var(--rose);box-shadow:var(--sh-sm);color:var(--ink);font-weight:500}
   .message.success{border-left-color:#7c9a7e}
   .message.error{border-left-color:var(--rose2)}
-  .message.warning{border-left-color:var(--amber)}
-  .message.info{border-left-color:#6a8fa8}
 
   /* FOOTER */
-  footer{background:rgba(240,228,233,0.95);border-top:1px solid var(--edge);padding:4rem 1.5rem 2.5rem;margin-top:6rem;position:relative;z-index:1}
+  footer{background:rgba(220,200,210,0.96);border-top:1px solid var(--edge);padding:4rem 1.5rem 2.5rem;margin-top:6rem;position:relative;z-index:1}
   .footer-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:3rem}
   .footer-brand .brand-logo{font-family:var(--serif);font-size:1.55rem;font-weight:700;color:var(--amber2);display:flex;align-items:center;gap:.5rem;margin-bottom:.7rem}
-  .footer-brand p{font-size:.82rem;color:var(--mist);line-height:1.75;margin-bottom:1.1rem}
+  .footer-brand p{font-size:.82rem;color:var(--ink2);line-height:1.75;margin-bottom:1.1rem}
   .footer-social{display:flex;gap:.5rem;flex-wrap:wrap}
   .social-btn{width:42px;height:42px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;transition:all .22s;color:#fff;overflow:hidden}
   .social-btn svg{width:18px;height:18px;fill:currentColor}
-  .social-btn.ig{background:var(--ig)}.social-btn.ig:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(188,24,136,.4)}
-  .social-btn.tg{background:var(--tg)}.social-btn.tg:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(34,158,217,.4)}
-  .social-btn.fb{background:var(--fb)}.social-btn.fb:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(24,119,242,.4)}
-  .social-btn.wa{background:var(--wa)}.social-btn.wa:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(37,211,102,.4)}
-  .social-btn.yt{background:var(--yt)}.social-btn.yt:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(255,0,0,.35)}
+  .social-btn.ig{background:var(--ig)}.social-btn.tg{background:var(--tg)}.social-btn.fb{background:var(--fb)}.social-btn.wa{background:var(--wa)}.social-btn.yt{background:var(--yt)}
+  .social-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
   .footer-col h4{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem}
   .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-  .footer-col a{font-size:.84rem;color:var(--mist);transition:color .2s;display:flex;align-items:center;gap:.4rem}
+  .footer-col a{font-size:.84rem;color:var(--ink2);transition:color .2s;display:flex;align-items:center;gap:.4rem}
   .footer-col a:hover{color:var(--amber2)}
-  .footer-col a svg{width:12px;height:12px;stroke:var(--sage2);flex-shrink:0;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .footer-contact-item{display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:var(--mist);margin-bottom:.6rem}
-  .footer-contact-item svg{width:15px;height:15px;flex-shrink:0;margin-top:.1rem;stroke:var(--amber);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .footer-col a svg{width:12px;height:12px;stroke:var(--sage2);fill:none;stroke-width:2}
+  .footer-contact-item{display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:var(--ink2);margin-bottom:.6rem}
+  .footer-contact-item svg{width:15px;height:15px;stroke:var(--amber);fill:none;stroke-width:1.8}
   .footer-bottom{max-width:1140px;margin:2.2rem auto 0;padding-top:1.3rem;border-top:1px solid var(--edge);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
-  .footer-bottom>span{font-size:.74rem;color:rgba(45,42,44,0.45)}
-  .footer-badges{display:flex;gap:.5rem;flex-wrap:wrap}
-  .footer-badge{padding:.24rem .65rem;border-radius:.4rem;background:var(--ink3);border:1px solid var(--edge);font-size:.67rem;font-weight:600;color:var(--mist)}
-  @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr};footer{margin-top:4rem}}
+  .footer-bottom>span{font-size:.74rem;color:rgba(30,26,28,0.55)}
+  .footer-badges{display:flex;gap:.5rem}
+  .footer-badge{padding:.24rem .65rem;border-radius:.4rem;background:var(--ink3);border:1px solid var(--edge);font-size:.67rem;font-weight:600;color:var(--ink)}
+  @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr}footer{margin-top:4rem}}
   @media(max-width:560px){.footer-inner{grid-template-columns:1fr}}
 
-  /* SCROLL REVEAL */
+  /* REVEAL & BUTTONS */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
   .reveal.visible{opacity:1;transform:none}
-  .stagger>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
-  .stagger.visible>*{opacity:1;transform:none}
-  .stagger.visible>*:nth-child(1){transition-delay:.05s}
-  .stagger.visible>*:nth-child(2){transition-delay:.12s}
-  .stagger.visible>*:nth-child(3){transition-delay:.19s}
-  .stagger.visible>*:nth-child(4){transition-delay:.26s}
-  .stagger.visible>*:nth-child(5){transition-delay:.32s}
-  .stagger.visible>*:nth-child(6){transition-delay:.38s}
-  .stagger.visible>*:nth-child(7){transition-delay:.44s}
-  .stagger.visible>*:nth-child(8){transition-delay:.5s}
-
-  /* BUTTONS */
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.72rem 1.5rem;border-radius:var(--r-sm);font-family:var(--sans);font-size:.88rem;font-weight:600;text-decoration:none;cursor:pointer;transition:all .22s;border:none;letter-spacing:.01em;min-height:46px}
-  .btn svg{width:15px;height:15px;flex-shrink:0}
-  .btn-primary{background:var(--grad-rose);color:#fff;box-shadow:0 4px 12px rgba(181,115,127,0.3)}
-  .btn-primary:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 8px 20px rgba(181,115,127,0.4);color:#fff}
-  .btn-outline{background:transparent;color:var(--mist);border:1.5px solid var(--edge)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.72rem 1.5rem;border-radius:var(--r-sm);font-family:var(--sans);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .22s;border:none;min-height:46px}
+  .btn-primary{background:var(--grad-rose);color:#fff;box-shadow:0 4px 12px rgba(178,98,116,0.4)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(178,98,116,0.45);color:#fff}
+  .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--edge)}
   .btn-outline:hover{border-color:var(--amber2);color:var(--amber2)}
-  .btn-amber{background:var(--grad-amber);color:#fff;box-shadow:0 4px 12px rgba(181,151,122,0.3)}
-  .btn-amber:hover{opacity:.9;transform:translateY(-2px);color:#fff}
-  .section-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:var(--ink)}
 
   @media(max-width:900px){
     body{padding-bottom:calc(var(--bottom-nav-h) + env(safe-area-inset-bottom))}
     .nav{display:none}
     .mobile-topbar{display:flex}
     .bottom-nav{display:block}
-    footer{margin-top:2.5rem;padding-bottom:1.5rem}
+    footer{margin-top:2.5rem}
   }
   @media(min-width:901px){.bottom-nav,.mobile-topbar,.drawer,.drawer-overlay{display:none!important}}
-  @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal,.stagger>*{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}.reveal{opacity:1;transform:none}}
   </style>
   {% block extra_head %}{% endblock %}
 </head>
 <body>
 
 <div id="splash">
-  <svg class="splash-svg" viewBox="0 0 72 72" fill="none">
-    <circle cx="36" cy="36" r="35" fill="rgba(181,115,127,0.08)" stroke="rgba(181,115,127,0.2)" stroke-width="1"/>
-    <path d="M36 14C36 14 26 21 26 31C26 38.8 30.2 42.8 36 45C41.8 42.8 46 38.8 46 31C46 21 36 14 36 14Z" fill="#b5977a"/>
-    <path d="M36 14C36 14 46 19 48 29C49.6 37 46.8 42 42 44.4C43 41 42 37.4 39.8 34C38.4 31.8 37 28 36 14Z" fill="#c9aa8b" opacity=".75"/>
-    <path d="M36 45L36 59" stroke="#5f6b64" stroke-width="3" stroke-linecap="round"/>
-    <path d="M36 53C36 53 29 49.5 25.5 53" stroke="#5f6b64" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-  </svg>
+  <svg class="splash-svg" viewBox="0 0 72 72" fill="none"><circle cx="36" cy="36" r="35" fill="rgba(178,98,116,0.1)" stroke="rgba(178,98,116,0.25)" stroke-width="1"/><path d="M36 14C36 14 26 21 26 31C26 38.8 30.2 42.8 36 45C41.8 42.8 46 38.8 46 31C46 21 36 14 36 14Z" fill="#b58a6b"/><path d="M36 14C36 14 46 19 48 29C49.6 37 46.8 42 42 44.4C43 41 42 37.4 39.8 34C38.4 31.8 37 28 36 14Z" fill="#c99a78" opacity=".75"/><path d="M36 45L36 59" stroke="#5e5b5c" stroke-width="3"/><path d="M36 53C36 53 29 49.5 25.5 53" stroke="#5e5b5c" stroke-width="2.2" fill="none"/></svg>
   <div class="splash-name">Flora Luxe</div>
   <div class="splash-sub">Premium Flower Shop</div>
   <div class="splash-bar"></div>
 </div>
 
+<!-- DESKTOP NAV (идентичная структура, цвета адаптированы) -->
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
-    <a href="{% url 'home' %}" class="nav-logo">
-      <svg class="logo-svg" viewBox="0 0 32 32" fill="none"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#b5977a"/><path d="M16 3C16 3 23 7 24.5 13.5C25.7 18.5 23.5 22.5 19.5 24C20.2 21 19.5 18 17.5 15.2C16.5 13.7 16.2 10 16 3Z" fill="#c9aa8b" opacity=".7"/><circle cx="16" cy="14.5" r="2.8" fill="rgba(255,255,240,.16)"/><path d="M16 24.2L16 30" stroke="#5f6b64" stroke-width="2" stroke-linecap="round"/></svg>
-      Flora Luxe
-    </a>
-    <ul class="nav-links">
-      <li><a href="{% url 'home' %}" {% if request.path == '/' %}class="active"{% endif %}><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>{% t 'home' %}</a></li>
-      <li><a href="{% url 'catalog' %}" {% if '/catalog' in request.path %}class="active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>{% t 'catalog' %}</a></li>
-      <li><a href="{% url 'about' %}" {% if '/about' in request.path %}class="active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>{% t 'about' %}</a></li>
-      <li><a href="{% url 'contacts' %}" {% if '/contacts' in request.path %}class="active"{% endif %}><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>{% t 'contacts' %}</a></li>
-    </ul>
-    <div class="lang-pills">
-      <button onclick="setLang('ru')" class="lang-pill {% if current_lang == 'ru' %}lang-active{% endif %}">RU</button>
-      <button onclick="setLang('uz')" class="lang-pill {% if current_lang == 'uz' %}lang-active{% endif %}">UZ</button>
-      <button onclick="setLang('en')" class="lang-pill {% if current_lang == 'en' %}lang-active{% endif %}">EN</button>
-    </div>
-    <a href="{% url 'cart' %}" class="nav-cart" title="Корзина">
-      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-      {% if request.session.cart %}<span class="cart-badge">{{ request.session.cart|length }}</span>{% endif %}
-    </a>
-    {% if user.is_authenticated %}
-    <div class="user-wrap">
-      <button class="user-btn" id="userBtn"><div class="user-init">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}" alt="">{% else %}{{ user.first_name|first|default:user.username|first|upper }}{% endif %}</div></button>
-      <div class="user-drop" id="userDrop">
-        <button class="drop-close" id="dropClose">✕</button>
-        <div class="drop-name">{{ user.get_full_name|default:user.username }}</div>
-        <a href="{% url 'profile' %}" class="drop-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>{% t 'profile' %}</a>
-        <a href="{% url 'cart' %}" class="drop-item"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% t 'cart' %}{% if request.session.cart %}<span class="drop-badge">{{ request.session.cart|length }}</span>{% endif %}</a>
-        <a href="{% url 'check_receipt' %}" class="drop-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>{% if current_lang == 'uz' %}Chekni tekshirish{% elif current_lang == 'en' %}Check Receipt{% else %}Проверить чек{% endif %}</a>
-        {% if user.is_staff %}<a href="/admin/" class="drop-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Админка</a>{% endif %}
-        <a href="{% url 'logout' %}" class="drop-item drop-logout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>{% t 'logout' %}</a>
-      </div>
-    </div>
-    {% else %}
-    <a href="{% url 'login' %}" class="btn btn-primary" style="padding:.5rem 1.1rem;font-size:.82rem;min-height:38px">{% t 'login' %}</a>
-    {% endif %}
+    <a href="{% url 'home' %}" class="nav-logo"><svg class="logo-svg" viewBox="0 0 32 32" fill="none"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#b58a6b"/><path d="M16 3C16 3 23 7 24.5 13.5C25.7 18.5 23.5 22.5 19.5 24C20.2 21 19.5 18 17.5 15.2C16.5 13.7 16.2 10 16 3Z" fill="#c99a78" opacity=".7"/><circle cx="16" cy="14.5" r="2.8" fill="rgba(255,255,240,.16)"/><path d="M16 24.2L16 30" stroke="#5e5b5c" stroke-width="2"/></svg>Flora Luxe</a>
+    <ul class="nav-links"><li><a href="{% url 'home' %}"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>{% t 'home' %}</a></li><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>{% t 'catalog' %}</a></li><li><a href="{% url 'about' %}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>{% t 'about' %}</a></li><li><a href="{% url 'contacts' %}"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>{% t 'contacts' %}</a></li></ul>
+    <div class="lang-pills"><button onclick="setLang('ru')" class="lang-pill {% if current_lang == 'ru' %}lang-active{% endif %}">RU</button><button onclick="setLang('uz')" class="lang-pill {% if current_lang == 'uz' %}lang-active{% endif %}">UZ</button><button onclick="setLang('en')" class="lang-pill {% if current_lang == 'en' %}lang-active{% endif %}">EN</button></div>
+    <a href="{% url 'cart' %}" class="nav-cart"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% if request.session.cart %}<span class="cart-badge">{{ request.session.cart|length }}</span>{% endif %}</a>
+    {% if user.is_authenticated %}<div class="user-wrap"><button class="user-btn" id="userBtn"><div class="user-init">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}">{% else %}{{ user.first_name|first|default:user.username|first|upper }}{% endif %}</div></button><div class="user-drop" id="userDrop"><button class="drop-close" id="dropClose">✕</button><div class="drop-name">{{ user.get_full_name|default:user.username }}</div><a href="{% url 'profile' %}" class="drop-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>{% t 'profile' %}</a><a href="{% url 'cart' %}" class="drop-item"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% t 'cart' %}{% if request.session.cart %}<span class="drop-badge">{{ request.session.cart|length }}</span>{% endif %}</a><a href="{% url 'check_receipt' %}" class="drop-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>{% if current_lang == 'uz' %}Chekni tekshirish{% elif current_lang == 'en' %}Check Receipt{% else %}Проверить чек{% endif %}</a>{% if user.is_staff %}<a href="/admin/" class="drop-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Админка</a>{% endif %}<a href="{% url 'logout' %}" class="drop-item drop-logout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>{% t 'logout' %}</a></div></div>{% else %}<a href="{% url 'login' %}" class="btn btn-primary" style="padding:.5rem 1.1rem;font-size:.82rem">{% t 'login' %}</a>{% endif %}
   </div>
 </nav>
 
-<div class="mobile-topbar" id="mobileTopbar">
-  <button class="topbar-menu-btn" id="drawerToggle"><span></span><span></span><span></span></button>
-  <a href="{% url 'home' %}" class="topbar-logo">Flora Luxe</a>
-  <div class="topbar-right">
-    <a href="{% url 'cart' %}" class="topbar-cart"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% if request.session.cart %}<span class="topbar-cart-badge">{{ request.session.cart|length }}</span>{% endif %}</a>
-    {% if user.is_authenticated %}
-    <button class="topbar-user" id="drawerUserToggle">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}" alt="">{% else %}<span class="topbar-user-init">{{ user.first_name|first|default:user.username|first|upper }}</span>{% endif %}</button>
-    {% else %}
-    <a href="{% url 'login' %}" class="btn btn-primary" style="padding:.4rem .9rem;font-size:.78rem;min-height:34px;border-radius:.65rem">{% t 'login' %}</a>
-    {% endif %}
-  </div>
-</div>
-
+<!-- MOBILE TOPBAR / DRAWER / BOTTOM NAV (структура сохранена) -->
+<div class="mobile-topbar" id="mobileTopbar"><button class="topbar-menu-btn" id="drawerToggle"><span></span><span></span><span></span></button><a href="{% url 'home' %}" class="topbar-logo">Flora Luxe</a><div class="topbar-right"><a href="{% url 'cart' %}" class="topbar-cart"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% if request.session.cart %}<span class="topbar-cart-badge">{{ request.session.cart|length }}</span>{% endif %}</a>{% if user.is_authenticated %}<button class="topbar-user" id="drawerUserToggle">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}">{% else %}<span class="topbar-user-init">{{ user.first_name|first|default:user.username|first|upper }}</span>{% endif %}</button>{% else %}<a href="{% url 'login' %}" class="btn btn-primary" style="padding:.4rem .9rem;font-size:.78rem">{% t 'login' %}</a>{% endif %}</div></div>
 <div class="drawer-overlay" id="drawerOverlay"></div>
-<div class="drawer" id="drawer">
-  <div class="drawer-header">
-    <a href="{% url 'home' %}" class="drawer-logo"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#b5977a"/><path d="M16 24.2L16 30" stroke="#5f6b64" stroke-width="2" stroke-linecap="round"/></svg>Flora Luxe</a>
-    <button class="drawer-close" id="drawerClose">✕</button>
-  </div>
-  <div class="drawer-user">
-    {% if user.is_authenticated %}
-    <div class="drawer-avatar">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}" alt="">{% else %}<span class="drawer-avatar-init">{{ user.first_name|first|default:user.username|first|upper }}</span>{% endif %}</div>
-    <div class="drawer-user-info">
-      <strong>{{ user.get_full_name|default:user.username }}</strong>
-      <span>{{ user.email }}</span>
-      <div class="drawer-user-btns">
-        <a href="{% url 'profile' %}" class="drawer-user-btn primary">{% t 'profile' %}</a>
-        <a href="{% url 'logout' %}" class="drawer-user-btn outline">{% t 'logout' %}</a>
-      </div>
-    </div>
-    {% else %}
-    <div style="display:flex;gap:.5rem;width:100%">
-      <a href="{% url 'login' %}" class="drawer-user-btn primary" style="flex:1;text-align:center;padding:.5rem">{% t 'login' %}</a>
-      <a href="{% url 'register' %}" class="drawer-user-btn outline" style="flex:1;text-align:center;padding:.5rem;border:1px solid var(--edge)">{% t 'register' %}</a>
-    </div>
-    {% endif %}
-  </div>
-  <nav class="drawer-nav" id="drawerNav">
-    <a href="{% url 'home' %}" {% if request.path == '/' %}class="active"{% endif %}><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>{% t 'home' %}</a>
-    <a href="{% url 'catalog' %}" {% if '/catalog' in request.path %}class="active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>{% t 'catalog' %}</a>
-    <a href="{% url 'cart' %}" {% if '/cart' in request.path %}class="active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% t 'cart' %}{% if request.session.cart %}<span class="d-badge">{{ request.session.cart|length }}</span>{% endif %}</a>
-    <div class="drawer-sep"></div>
-    <a href="{% url 'about' %}" {% if '/about' in request.path %}class="active"{% endif %}><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>{% t 'about' %}</a>
-    <a href="{% url 'contacts' %}" {% if '/contacts' in request.path %}class="active"{% endif %}><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>{% t 'contacts' %}</a>
-    <a href="{% url 'check_receipt' %}" {% if '/check-receipt' in request.path %}class="active"{% endif %}><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>{% if current_lang == 'uz' %}Chekni tekshirish{% elif current_lang == 'en' %}Check Receipt{% else %}Проверить чек{% endif %}</a>
-    {% if user.is_staff %}<div class="drawer-sep"></div><a href="/admin/"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Админка</a>{% endif %}
-  </nav>
-  <div class="drawer-lang">
-    <div class="drawer-lang-title">🌐 {% if current_lang == 'uz' %}Til{% elif current_lang == 'en' %}Language{% else %}Язык{% endif %}</div>
-    <div class="drawer-lang-pills">
-      <button onclick="setLang('ru')" class="drawer-lang-pill {% if current_lang == 'ru' %}active{% endif %}">🇷🇺 RU</button>
-      <button onclick="setLang('uz')" class="drawer-lang-pill {% if current_lang == 'uz' %}active{% endif %}">🇺🇿 UZ</button>
-      <button onclick="setLang('en')" class="drawer-lang-pill {% if current_lang == 'en' %}active{% endif %}">🇬🇧 EN</button>
-    </div>
-  </div>
-</div>
+<div class="drawer" id="drawer"><div class="drawer-header"><a href="{% url 'home' %}" class="drawer-logo"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#b58a6b"/><path d="M16 24.2L16 30" stroke="#5e5b5c" stroke-width="2"/></svg>Flora Luxe</a><button class="drawer-close" id="drawerClose">✕</button></div><div class="drawer-user">{% if user.is_authenticated %}<div class="drawer-avatar">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}">{% else %}<span class="drawer-avatar-init">{{ user.first_name|first|default:user.username|first|upper }}</span>{% endif %}</div><div class="drawer-user-info"><strong>{{ user.get_full_name|default:user.username }}</strong><span>{{ user.email }}</span><div class="drawer-user-btns"><a href="{% url 'profile' %}" class="drawer-user-btn primary">{% t 'profile' %}</a><a href="{% url 'logout' %}" class="drawer-user-btn outline">{% t 'logout' %}</a></div></div>{% else %}<div style="display:flex;gap:.5rem;width:100%"><a href="{% url 'login' %}" class="drawer-user-btn primary" style="flex:1;text-align:center">{% t 'login' %}</a><a href="{% url 'register' %}" class="drawer-user-btn outline" style="flex:1;text-align:center">{% t 'register' %}</a></div>{% endif %}</div><nav class="drawer-nav"><a href="{% url 'home' %}"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>{% t 'home' %}</a><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>{% t 'catalog' %}</a><a href="{% url 'cart' %}"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% t 'cart' %}{% if request.session.cart %}<span class="d-badge">{{ request.session.cart|length }}</span>{% endif %}</a><div class="drawer-sep"></div><a href="{% url 'about' %}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>{% t 'about' %}</a><a href="{% url 'contacts' %}"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>{% t 'contacts' %}</a><a href="{% url 'check_receipt' %}"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>{% if current_lang == 'uz' %}Chekni tekshirish{% elif current_lang == 'en' %}Check Receipt{% else %}Проверить чек{% endif %}</a>{% if user.is_staff %}<div class="drawer-sep"></div><a href="/admin/"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Админка</a>{% endif %}</nav><div class="drawer-lang"><div class="drawer-lang-title">🌐 Язык</div><div class="drawer-lang-pills"><button onclick="setLang('ru')" class="drawer-lang-pill {% if current_lang == 'ru' %}active{% endif %}">RU</button><button onclick="setLang('uz')" class="drawer-lang-pill {% if current_lang == 'uz' %}active{% endif %}">UZ</button><button onclick="setLang('en')" class="drawer-lang-pill {% if current_lang == 'en' %}active{% endif %}">EN</button></div></div></div>
+<nav class="bottom-nav"><div class="bottom-nav-inner"><a href="{% url 'home' %}" class="bn-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>{% t 'home' %}</a><a href="{% url 'catalog' %}" class="bn-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>{% t 'catalog' %}</a><a href="{% url 'cart' %}" class="bn-item"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% t 'cart' %}{% if request.session.cart %}<span class="bn-badge">{{ request.session.cart|length }}</span>{% endif %}</a>{% if user.is_authenticated %}<a href="{% url 'profile' %}" class="bn-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>{% t 'profile' %}</a>{% else %}<a href="{% url 'login' %}" class="bn-item"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>{% t 'login' %}</a>{% endif %}<a href="{% url 'contacts' %}" class="bn-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>{% t 'contacts' %}</a></div></nav>
 
-<nav class="bottom-nav">
-  <div class="bottom-nav-inner">
-    <a href="{% url 'home' %}" class="bn-item {% if request.path == '/' %}active{% endif %}"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>{% t 'home' %}</a>
-    <a href="{% url 'catalog' %}" class="bn-item {% if '/catalog' in request.path %}active{% endif %}"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>{% t 'catalog' %}</a>
-    <a href="{% url 'cart' %}" class="bn-item {% if '/cart' in request.path %}active{% endif %}"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>{% t 'cart' %}{% if request.session.cart %}<span class="bn-badge">{{ request.session.cart|length }}</span>{% endif %}</a>
-    {% if user.is_authenticated %}<a href="{% url 'profile' %}" class="bn-item {% if '/profile' in request.path %}active{% endif %}"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>{% t 'profile' %}</a>
-    {% else %}<a href="{% url 'login' %}" class="bn-item {% if '/login' in request.path %}active{% endif %}"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>{% t 'login' %}</a>{% endif %}
-    <a href="{% url 'contacts' %}" class="bn-item {% if '/contacts' in request.path %}active{% endif %}"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>{% t 'contacts' %}</a>
-  </div>
-</nav>
+<main>{% if messages %}<div class="messages">{% for message in messages %}<div class="message {{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}{% block content %}{% endblock %}</main>
 
-<main>
-  {% if messages %}<div class="messages">{% for message in messages %}<div class="message {{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
-  {% block content %}{% endblock %}
-</main>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="brand-logo"><svg width="22" height="22" viewBox="0 0 32 32" fill="none"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#b5977a"/><path d="M16 24.2L16 30" stroke="#5f6b64" stroke-width="2" stroke-linecap="round"/></svg>Flora Luxe</div>
-      <p>{% if current_lang == 'uz' %}Premium gullar va buyurtma guldastalar. Buxoro bo'ylab tezkor yetkazib berish.{% elif current_lang == 'en' %}Premium flowers and bespoke bouquets. Fast delivery across Bukhara.{% else %}Премиальные цветы и авторские букеты. Быстрая доставка по Бухаре.{% endif %}</p>
-      <div class="footer-social">
-        <a href="https://instagram.com/flora.luxe.uz" target="_blank" rel="noopener" class="social-btn ig"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" stroke-width="1.8"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke="white" stroke-width="1.8"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg></a>
-        <a href="https://t.me/floraluxe_uz" target="_blank" rel="noopener" class="social-btn tg"><svg viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 1 0 24 12 12.013 12.013 0 0 0 11.944 0zm5.08 8.4l-1.948 9.16c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.12 14.297l-2.96-.924c-.643-.202-.657-.643.136-.953l11.57-4.463c.536-.194 1.006.13.836.943z"/></svg></a>
-        <a href="https://facebook.com/floraluxe" target="_blank" rel="noopener" class="social-btn fb"><svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
-        <a href="https://wa.me/998901234567" target="_blank" rel="noopener" class="social-btn wa"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-        <a href="https://youtube.com/@floraluxe" target="_blank" rel="noopener" class="social-btn yt"><svg viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>{% if current_lang == 'uz' %}Sahifalar{% elif current_lang == 'en' %}Pages{% else %}Страницы{% endif %}</h4>
-      <ul>
-        <li><a href="{% url 'home' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'home' %}</a></li>
-        <li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'catalog' %}</a></li>
-        <li><a href="{% url 'about' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'about' %}</a></li>
-        <li><a href="{% url 'contacts' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'contacts' %}</a></li>
-        <li><a href="{% url 'check_receipt' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% if current_lang == 'uz' %}Chekni tekshirish{% elif current_lang == 'en' %}Check Receipt{% else %}Проверить чек{% endif %}</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>{% if current_lang == 'uz' %}Xizmatlar{% elif current_lang == 'en' %}Services{% else %}Услуги{% endif %}</h4>
-      <ul>
-        <li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% if current_lang == 'uz' %}Guldastalar{% elif current_lang == 'en' %}Bouquets{% else %}Букеты{% endif %}</a></li>
-        <li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% if current_lang == 'uz' %}To'y bezatish{% elif current_lang == 'en' %}Wedding decor{% else %}Свадебный декор{% endif %}</a></li>
-        <li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% if current_lang == 'uz' %}Korporativ{% elif current_lang == 'en' %}Corporate{% else %}Корпоративным{% endif %}</a></li>
-        <li><a href="{% url 'contacts' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% if current_lang == 'uz' %}Maxsus buyurtma{% elif current_lang == 'en' %}Custom order{% else %}Индивидуальный заказ{% endif %}</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>{% t 'our_contacts' %}</h4>
-      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg><span>+998 90 123 45 67</span></div>
-      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>info@floraluxe.uz</span></div>
-      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>9:00–21:00, {% if current_lang == 'uz' %}har kuni{% elif current_lang == 'en' %}daily{% else %}ежедневно{% endif %}</span></div>
-      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>{% if current_lang == 'uz' %}Buxoro, Markaziy tuman{% elif current_lang == 'en' %}Bukhara, Central district{% else %}Бухара, Центральный район{% endif %}</span></div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Flora Luxe. {% if current_lang == 'uz' %}Barcha huquqlar{% elif current_lang == 'en' %}All rights reserved{% else %}Все права защищены{% endif %}.</span>
-    <div class="footer-badges">
-      <span class="footer-badge">🔒 SSL</span>
-      <span class="footer-badge">💳 Payme / Click</span>
-      <span class="footer-badge">📱 Mobile-first</span>
-      <span class="footer-badge">🚚 Доставка 2ч</span>
-    </div>
-  </div>
-</footer>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="brand-logo"><svg width="22" height="22" viewBox="0 0 32 32"><path d="M16 3C16 3 9 8 9 14.5C9 19.8 12.2 22.8 16 24.2C19.8 22.8 23 19.8 23 14.5C23 8 16 3 16 3Z" fill="#b58a6b"/><path d="M16 24.2L16 30" stroke="#5e5b5c" stroke-width="2"/></svg>Flora Luxe</div><p>{% if current_lang == 'uz' %}Premium gullar va buyurtma guldastalar. Buxoro bo'ylab tezkor yetkazib berish.{% elif current_lang == 'en' %}Premium flowers and bespoke bouquets. Fast delivery across Bukhara.{% else %}Премиальные цветы и авторские букеты. Быстрая доставка по Бухаре.{% endif %}</p><div class="footer-social"><a href="#" class="social-btn ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" stroke-width="1.8"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke="white" stroke-width="1.8"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" stroke-width="2.2"/></svg></a><a href="#" class="social-btn tg"><svg viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 1 0 24 12 12.013 12.013 0 0 0 11.944 0zm5.08 8.4l-1.948 9.16c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.12 14.297l-2.96-.924c-.643-.202-.657-.643.136-.953l11.57-4.463c.536-.194 1.006.13.836.943z"/></svg></a><a href="#" class="social-btn fb"><svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a><a href="#" class="social-btn wa"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a></div></div><div class="footer-col"><h4>Страницы</h4><ul><li><a href="{% url 'home' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'home' %}</a></li><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'catalog' %}</a></li><li><a href="{% url 'about' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'about' %}</a></li><li><a href="{% url 'contacts' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>{% t 'contacts' %}</a></li></ul></div><div class="footer-col"><h4>Услуги</h4><ul><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Букеты</a></li><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Свадебный декор</a></li><li><a href="{% url 'catalog' %}"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Корпоративным</a></li></ul></div><div class="footer-col"><h4>{% t 'our_contacts' %}</h4><div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.04 2.22 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg><span>+998 90 123 45 67</span></div><div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>info@floraluxe.uz</span></div><div class="footer-contact-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>9:00–21:00, ежедневно</span></div></div></div><div class="footer-bottom"><span>© 2026 Flora Luxe. Все права защищены.</span><div class="footer-badges"><span class="footer-badge">🔒 SSL</span><span class="footer-badge">💳 Payme / Click</span><span class="footer-badge">🚚 Доставка 2ч</span></div></div></footer>
 
 <script>
 (function(){
-  var s=document.getElementById('splash');
-  if(s){if(sessionStorage.getItem('splashed')){s.style.display='none';}else{sessionStorage.setItem('splashed','1');setTimeout(function(){s.classList.add('done');setTimeout(function(){s.style.display='none';},700);},2200);}}
-  var mainNav=document.getElementById('mainNav'),mobileTopbar=document.getElementById('mobileTopbar');
-  window.addEventListener('scroll',function(){var sc=window.scrollY>20;if(mainNav)mainNav.classList.toggle('scrolled',sc);if(mobileTopbar)mobileTopbar.classList.toggle('scrolled',sc);},{passive:true});
+  var s=document.getElementById('splash'); if(s){if(sessionStorage.getItem('splashed')){s.style.display='none';}else{sessionStorage.setItem('splashed','1');setTimeout(function(){s.classList.add('done');setTimeout(function(){s.style.display='none';},700);},2200);}}
   window.setLang=function(lang){fetch("{% url 'change_language' %}",{method:'POST',headers:{'X-CSRFToken':'{{ csrf_token }}','Content-Type':'application/x-www-form-urlencoded'},body:'language='+lang}).then(function(){location.reload();});};
   var userBtn=document.getElementById('userBtn'),userDrop=document.getElementById('userDrop'),dropClose=document.getElementById('dropClose');
-  if(userBtn&&userDrop){userBtn.addEventListener('click',function(e){e.stopPropagation();userDrop.classList.toggle('open');});if(dropClose)dropClose.addEventListener('click',function(){userDrop.classList.remove('open');});document.addEventListener('click',function(e){if(!e.target.closest('.user-wrap'))userDrop.classList.remove('open');});document.addEventListener('keydown',function(e){if(e.key==='Escape')userDrop.classList.remove('open');});}
+  if(userBtn&&userDrop){userBtn.addEventListener('click',function(e){e.stopPropagation();userDrop.classList.toggle('open');});if(dropClose)dropClose.addEventListener('click',function(){userDrop.classList.remove('open');});document.addEventListener('click',function(e){if(!e.target.closest('.user-wrap'))userDrop.classList.remove('open');});}
   var drawer=document.getElementById('drawer'),overlay=document.getElementById('drawerOverlay'),drawerToggle=document.getElementById('drawerToggle'),drawerClose=document.getElementById('drawerClose'),drawerUserToggle=document.getElementById('drawerUserToggle');
   function openDrawer(){drawer.classList.add('open');overlay.classList.add('open');document.body.style.overflow='hidden';}
   function closeDrawer(){drawer.classList.remove('open');overlay.classList.remove('open');document.body.style.overflow='';}
@@ -432,7 +271,6 @@
   if(drawerUserToggle)drawerUserToggle.addEventListener('click',openDrawer);
   if(drawerClose)drawerClose.addEventListener('click',closeDrawer);
   if(overlay)overlay.addEventListener('click',closeDrawer);
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
   document.querySelectorAll('#drawerNav a').forEach(function(a){a.addEventListener('click',closeDrawer);});
   var revEls=document.querySelectorAll('.reveal,.stagger');
   if(revEls.length&&window.IntersectionObserver){var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.1});revEls.forEach(function(el){io.observe(el);});}else{revEls.forEach(function(el){el.classList.add('visible');});}
