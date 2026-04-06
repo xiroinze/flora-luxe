@@ -3,641 +3,201 @@
 {% block title %}{{ flower.name }} — Flora Luxe{% endblock %}
 {% block extra_head %}
 <style>
-/* ================== ДЕТАЛЬНАЯ СТРАНИЦА ТОВАРА ================== */
-.fd-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 5rem;
-  position: relative;
-  z-index: 1;
-}
-
-/* Хлебные крошки */
-.breadcrumb {
-  font-size: 0.8rem;
-  color: rgba(207,196,154,0.6);
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.breadcrumb a {
-  color: var(--gold-deep);
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.breadcrumb a:hover {
-  color: var(--gold-primary);
-  text-shadow: 0 0 5px rgba(207,196,154,0.4);
-}
-
-.breadcrumb span {
-  opacity: 0.4;
-}
-
-/* Основная сетка */
-.fd-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-  margin-bottom: 4rem;
-}
-
-@media(max-width: 768px) {
-  .fd-grid {
-    grid-template-columns: 1fr;
-    gap: 1.8rem;
-  }
-}
-
-/* Изображение */
-.fd-img-wrap {
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-  position: relative;
-  transition: all 0.4s ease;
-  border: 1px solid var(--border-gold);
-}
-
-.fd-img-wrap:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-  border-color: var(--gold-deep);
-}
-
-.fd-img-wrap img {
-  width: 100%;
-  height: 480px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s ease;
-}
-
-.fd-img-wrap:hover img {
-  transform: scale(1.03);
-}
-
-.fd-img-ph {
-  width: 100%;
-  height: 480px;
-  background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 8rem;
-  color: var(--gold-deep);
-}
-
-@media(max-width: 768px) {
-  .fd-img-wrap img,
-  .fd-img-ph {
-    height: 320px;
-  }
-}
-
-/* Информация */
-.fd-info {
-  position: relative;
-}
-
-.fd-cat {
-  font-size: 0.7rem;
-  color: rgba(207,196,154,0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.6rem;
-  display: inline-block;
-  padding: 0.2rem 0.8rem;
-  background: rgba(207,196,154,0.1);
-  border-radius: 2rem;
-  border: 1px solid var(--border-gold);
-}
-
-.fd-name {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 700;
-  color: var(--gold-primary);
-  line-height: 1.1;
-  margin-bottom: 0.8rem;
-  letter-spacing: -0.02em;
-  text-shadow: 0 0 10px rgba(207,196,154,0.3);
-}
-
-.fd-stars {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  color: rgba(207,196,154,0.7);
-}
-
-.fd-stars .stars {
-  color: #f5a623;
-  letter-spacing: 0.1em;
-  font-size: 1rem;
-}
-
-.fd-price {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--gold-primary);
-  margin-bottom: 1.2rem;
-  text-shadow: 0 0 15px rgba(207,196,154,0.3);
-  display: inline-block;
-  padding-right: 1rem;
-  background: linear-gradient(135deg, var(--gold-primary), var(--gold-deep));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: none;
-}
-
-.fd-desc {
-  color: rgba(207,196,154,0.8);
-  font-size: 0.95rem;
-  line-height: 1.8;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-gold);
-}
-
-/* Мета информация */
-.fd-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin-bottom: 2rem;
-  background: rgba(0,0,0,0.2);
-  padding: 1rem 1.2rem;
-  border-radius: 16px;
-  border: 1px solid var(--border-gold);
-}
-
-.fd-meta-row {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  font-size: 0.88rem;
-}
-
-.fd-meta-row .lbl {
-  color: rgba(207,196,154,0.6);
-  width: 100px;
-  flex-shrink: 0;
-  font-weight: 500;
-}
-
-.fd-meta-row .val {
-  color: var(--gold-primary);
-  font-weight: 500;
-}
-
-/* Статус наличия */
-.fd-stock {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.3rem 0.9rem;
-  border-radius: 2rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.fd-stock.in {
-  background: rgba(46,204,113,0.12);
-  color: #2ecc71;
-  border: 1px solid rgba(46,204,113,0.25);
-}
-
-.fd-stock.out {
-  background: rgba(231,76,60,0.12);
-  color: #e74c3c;
-  border: 1px solid rgba(231,76,60,0.25);
-}
-
-/* Выбор количества */
-.qty-section {
-  margin-bottom: 1.8rem;
-}
-
-.qty-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(207,196,154,0.6);
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.qty-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(0,0,0,0.3);
-  border: 1.5px solid var(--border-gold);
-  border-radius: 40px;
-  padding: 0.2rem 0.3rem;
-}
-
-.qty-btn {
-  width: 38px;
-  height: 38px;
-  border: none;
-  background: rgba(207,196,154,0.1);
-  color: var(--gold-primary);
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.qty-btn:hover {
-  background: var(--gold-deep);
-  color: #1a1418;
-  transform: scale(1.05);
-}
-
-.qty-num {
-  font-weight: 700;
-  font-size: 1rem;
-  min-width: 40px;
-  text-align: center;
-  color: var(--gold-primary);
-}
-
-/* Кнопки действий */
-.fd-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-}
-
-.fd-actions .btn {
-  min-width: 180px;
-  padding: 0.9rem 1.5rem;
-  font-size: 0.95rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-}
-
-/* Блок "Вам также может понравиться" */
-.related-section {
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-gold);
-}
-
-.related-section h2 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--gold-primary);
-  margin-bottom: 1.5rem;
-  text-shadow: 0 0 5px rgba(207,196,154,0.3);
-}
-
-.rel-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.2rem;
-}
-
-.rel-card {
-  background: linear-gradient(135deg, rgba(47,41,46,0.95), rgba(37,32,36,0.95));
-  border: 1px solid var(--border-gold);
-  border-radius: 20px;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.rel-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--gold-deep);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
-}
-
-.rel-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-
-.rel-card:hover img {
-  transform: scale(1.05);
-}
-
-.rel-body {
-  padding: 0.8rem 1rem;
-  text-align: center;
-}
-
-.rel-body h4 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--gold-primary);
-  margin-bottom: 0.3rem;
-}
-
-.rel-body span {
-  font-size: 0.85rem;
-  color: var(--gold-deep);
-  font-weight: 600;
-}
-
-/* Отзывы */
-.reviews-section {
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-gold);
-}
-
-.reviews-section h2 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--gold-primary);
-  margin-bottom: 1.5rem;
-  text-shadow: 0 0 5px rgba(207,196,154,0.3);
-}
-
-.rev-card {
-  background: linear-gradient(135deg, rgba(47,41,46,0.9), rgba(37,32,36,0.9));
-  border: 1px solid var(--border-gold);
-  border-radius: 20px;
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
-}
-
-.rev-card:hover {
-  border-color: var(--gold-deep);
-  transform: translateX(4px);
-}
-
-.rev-head {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.6rem;
-  flex-wrap: wrap;
-}
-
-.rev-user {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--gold-primary);
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.rev-user::before {
-  content: '👤';
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-.rev-rating {
-  color: #f5a623;
-  font-size: 0.85rem;
-}
-
-.rev-date {
-  font-size: 0.7rem;
-  color: rgba(207,196,154,0.5);
-  margin-left: auto;
-}
-
-.rev-text {
-  font-size: 0.88rem;
-  color: rgba(207,196,154,0.8);
-  line-height: 1.7;
-}
-
-/* Форма отзыва */
-.rev-form {
-  background: linear-gradient(135deg, rgba(47,41,46,0.95), rgba(37,32,36,0.95));
-  border: 1px solid var(--border-gold);
-  border-radius: 24px;
-  padding: 1.8rem;
-  margin-top: 2rem;
-  transition: all 0.3s ease;
-}
-
-.rev-form:hover {
-  border-color: var(--gold-deep);
-}
-
-.rev-form h3 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.3rem;
-  color: var(--gold-primary);
-  margin-bottom: 1.2rem;
-}
-
-.rev-form select,
-.rev-form textarea {
-  width: 100%;
-  padding: 0.8rem 1rem;
-  border: 1.5px solid var(--border-gold);
-  border-radius: 12px;
-  background: rgba(42,36,40,0.8);
-  color: var(--gold-primary);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  outline: none;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
-}
-
-.rev-form select:focus,
-.rev-form textarea:focus {
-  border-color: var(--gold-deep);
-  box-shadow: 0 0 0 3px rgba(207,196,154,0.15);
-  background: rgba(42,36,40,0.95);
-}
-
-.rev-form select {
-  cursor: pointer;
-}
-
-.rev-form .btn {
-  margin-top: 0.5rem;
-  padding: 0.8rem 1.8rem;
-}
-
-.no-rev {
-  color: rgba(207,196,154,0.6);
-  font-style: italic;
-  font-size: 0.9rem;
-  text-align: center;
-  padding: 2rem;
-  background: rgba(0,0,0,0.2);
-  border-radius: 20px;
-  border: 1px dashed var(--border-gold);
-}
-
-/* Анимации */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.reveal {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.stagger > * {
-  animation: fadeInUp 0.5s ease-out forwards;
-  opacity: 0;
-}
-
-.stagger > *:nth-child(1) { animation-delay: 0.05s; }
-.stagger > *:nth-child(2) { animation-delay: 0.1s; }
-.stagger > *:nth-child(3) { animation-delay: 0.15s; }
-.stagger > *:nth-child(4) { animation-delay: 0.2s; }
-.stagger > *:nth-child(5) { animation-delay: 0.25s; }
-
-/* Адаптив */
-@media(max-width: 640px) {
-  .fd-wrap {
-    padding: 1.2rem 0.9rem 4rem;
-  }
-
-  .fd-actions .btn {
-    min-width: 100%;
-    padding: 0.8rem;
-  }
-
-  .qty-wrap {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .qty-btn {
-    width: 44px;
-    height: 44px;
-  }
-
-  .rel-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-  }
-
-  .rev-head {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .rev-date {
-    margin-left: 0;
-  }
-
-  .rev-form {
-    padding: 1.2rem;
-  }
-}
-
-@media(max-width: 480px) {
-  .rel-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .fd-meta-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2rem;
-  }
-
-  .fd-meta-row .lbl {
-    width: auto;
-  }
+.fd-wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 5rem}
+
+/* BREADCRUMB */
+.breadcrumb{font-size:.78rem;color:rgba(45,42,44,.45);margin-bottom:1.8rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.breadcrumb a{color:var(--amber2);font-weight:500}
+.breadcrumb a:hover{color:var(--rose2)}
+.breadcrumb .sep{opacity:.3}
+
+/* GRID */
+.fd-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:3.5rem}
+@media(max-width:720px){.fd-grid{grid-template-columns:1fr;gap:1.5rem}}
+
+/* IMAGE */
+.fd-img-wrap{border-radius:var(--r-xl);overflow:hidden;box-shadow:0 12px 48px rgba(181,115,127,.25);position:relative}
+.fd-img-wrap img{width:100%;height:460px;object-fit:cover;display:block;transition:transform .5s}
+.fd-img-wrap:hover img{transform:scale(1.03)}
+.fd-img-ph{width:100%;height:460px;background:linear-gradient(135deg,#e6d9de,#f0e4e9);display:flex;align-items:center;justify-content:center;font-size:7rem}
+@media(max-width:720px){.fd-img-wrap img,.fd-img-ph{height:280px}}
+
+/* INFO */
+.fd-cat{font-size:.7rem;color:var(--rose2);text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.fd-cat::before{content:'';width:22px;height:2px;background:var(--rose2);border-radius:2px}
+
+.fd-name{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700;color:#2d2a2c;line-height:1.1;margin-bottom:1rem;letter-spacing:-.02em}
+
+.fd-stars{display:flex;align-items:center;gap:.5rem;margin-bottom:1.2rem}
+.fd-stars .stars{color:#e8945a;font-size:1rem;letter-spacing:.05em}
+.fd-stars .count{font-size:.82rem;color:rgba(45,42,44,.45)}
+
+/* PRICE BOX */
+.fd-price-box{background:linear-gradient(135deg,#b5737f,#c28492);border-radius:var(--r-lg);padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between}
+.fd-price-label{font-size:.72rem;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.fd-price-value{font-family:var(--serif);font-size:2.2rem;font-weight:700;color:#fff;letter-spacing:-.02em}
+.fd-price-unit{font-size:.78rem;color:rgba(255,255,255,.7);margin-top:.1rem}
+
+/* DESCRIPTION */
+.fd-desc-box{background:rgba(255,255,255,.75);border:1px solid rgba(181,115,127,.18);border-radius:var(--r-lg);padding:1.2rem 1.3rem;margin-bottom:1.5rem;backdrop-filter:blur(6px)}
+.fd-desc-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(45,42,44,.45);margin-bottom:.5rem}
+.fd-desc-text{color:rgba(45,42,44,.78);font-size:.92rem;line-height:1.75}
+
+/* META */
+.fd-meta{background:rgba(255,255,255,.75);border:1px solid rgba(181,115,127,.18);border-radius:var(--r-lg);overflow:hidden;margin-bottom:1.8rem;backdrop-filter:blur(6px)}
+.fd-meta-row{display:flex;align-items:center;padding:.7rem 1.2rem;gap:1rem}
+.fd-meta-row:not(:last-child){border-bottom:1px solid rgba(181,115,127,.12)}
+.fd-meta-row .lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(45,42,44,.42);width:100px;flex-shrink:0}
+.fd-meta-row .val{font-size:.9rem;color:#2d2a2c;font-weight:500}
+.fd-stock{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .8rem;border-radius:2rem;font-size:.78rem;font-weight:700}
+.fd-stock.in{background:rgba(39,174,96,.12);color:#27ae60;border:1px solid rgba(39,174,96,.25)}
+.fd-stock.out{background:rgba(159,94,107,.12);color:var(--rose2);border:1px solid rgba(159,94,107,.25)}
+
+/* QTY */
+.qty-row{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.qty-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(45,42,44,.45);min-width:80px}
+.qty-wrap{display:inline-flex;align-items:center;background:rgba(255,255,255,.85);border:1.5px solid rgba(181,115,127,.3);border-radius:var(--r-sm);overflow:hidden}
+.qty-btn{width:44px;height:44px;border:none;background:transparent;color:#2d2a2c;font-size:1.3rem;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center}
+.qty-btn:hover{background:rgba(181,115,127,.15)}
+.qty-num{font-weight:700;font-size:1rem;min-width:42px;text-align:center;color:#2d2a2c;border-left:1px solid rgba(181,115,127,.2);border-right:1px solid rgba(181,115,127,.2);height:44px;display:flex;align-items:center;justify-content:center}
+
+/* ACTIONS */
+.fd-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.fd-btn-cart{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 2rem;border-radius:var(--r-sm);background:linear-gradient(135deg,#b5737f,#c28492);color:#fff;font-weight:700;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 6px 20px rgba(181,115,127,.4);border:none;cursor:pointer;min-height:52px;flex:1;justify-content:center}
+.fd-btn-cart:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(181,115,127,.55);color:#fff}
+.fd-btn-cart svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.fd-btn-back{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.5rem;border-radius:var(--r-sm);background:rgba(255,255,255,.85);border:1.5px solid rgba(181,115,127,.3);color:rgba(45,42,44,.65);font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s;min-height:52px;justify-content:center}
+.fd-btn-back:hover{border-color:var(--amber2);color:var(--amber2);background:rgba(255,255,255,.97)}
+.fd-btn-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+
+/* DELIVERY BADGE */
+.fd-delivery{display:flex;align-items:center;gap:.5rem;margin-top:1rem;font-size:.82rem;color:rgba(45,42,44,.55)}
+.fd-delivery svg{width:16px;height:16px;stroke:#27ae60;fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+.fd-delivery strong{color:#27ae60}
+
+/* REVIEWS */
+.reviews-section{margin-top:2.5rem}
+.rev-title{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:#2d2a2c;margin-bottom:1.3rem;display:flex;align-items:center;gap:.5rem}
+.rev-title svg{width:22px;height:22px;stroke:var(--rose2);fill:none;stroke-width:1.8;flex-shrink:0}
+.rev-title .rev-count{font-size:.95rem;color:rgba(45,42,44,.35);font-family:var(--sans);font-weight:400}
+
+.no-rev{background:rgba(255,255,255,.75);border:1px solid rgba(181,115,127,.18);border-radius:var(--r-lg);padding:1.5rem;color:rgba(45,42,44,.45);font-size:.9rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:.5rem}
+
+.rev-card{background:rgba(255,255,255,.82);border:1px solid rgba(181,115,127,.18);border-radius:var(--r-lg);padding:1.1rem 1.3rem;margin-bottom:.75rem;backdrop-filter:blur(6px)}
+.rev-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem;flex-wrap:wrap}
+.rev-user{font-weight:700;font-size:.9rem;color:#2d2a2c}
+.rev-rating{color:#e8945a;font-size:.85rem}
+.rev-text{font-size:.88rem;color:rgba(45,42,44,.7);line-height:1.65}
+
+/* REVIEW FORM */
+.rev-form{background:rgba(255,255,255,.88);border:1px solid rgba(181,115,127,.22);border-radius:var(--r-xl);padding:2rem;margin-top:1.5rem;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(181,115,127,.1)}
+.rev-form-title{font-family:var(--serif);font-size:1.3rem;color:#2d2a2c;margin-bottom:1.3rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
+.rev-form-title svg{width:18px;height:18px;stroke:var(--rose2);fill:none;stroke-width:1.8;flex-shrink:0}
+.rev-field{margin-bottom:1rem}
+.rev-field label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(45,42,44,.45);margin-bottom:.4rem}
+.rev-field select,.rev-field textarea{width:100%;padding:.75rem 1rem;border:1.5px solid rgba(181,115,127,.25);border-radius:var(--r-sm);background:rgba(255,245,248,.9);color:#2d2a2c;font-family:var(--sans);font-size:.9rem;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.rev-field select:focus,.rev-field textarea:focus{border-color:var(--rose2);box-shadow:0 0 0 3px rgba(159,94,107,.1)}
+.rev-field textarea{resize:vertical;min-height:100px;line-height:1.6}
+.rev-field textarea::placeholder{color:rgba(45,42,44,.3)}
+
+.login-prompt{text-align:center;padding:1.5rem;background:rgba(255,255,255,.75);border:1px solid rgba(181,115,127,.18);border-radius:var(--r-lg);margin-top:1rem}
+.login-prompt p{color:rgba(45,42,44,.55);font-size:.9rem;margin-bottom:.8rem}
+
+/* RELATED */
+.related-section{margin-top:3rem}
+.related-section h2{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:#2d2a2c;margin-bottom:1.2rem}
+.rel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem}
+.rel-card{background:rgba(255,255,255,.85);border:1px solid rgba(181,115,127,.2);border-radius:var(--r-lg);overflow:hidden;text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s}
+.rel-card:hover{transform:translateY(-5px);box-shadow:0 10px 28px rgba(181,115,127,.2)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-body{padding:.75rem 1rem}
+.rel-body h4{font-size:.9rem;font-weight:700;color:#2d2a2c;margin-bottom:.2rem}
+.rel-body span{font-size:.85rem;color:var(--rose2);font-weight:700}
+
+@media(max-width:500px){
+  .fd-actions{flex-direction:column}
+  .fd-btn-cart,.fd-btn-back{width:100%}
+  .fd-price-value{font-size:1.8rem}
 }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="fd-wrap">
-  <!-- Хлебные крошки -->
-  <div class="breadcrumb reveal">
+
+  <div class="breadcrumb">
     <a href="{% url 'catalog' %}">{% t 'catalog' %}</a>
-    <span>›</span>
-    <a href="{% url 'catalog' %}?category={{ flower.category.slug }}">{{ flower.category.name }}</a>
-    <span>›</span>
+    <span class="sep">›</span>
+    <a href="{% url 'catalog' %}">{{ flower.category.name }}</a>
+    <span class="sep">›</span>
     <span>{{ flower.name }}</span>
   </div>
 
-  <!-- Основная информация -->
   <div class="fd-grid reveal">
-    <!-- Изображение -->
+
+    <!-- ФОТО -->
     <div class="fd-img-wrap">
       {% if flower.image %}
-        <img src="{{ flower.image.url }}" alt="{{ flower.name }}" loading="lazy">
+        <img src="{{ flower.image.url }}" alt="{{ flower.name }}">
       {% else %}
         <div class="fd-img-ph">🌸</div>
       {% endif %}
     </div>
 
-    <!-- Информация о товаре -->
-    <div class="fd-info">
+    <!-- ИНФОРМАЦИЯ -->
+    <div>
       <div class="fd-cat">{{ flower.category.name }}</div>
       <h1 class="fd-name">{{ flower.name }}</h1>
 
       {% if reviews %}
       <div class="fd-stars">
-        <span class="stars">★★★★★</span>
-        <span>({{ reviews|length }} {% if current_lang == 'uz' %}sharh{% elif current_lang == 'en' %}reviews{% else %}отзывов{% endif %})</span>
+        <span class="stars">⭐⭐⭐⭐⭐</span>
+        <span class="count">({{ reviews|length }} {% if current_lang == 'uz' %}sharh{% elif current_lang == 'en' %}reviews{% else %}отзывов{% endif %})</span>
       </div>
       {% endif %}
 
-      <div class="fd-price">{{ flower.price }} {% t 'price' %}</div>
+      <!-- ЦЕНА — главный блок -->
+      <div class="fd-price-box">
+        <div>
+          <div class="fd-price-label">{% if current_lang == 'uz' %}Narxi{% elif current_lang == 'en' %}Price{% else %}Цена{% endif %}</div>
+          <div class="fd-price-value">{{ flower.price }}</div>
+          <div class="fd-price-unit">{% t 'price' %}</div>
+        </div>
+        <svg viewBox="0 0 48 48" fill="none" style="width:52px;height:52px;opacity:.35">
+          <path d="M24 4C24 4 12 12 12 24C12 33 17 38 24 41C31 38 36 33 36 24C36 12 24 4 24 4Z" fill="white"/>
+          <path d="M24 41V46" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
 
-      <p class="fd-desc">{{ flower.description|default:"Прекрасный выбор для любого случая. Свежие цветы, изящная композиция, безупречное качество." }}</p>
+      <!-- ОПИСАНИЕ -->
+      {% if flower.description %}
+      <div class="fd-desc-box">
+        <div class="fd-desc-label">{% if current_lang == 'uz' %}Tavsif{% elif current_lang == 'en' %}Description{% else %}Описание{% endif %}</div>
+        <div class="fd-desc-text">{{ flower.description }}</div>
+      </div>
+      {% endif %}
 
-      <!-- Мета информация -->
+      <!-- МЕТА -->
       <div class="fd-meta">
         <div class="fd-meta-row">
-          <span class="lbl">{% if current_lang == 'uz' %}Kategoriya{% elif current_lang == 'en' %}Category{% else %}Категория{% endif %}:</span>
+          <span class="lbl">{% if current_lang == 'uz' %}Kategoriya{% elif current_lang == 'en' %}Category{% else %}Категория{% endif %}</span>
           <span class="val">{{ flower.category.name }}</span>
         </div>
         <div class="fd-meta-row">
-          <span class="lbl">{% if current_lang == 'uz' %}Mavjudlik{% elif current_lang == 'en' %}Availability{% else %}Наличие{% endif %}:</span>
+          <span class="lbl">{% if current_lang == 'uz' %}Mavjud{% elif current_lang == 'en' %}Status{% else %}Наличие{% endif %}</span>
           <span class="val">
-            <span class="fd-stock in">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              {% if current_lang == 'uz' %}Mavjud{% elif current_lang == 'en' %}In stock{% else %}В наличии{% endif %}
-            </span>
+            {% if flower.available %}
+              <span class="fd-stock in">✓ {% if current_lang == 'uz' %}Mavjud{% elif current_lang == 'en' %}In stock{% else %}В наличии{% endif %}</span>
+            {% else %}
+              <span class="fd-stock out">{% if current_lang == 'uz' %}Tugagan{% elif current_lang == 'en' %}Out of stock{% else %}Нет в наличии{% endif %}</span>
+            {% endif %}
           </span>
         </div>
       </div>
 
-      <!-- Выбор количества -->
-      <div class="qty-section">
-        <label class="qty-label">{% if current_lang == 'uz' %}Miqdor{% elif current_lang == 'en' %}Quantity{% else %}Количество{% endif %}</label>
+      <!-- КОЛИЧЕСТВО -->
+      <div class="qty-row">
+        <span class="qty-label">{% if current_lang == 'uz' %}Miqdor{% elif current_lang == 'en' %}Qty{% else %}Кол-во{% endif %}</span>
         <div class="qty-wrap">
           <button class="qty-btn" onclick="changeQty(-1)">−</button>
           <span class="qty-num" id="qtyNum">1</span>
@@ -645,178 +205,107 @@
         </div>
       </div>
 
-      <!-- Кнопки действий -->
+      <!-- КНОПКИ -->
       <div class="fd-actions">
-        <a href="javascript:void(0)" onclick="addToCartWithQty({{ flower.pk }})" class="btn btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
-          </svg>
+        <a href="{% url 'add_to_cart' flower.pk %}" class="fd-btn-cart" id="cartBtn">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
           {% t 'add_to_cart' %}
         </a>
-        <a href="{% url 'catalog' %}" class="btn btn-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <a href="{% url 'catalog' %}" class="fd-btn-back">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           {% t 'back_to_catalog' %}
         </a>
+      </div>
+
+      <div class="fd-delivery">
+        <svg viewBox="0 0 24 24"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        {% if current_lang == 'uz' %}<strong>2 soatda</strong> yetkazib berish{% elif current_lang == 'en' %}Delivery within <strong>2 hours</strong>{% else %}Доставка за <strong>2 часа</strong> по Бухаре{% endif %}
       </div>
     </div>
   </div>
 
-  <!-- Рекомендации -->
+  <!-- ПОХОЖИЕ -->
   {% if related_flowers %}
   <div class="related-section reveal">
-    <h2>{% if current_lang == 'uz' %}Sizga ham yoqishi mumkin{% elif current_lang == 'en' %}You may also like{% else %}Вам также может понравиться{% endif %}</h2>
+    <h2>{% t 'you_may_also_like' %}</h2>
     <div class="rel-grid stagger">
       {% for f in related_flowers %}
       <a href="{% url 'flower_detail' f.pk %}" class="rel-card">
-        {% if f.image %}
-          <img src="{{ f.image.url }}" alt="{{ f.name }}" loading="lazy">
-        {% else %}
-          <div style="height:150px; background:linear-gradient(135deg,var(--bg-card),var(--bg-elevated)); display:flex; align-items:center; justify-content:center;">🌸</div>
-        {% endif %}
-        <div class="rel-body">
-          <h4>{{ f.name }}</h4>
-          <span>{{ f.price }} {% t 'price' %}</span>
-        </div>
+        {% if f.image %}<img src="{{ f.image.url }}" alt="{{ f.name }}">{% endif %}
+        <div class="rel-body"><h4>{{ f.name }}</h4><span>{{ f.price }} {% t 'price' %}</span></div>
       </a>
       {% endfor %}
     </div>
   </div>
   {% endif %}
 
-  <!-- Отзывы -->
+  <!-- ОТЗЫВЫ -->
   <div class="reviews-section reveal">
-    <h2>{% t 'reviews' %} <span style="font-size:0.9rem;">({{ reviews|length }})</span></h2>
+    <div class="rev-title">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      {% t 'reviews' %}
+      {% if reviews %}<span class="rev-count">({{ reviews|length }})</span>{% endif %}
+    </div>
 
     {% for r in reviews %}
     <div class="rev-card">
       <div class="rev-head">
-        <span class="rev-user">{{ r.user.get_full_name|default:r.user.username }}</span>
-        <span class="rev-rating">
-          {% for i in "12345" %}
-            {% if forloop.counter <= r.rating %}⭐{% endif %}
-          {% endfor %}
-        </span>
-        <span class="rev-date">{{ r.created_at|date:"d.m.Y" }}</span>
+        <span class="rev-user">{{ r.user.username }}</span>
+        <span class="rev-rating">{% for i in "12345" %}{% if forloop.counter <= r.rating %}⭐{% endif %}{% endfor %}</span>
       </div>
       <div class="rev-text">{{ r.text }}</div>
     </div>
     {% empty %}
-    <p class="no-rev">
-      🌸 {% if current_lang == 'uz' %}Hali sharh qoldirilmagan. Birinchi bo'ling!{% elif current_lang == 'en' %}No reviews yet. Be the first!{% else %}Пока нет отзывов. Будьте первым!{% endif %}
-    </p>
+    <div class="no-rev">
+      🌸 {% if current_lang == 'uz' %}Hali sharhlar yo'q. Birinchi bo'ling!{% elif current_lang == 'en' %}No reviews yet. Be the first!{% else %}Отзывов пока нет. Будьте первым!{% endif %}
+    </div>
     {% endfor %}
 
     {% if user.is_authenticated %}
-    <form method="post" action="{% url 'add_review' %}" class="rev-form">
-      {% csrf_token %}
-      <input type="hidden" name="flower_id" value="{{ flower.pk }}">
-      <h3>{% if current_lang == 'uz' %}Sharh qoldirish{% elif current_lang == 'en' %}Write a review{% else %}Написать отзыв{% endif %}</h3>
-      <select name="rating" required>
-        <option value="5">⭐⭐⭐⭐⭐ {% if current_lang == 'uz' %}Ajoyib{% elif current_lang == 'en' %}Excellent{% else %}Отлично{% endif %}</option>
-        <option value="4">⭐⭐⭐⭐ {% if current_lang == 'uz' %}Yaxshi{% elif current_lang == 'en' %}Good{% else %}Хорошо{% endif %}</option>
-        <option value="3">⭐⭐⭐ {% if current_lang == 'uz' %}O'rtacha{% elif current_lang == 'en' %}Average{% else %}Средне{% endif %}</option>
-        <option value="2">⭐⭐ {% if current_lang == 'uz' %}Yomon emas{% elif current_lang == 'en' %}Not bad{% else %}Неплохо{% endif %}</option>
-        <option value="1">⭐ {% if current_lang == 'uz' %}Yomon{% elif current_lang == 'en' %}Poor{% else %}Плохо{% endif %}</option>
-      </select>
-      <textarea name="text" rows="4" placeholder="{% if current_lang == 'uz' %}Fikringizni yozing...{% elif current_lang == 'en' %}Share your thoughts...{% else %}Поделитесь впечатлениями...{% endif %}" required></textarea>
-      <button type="submit" class="btn btn-primary">{% if current_lang == 'uz' %}Sharh qoldirish{% elif current_lang == 'en' %}Submit review{% else %}Отправить отзыв{% endif %}</button>
-    </form>
+    <div class="rev-form">
+      <div class="rev-form-title">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        {% t 'write_review' %}
+      </div>
+      <form method="post" action="{% url 'add_review' %}">
+        {% csrf_token %}
+        <input type="hidden" name="flower_id" value="{{ flower.pk }}">
+        <div class="rev-field">
+          <label>{% if current_lang == 'uz' %}Reyting{% elif current_lang == 'en' %}Rating{% else %}Оценка{% endif %}</label>
+          <select name="rating">
+            <option value="5">⭐⭐⭐⭐⭐ — {% if current_lang == 'uz' %}A'lo{% elif current_lang == 'en' %}Excellent{% else %}Отлично{% endif %}</option>
+            <option value="4">⭐⭐⭐⭐ — {% if current_lang == 'uz' %}Yaxshi{% elif current_lang == 'en' %}Good{% else %}Хорошо{% endif %}</option>
+            <option value="3">⭐⭐⭐ — {% if current_lang == 'uz' %}Yomon emas{% elif current_lang == 'en' %}Average{% else %}Нормально{% endif %}</option>
+            <option value="2">⭐⭐ — {% if current_lang == 'uz' %}Yomon{% elif current_lang == 'en' %}Poor{% else %}Плохо{% endif %}</option>
+            <option value="1">⭐ — {% if current_lang == 'uz' %}Juda yomon{% elif current_lang == 'en' %}Very poor{% else %}Очень плохо{% endif %}</option>
+          </select>
+        </div>
+        <div class="rev-field">
+          <label>{% if current_lang == 'uz' %}Sharhingiz{% elif current_lang == 'en' %}Your review{% else %}Ваш отзыв{% endif %}</label>
+          <textarea name="text" rows="4" placeholder="{% if current_lang == 'uz' %}Taassurotlaringizni yozing...{% elif current_lang == 'en' %}Share your impressions...{% else %}Поделитесь впечатлениями...{% endif %}"></textarea>
+        </div>
+        <button type="submit" class="fd-btn-cart" style="width:100%;justify-content:center">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          {% t 'submit_review' %}
+        </button>
+      </form>
+    </div>
+    {% else %}
+    <div class="login-prompt">
+      <p>{% if current_lang == 'uz' %}Sharh qoldirish uchun tizimga kiring{% elif current_lang == 'en' %}Log in to leave a review{% else %}Войдите, чтобы оставить отзыв{% endif %}</p>
+      <a href="{% url 'login' %}" class="fd-btn-cart" style="display:inline-flex;width:auto">{% if current_lang == 'uz' %}Kirish{% elif current_lang == 'en' %}Log in{% else %}Войти{% endif %}</a>
+    </div>
     {% endif %}
   </div>
+
 </div>
-
 <script>
-// Количество товара
-let currentQty = 1;
-
-function changeQty(delta) {
-  const newQty = currentQty + delta;
-  if (newQty >= 1 && newQty <= 99) {
-    currentQty = newQty;
-    document.getElementById('qtyNum').innerText = currentQty;
-  }
+var qty=1;
+function changeQty(d){
+  qty=Math.max(1,Math.min(99,qty+d));
+  document.getElementById('qtyNum').textContent=qty;
+  var btn=document.getElementById('cartBtn');
+  if(btn) btn.href='{% url "add_to_cart" flower.pk %}?qty='+qty;
 }
-
-// Добавление в корзину с выбранным количеством
-function addToCartWithQty(pk) {
-  const btn = event.currentTarget;
-  const originalText = btn.innerHTML;
-
-  btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 1s linear infinite;"><polyline points="20 6 9 17 4 12"/></svg> {% if current_lang == 'uz' %}Qo\'shilmoqda...{% elif current_lang == 'en' %}Adding...{% else %}Добавляется...{% endif %}';
-  btn.disabled = true;
-
-  fetch(`/cart/add/${pk}/?quantity=${currentQty}`, {
-    method: 'POST',
-    headers: {
-      'X-CSRFToken': '{{ csrf_token }}',
-      'X-Requested-With': 'XMLHttpRequest'
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    btn.innerHTML = originalText;
-    btn.disabled = false;
-
-    // Показываем уведомление
-    showNotification('{% if current_lang == 'uz' %}Gul savatga qo\'shildi!{% elif current_lang == 'en' %}Flower added to cart!{% else %}Цветок добавлен в корзину!{% endif %}');
-
-    // Обновляем счетчик корзины
-    if (data.cart_count) {
-      const cartBadge = document.querySelector('.cart-count');
-      if (cartBadge) cartBadge.textContent = data.cart_count;
-    }
-  })
-  .catch(error => {
-    btn.innerHTML = originalText;
-    btn.disabled = false;
-    showNotification('{% if current_lang == 'uz' %}Xatolik yuz berdi. Qayta urining.{% elif current_lang == 'en' %}Error occurred. Try again.{% else %}Ошибка. Попробуйте снова.{% endif %}', 'error');
-  });
-}
-
-// Уведомление
-function showNotification(message, type = 'success') {
-  const notif = document.createElement('div');
-  notif.className = 'notification-toast';
-  notif.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: ${type === 'success' ? 'linear-gradient(135deg, var(--gold-dark), var(--gold-primary))' : 'linear-gradient(135deg, #e74c3c, #c0392b)'};
-    color: #1a1418;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-weight: 600;
-    z-index: 1000;
-    animation: slideIn 0.3s ease-out;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  `;
-  notif.innerHTML = message;
-  document.body.appendChild(notif);
-
-  setTimeout(() => {
-    notif.style.animation = 'slideOut 0.3s ease-out';
-    setTimeout(() => notif.remove(), 300);
-  }, 3000);
-}
-
-// Стили для анимаций уведомлений
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  @keyframes slideOut {
-    from { transform: translateX(0); opacity: 1; }
-    to { transform: translateX(100%); opacity: 0; }
-  }
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-`;
-document.head.appendChild(style);
 </script>
 {% endblock %}
