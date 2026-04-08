@@ -64,6 +64,8 @@
 .rev-form select:focus,.rev-form textarea:focus{border-color:var(--rose2)}
 .rev-form textarea{resize:vertical;min-height:100px;line-height:1.6}
 .rev-form textarea::placeholder{color:rgba(45,42,44,.3)}
+.rev-form button{background:linear-gradient(135deg,#b5737f,#c28492);color:#fff;border:none;padding:.85rem 1.8rem;border-radius:var(--r-sm);font-weight:700;font-size:.93rem;cursor:pointer;transition:transform .2s,box-shadow .2s;width:100%;justify-content:center;display:flex;align-items:center;gap:.5rem}
+.rev-form button:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(181,115,127,.4)}
 
 /* RELATED */
 .related-section{margin-top:3rem}
@@ -80,6 +82,10 @@
   .fd-actions{flex-direction:column}
   .fd-btn-cart,.fd-btn-back{width:100%;justify-content:center}
 }
+
+/* Сообщение об успешном добавлении */
+.toast-msg{position:fixed;bottom:30px;right:30px;background:linear-gradient(135deg,#27ae60,#219a52);color:#fff;padding:12px 24px;border-radius:50px;font-size:.9rem;font-weight:500;z-index:9999;box-shadow:0 4px 20px rgba(39,174,96,.3);animation:slideIn .3s ease-out}
+@keyframes slideIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
 </style>
 {% endblock %}
 
@@ -147,17 +153,17 @@
       <!-- QTY -->
       <div class="qty-label">{% if current_lang == 'uz' %}Miqdor{% elif current_lang == 'en' %}Quantity{% else %}Количество{% endif %}</div>
       <div class="qty-wrap" id="qtyWrap">
-        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <button class="qty-btn" type="button" onclick="changeQty(-1)">−</button>
         <span class="qty-num" id="qtyNum">1</span>
-        <button class="qty-btn" onclick="changeQty(1)">+</button>
+        <button class="qty-btn" type="button" onclick="changeQty(1)">+</button>
       </div>
 
       <!-- ACTIONS -->
       <div class="fd-actions">
-        <a href="{% url 'add_to_cart' flower.pk %}" class="fd-btn-cart" id="cartBtn">
+        <button class="fd-btn-cart" id="cartBtn" onclick="addToCart()">
           <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
           {% t 'add_to_cart' %}
-        </a>
+        </button>
         <a href="{% url 'catalog' %}" class="fd-btn-back">
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           {% t 'back_to_catalog' %}
@@ -217,7 +223,7 @@
         </select>
         <label>{% if current_lang == 'uz' %}Sharhingiz{% elif current_lang == 'en' %}Your review{% else %}Ваш отзыв{% endif %}</label>
         <textarea name="text" rows="4" placeholder="{% if current_lang == 'uz' %}Taassurotlaringizni yozing...{% elif current_lang == 'en' %}Share your impressions...{% else %}Поделитесь впечатлениями...{% endif %}"></textarea>
-        <button type="submit" class="fd-btn-cart" style="width:100%;justify-content:center">
+        <button type="submit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           {% t 'submit_review' %}
         </button>
@@ -231,13 +237,105 @@
     {% endif %}
   </div>
 </div>
+
 <script>
-var qty=1;
-function changeQty(d){
-  qty=Math.max(1,qty+d);
-  document.getElementById('qtyNum').textContent=qty;
-  var btn=document.getElementById('cartBtn');
-  if(btn) btn.href='{% url "add_to_cart" flower.pk %}?qty='+qty;
+// Текущее количество товара
+let currentQty = 1;
+
+// Функция изменения количества
+function changeQty(delta) {
+  currentQty = Math.max(1, currentQty + delta);
+  document.getElementById('qtyNum').textContent = currentQty;
+}
+
+// Функция добавления в корзину через AJAX
+function addToCart() {
+  const flowerId = {{ flower.pk }};
+  const quantity = currentQty;
+  const cartBtn = document.getElementById('cartBtn');
+
+  // Блокируем кнопку на время запроса
+  cartBtn.disabled = true;
+  cartBtn.style.opacity = '0.7';
+  cartBtn.innerHTML = '<svg viewBox="0 0 24 24" style="animation: spin 1s linear infinite"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><path d="M12 2 L12 6 M12 18 L12 22 M2 12 L6 12 M18 12 L22 12" stroke="white" stroke-width="2"/></svg> Добавление...';
+
+  // Добавляем стиль для анимации
+  if (!document.querySelector('#spin-style')) {
+    const style = document.createElement('style');
+    style.id = 'spin-style';
+    style.textContent = '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
+    document.head.appendChild(style);
+  }
+
+  // Отправляем AJAX запрос
+  fetch("{% url 'add_to_cart_ajax' %}", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': '{{ csrf_token }}'
+    },
+    body: JSON.stringify({
+      flower_id: flowerId,
+      quantity: quantity
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Показываем уведомление
+      showToast(data.message || 'Товар добавлен в корзину! ✓');
+
+      // Обновляем счетчик корзины в хедере (если есть)
+      updateCartCount(data.cart_total);
+
+      // Восстанавливаем кнопку
+      cartBtn.disabled = false;
+      cartBtn.style.opacity = '1';
+      cartBtn.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> {% t 'add_to_cart' %}';
+    } else {
+      showToast(data.error || 'Ошибка при добавлении товара', 'error');
+      cartBtn.disabled = false;
+      cartBtn.style.opacity = '1';
+      cartBtn.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> {% t 'add_to_cart' %}';
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    showToast('Ошибка соединения. Попробуйте еще раз.', 'error');
+    cartBtn.disabled = false;
+    cartBtn.style.opacity = '1';
+    cartBtn.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> {% t 'add_to_cart' %}';
+  });
+}
+
+// Функция показа уведомления
+function showToast(message, type = 'success') {
+  // Удаляем старые уведомления
+  const oldToast = document.querySelector('.toast-msg');
+  if (oldToast) oldToast.remove();
+
+  // Создаем новое уведомление
+  const toast = document.createElement('div');
+  toast.className = 'toast-msg';
+  toast.style.background = type === 'error' ? 'linear-gradient(135deg,#e74c3c,#c0392b)' : 'linear-gradient(135deg,#27ae60,#219a52)';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  // Удаляем через 3 секунды
+  setTimeout(() => {
+    if (toast) toast.remove();
+  }, 3000);
+}
+
+// Функция обновления счетчика корзины
+function updateCartCount(total) {
+  const cartCounter = document.querySelector('.cart-counter');
+  if (cartCounter && total > 0) {
+    cartCounter.textContent = total;
+    cartCounter.style.display = 'flex';
+  } else if (cartCounter && total === 0) {
+    cartCounter.style.display = 'none';
+  }
 }
 </script>
 {% endblock %}
