@@ -1,341 +1,178 @@
 {% extends 'main/base.html' %}
 {% load i18n_tags %}
-{% block title %}{{ flower.name }} — Flora Luxe{% endblock %}
+{% block title %}{% t 'cart_title' %} — Flora Luxe{% endblock %}
 {% block extra_head %}
 <style>
-.fd-wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 5rem}
-.breadcrumb{font-size:.78rem;color:rgba(45,42,44,.5);margin-bottom:1.8rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
-.breadcrumb a{color:var(--amber2);transition:color .2s}
-.breadcrumb a:hover{color:var(--rose2)}
-.breadcrumb span{opacity:.4}
-.fd-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:4rem}
-@media(max-width:720px){.fd-grid{grid-template-columns:1fr;gap:1.5rem}}
-.fd-img-wrap{border-radius:var(--r-xl);overflow:hidden;box-shadow:0 8px 40px rgba(181,115,127,.2);position:relative}
-.fd-img-wrap img{width:100%;height:460px;object-fit:cover;display:block;transition:transform .5s}
-.fd-img-wrap:hover img{transform:scale(1.03)}
-.fd-img-ph{width:100%;height:460px;background:linear-gradient(135deg,#e6d9de,#f0e4e9);display:flex;align-items:center;justify-content:center;font-size:8rem}
-@media(max-width:720px){.fd-img-wrap img,.fd-img-ph{height:280px}}
-.fd-cat{font-size:.7rem;color:var(--rose2);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
-.fd-cat::before{content:'';width:18px;height:1.5px;background:var(--rose2);display:inline-block;flex-shrink:0}
-.fd-name{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:.8rem;letter-spacing:-.02em}
-.fd-stars{display:flex;align-items:center;gap:.4rem;margin-bottom:1rem}
-.fd-stars .stars{color:#e8945a;font-size:.95rem}
-.fd-stars .count{font-size:.82rem;color:rgba(45,42,44,.5)}
-.fd-price{font-size:2.4rem;font-weight:700;color:var(--rose2);margin-bottom:.3rem;font-family:var(--serif);letter-spacing:-.02em}
-.fd-price-sub{font-size:.78rem;color:rgba(45,42,44,.4);margin-bottom:1.4rem}
-.fd-desc{color:rgba(45,42,44,.72);font-size:.93rem;line-height:1.8;margin-bottom:1.6rem;padding-bottom:1.4rem;border-bottom:1px solid rgba(181,115,127,.2)}
-.fd-meta{display:flex;flex-direction:column;gap:0;margin-bottom:1.8rem;background:rgba(255,255,255,.75);border:1px solid rgba(181,115,127,.2);border-radius:var(--r-lg);overflow:hidden;backdrop-filter:blur(8px)}
-.fd-meta-row{display:flex;align-items:center;gap:.6rem;font-size:.85rem;padding:.75rem 1.1rem}
-.fd-meta-row:not(:last-child){border-bottom:1px solid rgba(181,115,127,.12)}
-.fd-meta-row .lbl{color:rgba(45,42,44,.45);width:100px;flex-shrink:0;font-size:.73rem;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
-.fd-meta-row .val{color:var(--ink);font-weight:500}
-.fd-stock{display:inline-flex;align-items:center;gap:.35rem;padding:.26rem .75rem;border-radius:2rem;font-size:.76rem;font-weight:700}
-.fd-stock.in{background:rgba(39,174,96,.12);color:#27ae60;border:1px solid rgba(39,174,96,.25)}
-.fd-stock.out{background:rgba(159,94,107,.12);color:var(--rose2);border:1px solid rgba(159,94,107,.25)}
-.qty-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(45,42,44,.45);margin-bottom:.5rem}
-.qty-wrap{display:inline-flex;align-items:center;background:rgba(255,255,255,.8);border:1.5px solid rgba(181,115,127,.3);border-radius:var(--r-sm);overflow:hidden;margin-bottom:1.5rem}
-.qty-btn{width:42px;height:42px;border:none;background:transparent;color:var(--ink);font-size:1.3rem;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;font-weight:300}
-.qty-btn:hover{background:rgba(181,115,127,.12)}
-.qty-num{font-weight:700;font-size:.95rem;min-width:38px;text-align:center;color:var(--ink);border-left:1px solid rgba(181,115,127,.2);border-right:1px solid rgba(181,115,127,.2);height:42px;display:flex;align-items:center;justify-content:center}
-.fd-actions{display:flex;gap:.75rem;flex-wrap:wrap}
-.fd-btn-cart{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:var(--r-sm);background:linear-gradient(135deg,#b5737f,#c28492);color:#fff;font-weight:700;font-size:.93rem;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 6px 20px rgba(181,115,127,.35);border:none;cursor:pointer;min-height:50px}
-.fd-btn-cart:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(181,115,127,.5);color:#fff}
-.fd-btn-cart svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.fd-btn-back{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:var(--r-sm);background:rgba(255,255,255,.8);border:1.5px solid rgba(181,115,127,.3);color:rgba(45,42,44,.7);font-weight:600;font-size:.88rem;text-decoration:none;transition:all .2s;min-height:50px;backdrop-filter:blur(6px)}
-.fd-btn-back:hover{border-color:var(--amber2);color:var(--amber2)}
-.fd-btn-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+.cart-page{max-width:820px;margin:0 auto;padding:2.5rem 1.5rem 5rem;position:relative;z-index:1}
 
-/* REVIEWS */
-.reviews-section{margin-top:3rem}
-.reviews-section h2{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:var(--rose2);margin-bottom:1.3rem;display:flex;align-items:center;gap:.5rem}
-.rev-card{background:rgba(255,255,255,.82);border:1px solid rgba(181,115,127,.2);border-radius:var(--r-lg);padding:1rem 1.2rem;margin-bottom:.75rem;backdrop-filter:blur(6px)}
-.rev-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.4rem;flex-wrap:wrap}
-.rev-user{font-weight:700;font-size:.88rem;color:var(--ink)}
-.rev-rating{color:#e8945a;font-size:.85rem}
-.rev-date{font-size:.72rem;color:rgba(45,42,44,.4);margin-left:auto}
-.rev-text{font-size:.87rem;color:rgba(45,42,44,.72);line-height:1.65}
-.no-rev{background:rgba(255,255,255,.7);border:1px solid rgba(181,115,127,.15);border-radius:var(--r-md);padding:1.2rem 1.4rem;color:rgba(45,42,44,.45);font-style:italic;font-size:.88rem;text-align:center}
+/* ЗАГОЛОВОК */
+.cart-header{margin-bottom:2rem}
+.cart-header h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.4rem;font-weight:700;color:#e0b55a;letter-spacing:-.02em;display:flex;align-items:center;gap:.6rem}
+.cart-header h1 svg{width:28px;height:28px;stroke:#c8963c;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.cart-count{font-size:.85rem;color:rgba(240,237,224,.4);font-family:'DM Sans',sans-serif;font-weight:400;margin-top:.2rem}
 
-/* REVIEW FORM — светлая тема */
-.rev-form{background:rgba(255,255,255,.85);border:1px solid rgba(181,115,127,.25);border-radius:var(--r-xl);padding:1.8rem;margin-top:1.5rem;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(181,115,127,.1)}
-.rev-form h3{font-family:var(--serif);font-size:1.25rem;color:var(--rose2);margin-bottom:1.1rem;font-weight:700}
-.rev-form label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(45,42,44,.5);margin-bottom:.4rem}
-.rev-form select,.rev-form textarea{width:100%;padding:.72rem 1rem;border:1.5px solid rgba(181,115,127,.25);border-radius:var(--r-sm);background:rgba(255,245,248,.9);color:var(--ink);font-family:var(--sans);font-size:.9rem;outline:none;margin-bottom:1rem;transition:border-color .2s;-webkit-appearance:none}
-.rev-form select:focus,.rev-form textarea:focus{border-color:var(--rose2)}
-.rev-form textarea{resize:vertical;min-height:100px;line-height:1.6}
-.rev-form textarea::placeholder{color:rgba(45,42,44,.3)}
-.rev-form button{background:linear-gradient(135deg,#b5737f,#c28492);color:#fff;border:none;padding:.85rem 1.8rem;border-radius:var(--r-sm);font-weight:700;font-size:.93rem;cursor:pointer;transition:transform .2s,box-shadow .2s;width:100%;justify-content:center;display:flex;align-items:center;gap:.5rem}
-.rev-form button:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(181,115,127,.4)}
+/* ПУСТАЯ КОРЗИНА */
+.cart-empty{text-align:center;padding:4rem 2rem;background:rgba(22,43,26,.5);border:1px solid rgba(46,204,113,.12);border-radius:1.5rem;backdrop-filter:blur(8px)}
+.cart-empty-ico{font-size:4rem;margin-bottom:1rem;display:block;filter:drop-shadow(0 0 20px rgba(46,204,113,.2))}
+.cart-empty h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;color:#e0b55a;margin-bottom:.5rem}
+.cart-empty p{color:rgba(240,237,224,.4);margin-bottom:1.5rem;font-size:.9rem}
+.cart-empty-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;background:linear-gradient(135deg,#a07828,#c8963c,#e0b55a);color:#0a1a0f;border-radius:2rem;font-weight:700;text-decoration:none;transition:all .22s;box-shadow:0 4px 16px rgba(200,150,60,.4)}
+.cart-empty-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,150,60,.55);color:#0a1a0f}
 
-/* RELATED */
-.related-section{margin-top:3rem}
-.related-section h2{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:var(--rose2);margin-bottom:1.2rem}
-.rel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem}
-.rel-card{background:rgba(255,255,255,.85);border:1px solid rgba(181,115,127,.2);border-radius:var(--r-lg);overflow:hidden;text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s;backdrop-filter:blur(6px)}
-.rel-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(181,115,127,.2)}
-.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
-.rel-body{padding:.75rem 1rem}
-.rel-body h4{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:.2rem}
-.rel-body span{font-size:.82rem;color:var(--rose2);font-weight:700}
+/* ITEMS */
+.cart-items{display:flex;flex-direction:column;gap:.85rem;margin-bottom:1.5rem}
+.cart-item{display:flex;align-items:center;gap:1rem;background:rgba(22,43,26,.65);border:1px solid rgba(46,204,113,.13);border-radius:1.2rem;padding:1rem 1.2rem;box-shadow:0 4px 16px rgba(0,0,0,.35);transition:border-color .2s;backdrop-filter:blur(8px)}
+.cart-item:hover{border-color:rgba(200,150,60,.25)}
 
-@media(max-width:500px){
-  .fd-actions{flex-direction:column}
-  .fd-btn-cart,.fd-btn-back{width:100%;justify-content:center}
+.ci-img{width:68px;height:68px;border-radius:.85rem;object-fit:cover;background:linear-gradient(135deg,#162b1a,#1e3322);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;overflow:hidden;border:1px solid rgba(46,204,113,.1)}
+.ci-img img{width:100%;height:100%;object-fit:cover;display:block}
+
+.ci-info{flex:1;min-width:0}
+.ci-name{font-weight:700;color:#f0ede0;font-size:.97rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-cat{font-size:.73rem;color:rgba(240,237,224,.35);margin-top:.1rem;text-transform:uppercase;letter-spacing:.06em}
+.ci-unit{font-size:.82rem;color:rgba(240,237,224,.4);margin-top:.2rem}
+
+.ci-controls{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.qty-wrap{display:flex;align-items:center;background:rgba(10,26,15,.6);border:1px solid rgba(46,204,113,.18);border-radius:.65rem;overflow:hidden}
+.qty-btn{width:36px;height:36px;border:none;background:transparent;color:rgba(240,237,224,.55);cursor:pointer;font-size:1.1rem;transition:background .2s,color .2s;display:flex;align-items:center;justify-content:center}
+.qty-btn:hover{background:rgba(46,204,113,.12);color:#2ecc71}
+.qty-num{font-weight:700;font-size:.9rem;min-width:32px;text-align:center;color:#f0ede0;height:36px;display:flex;align-items:center;justify-content:center;border-left:1px solid rgba(46,204,113,.15);border-right:1px solid rgba(46,204,113,.15)}
+
+.ci-total{font-weight:800;color:#c8963c;font-size:1rem;white-space:nowrap;min-width:80px;text-align:right;flex-shrink:0}
+.ci-total small{display:block;font-size:.68rem;color:rgba(240,237,224,.3);font-weight:400;margin-top:.1rem}
+
+.rm-btn{width:34px;height:34px;border-radius:50%;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.2);color:#e74c3c;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .2s;flex-shrink:0}
+.rm-btn:hover{background:rgba(231,76,60,.25);border-color:#e74c3c;transform:scale(1.1)}
+.rm-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round}
+
+/* SUMMARY */
+.cart-summary{background:rgba(22,43,26,.7);border:1px solid rgba(200,150,60,.2);border-radius:1.4rem;padding:1.6rem;box-shadow:0 8px 32px rgba(0,0,0,.4);backdrop-filter:blur(12px)}
+.cart-summary-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(46,204,113,.08)}
+.cart-summary-row:last-of-type{border-bottom:none}
+.cart-summary-row span{color:rgba(240,237,224,.45);font-size:.88rem}
+.cart-summary-row .val{color:rgba(240,237,224,.7);font-weight:500}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin:1rem 0 1.4rem;padding-top:1rem;border-top:1px solid rgba(200,150,60,.2)}
+.cart-total-row span{color:rgba(240,237,224,.6);font-size:.95rem;font-weight:600}
+.cart-total-row strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:700;color:#e0b55a}
+
+.btn-checkout{display:flex;align-items:center;justify-content:center;gap:.6rem;text-align:center;padding:1rem;background:linear-gradient(135deg,#a07828,#c8963c,#e0b55a);color:#0a1a0f;border-radius:1rem;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:800;text-decoration:none;transition:all .22s;box-shadow:0 6px 20px rgba(200,150,60,.4);min-height:54px;letter-spacing:.01em}
+.btn-checkout:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(200,150,60,.6);color:#0a1a0f}
+.btn-checkout svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0}
+.btn-cont{display:flex;align-items:center;justify-content:center;gap:.5rem;text-align:center;padding:.75rem;background:transparent;border:1.5px solid rgba(46,204,113,.2);color:rgba(240,237,224,.5);border-radius:1rem;font-size:.9rem;text-decoration:none;margin-top:.6rem;transition:border-color .2s,color .2s;min-height:48px}
+.btn-cont:hover{border-color:#2ecc71;color:#2ecc71}
+.btn-cont svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+
+/* DELIVERY INFO */
+.cart-delivery{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:rgba(240,237,224,.35);margin-top:.7rem;justify-content:center}
+.cart-delivery svg{width:14px;height:14px;stroke:#2ecc71;fill:none;stroke-width:2;flex-shrink:0}
+
+@media(max-width:600px){
+  .cart-page{padding:1.5rem .9rem 3rem}
+  .cart-header h1{font-size:1.8rem}
+  .cart-item{gap:.65rem;padding:.85rem .9rem;flex-wrap:wrap}
+  .ci-img{width:56px;height:56px}
+  .ci-controls{order:3;width:100%;justify-content:space-between}
+  .ci-total{min-width:unset}
+  .ci-total small{display:none}
+  .btn-checkout,.btn-cont{min-height:52px}
 }
-
-/* Сообщение об успешном добавлении */
-.toast-msg{position:fixed;bottom:30px;right:30px;background:linear-gradient(135deg,#27ae60,#219a52);color:#fff;padding:12px 24px;border-radius:50px;font-size:.9rem;font-weight:500;z-index:9999;box-shadow:0 4px 20px rgba(39,174,96,.3);animation:slideIn .3s ease-out}
-@keyframes slideIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="fd-wrap">
-  <div class="breadcrumb">
-    <a href="{% url 'catalog' %}">{% t 'catalog' %}</a>
-    <span>›</span>
-    <a href="{% url 'catalog' %}">{{ flower.category.name }}</a>
-    <span>›</span>
-    <span>{{ flower.name }}</span>
-  </div>
+<div class="cart-page">
 
-  <div class="fd-grid reveal">
-    <!-- IMAGE -->
-    <div class="fd-img-wrap">
-      {% if flower.image %}
-        <img src="{{ flower.image.url }}" alt="{{ flower.name }}">
-      {% else %}
-        <div class="fd-img-ph">🌸</div>
-      {% endif %}
-    </div>
-
-    <!-- INFO -->
-    <div class="fd-info">
-      <div class="fd-cat">{{ flower.category.name }}</div>
-      <h1 class="fd-name">{{ flower.name }}</h1>
-
-      {% if reviews %}
-      <div class="fd-stars">
-        <span class="stars">⭐⭐⭐⭐⭐</span>
-        <span class="count">({{ reviews|length }} {% if current_lang == 'uz' %}sharh{% elif current_lang == 'en' %}reviews{% else %}отзывов{% endif %})</span>
-      </div>
-      {% endif %}
-
-      <div class="fd-price">{{ flower.price }} {% t 'price' %}</div>
-      <div class="fd-price-sub">{% if current_lang == 'uz' %}Narxi{% elif current_lang == 'en' %}Price per item{% else %}Цена за штуку{% endif %}</div>
-
-      {% if flower.description %}
-      <p class="fd-desc">{{ flower.description }}</p>
-      {% endif %}
-
-      <!-- META -->
-      <div class="fd-meta">
-        <div class="fd-meta-row">
-          <span class="lbl">{% if current_lang == 'uz' %}Kategoriya{% elif current_lang == 'en' %}Category{% else %}Категория{% endif %}</span>
-          <span class="val">{{ flower.category.name }}</span>
-        </div>
-        <div class="fd-meta-row">
-          <span class="lbl">{% if current_lang == 'uz' %}Mavjud{% elif current_lang == 'en' %}Status{% else %}Наличие{% endif %}</span>
-          <span class="val">
-            {% if flower.available %}
-              <span class="fd-stock in">✓ {% if current_lang == 'uz' %}Mavjud{% elif current_lang == 'en' %}In stock{% else %}В наличии{% endif %}</span>
-            {% else %}
-              <span class="fd-stock out">{% if current_lang == 'uz' %}Tugagan{% elif current_lang == 'en' %}Out of stock{% else %}Нет в наличии{% endif %}</span>
-            {% endif %}
-          </span>
-        </div>
-        <div class="fd-meta-row">
-          <span class="lbl">{% if current_lang == 'uz' %}Yetkazish{% elif current_lang == 'en' %}Delivery{% else %}Доставка{% endif %}</span>
-          <span class="val" style="color:#27ae60;font-weight:600">{% if current_lang == 'uz' %}2 soatda{% elif current_lang == 'en' %}Within 2 hours{% else %}За 2 часа{% endif %}</span>
-        </div>
-      </div>
-
-      <!-- QTY -->
-      <div class="qty-label">{% if current_lang == 'uz' %}Miqdor{% elif current_lang == 'en' %}Quantity{% else %}Количество{% endif %}</div>
-      <div class="qty-wrap" id="qtyWrap">
-        <button class="qty-btn" type="button" onclick="changeQty(-1)">−</button>
-        <span class="qty-num" id="qtyNum">1</span>
-        <button class="qty-btn" type="button" onclick="changeQty(1)">+</button>
-      </div>
-
-      <!-- ACTIONS -->
-      <div class="fd-actions">
-        <button class="fd-btn-cart" id="cartBtn" onclick="addToCart()">
-          <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-          {% t 'add_to_cart' %}
-        </button>
-        <a href="{% url 'catalog' %}" class="fd-btn-back">
-          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-          {% t 'back_to_catalog' %}
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- RELATED -->
-  {% if related_flowers %}
-  <div class="related-section reveal">
-    <h2>{% t 'you_may_also_like' %}</h2>
-    <div class="rel-grid stagger">
-      {% for f in related_flowers %}
-      <a href="{% url 'flower_detail' f.pk %}" class="rel-card">
-        {% if f.image %}<img src="{{ f.image.url }}" alt="{{ f.name }}">{% endif %}
-        <div class="rel-body"><h4>{{ f.name }}</h4><span>{{ f.price }} {% t 'price' %}</span></div>
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-  {% endif %}
-
-  <!-- REVIEWS -->
-  <div class="reviews-section reveal">
-    <h2>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="width:22px;height:22px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      {% t 'reviews' %} {% if reviews %}<span style="font-size:1rem;color:rgba(45,42,44,.4);font-family:var(--sans);font-weight:400">({{ reviews|length }})</span>{% endif %}
-    </h2>
-    {% for r in reviews %}
-    <div class="rev-card">
-      <div class="rev-head">
-        <span class="rev-user">{{ r.user.username }}</span>
-        <span class="rev-rating">{% for i in "12345" %}{% if forloop.counter <= r.rating %}⭐{% endif %}{% endfor %}</span>
-      </div>
-      <div class="rev-text">{{ r.text }}</div>
-    </div>
-    {% empty %}
-    <div class="no-rev">
-      🌸 {% if current_lang == 'uz' %}Hali sharhlar yo'q. Birinchi bo'ling!{% elif current_lang == 'en' %}No reviews yet. Be the first!{% else %}Отзывов пока нет. Будьте первым!{% endif %}
-    </div>
-    {% endfor %}
-
-    {% if user.is_authenticated %}
-    <div class="rev-form">
-      <h3>{% t 'write_review' %}</h3>
-      <form method="post" action="{% url 'add_review' %}">
-        {% csrf_token %}
-        <input type="hidden" name="flower_id" value="{{ flower.pk }}">
-        <label>{% if current_lang == 'uz' %}Reyting{% elif current_lang == 'en' %}Rating{% else %}Оценка{% endif %}</label>
-        <select name="rating">
-          <option value="5">⭐⭐⭐⭐⭐ — {% if current_lang == 'uz' %}A'lo{% elif current_lang == 'en' %}Excellent{% else %}Отлично{% endif %}</option>
-          <option value="4">⭐⭐⭐⭐ — {% if current_lang == 'uz' %}Yaxshi{% elif current_lang == 'en' %}Good{% else %}Хорошо{% endif %}</option>
-          <option value="3">⭐⭐⭐ — {% if current_lang == 'uz' %}Yomon emas{% elif current_lang == 'en' %}Average{% else %}Нормально{% endif %}</option>
-          <option value="2">⭐⭐ — {% if current_lang == 'uz' %}Yomon{% elif current_lang == 'en' %}Poor{% else %}Плохо{% endif %}</option>
-          <option value="1">⭐ — {% if current_lang == 'uz' %}Juda yomon{% elif current_lang == 'en' %}Very poor{% else %}Очень плохо{% endif %}</option>
-        </select>
-        <label>{% if current_lang == 'uz' %}Sharhingiz{% elif current_lang == 'en' %}Your review{% else %}Ваш отзыв{% endif %}</label>
-        <textarea name="text" rows="4" placeholder="{% if current_lang == 'uz' %}Taassurotlaringizni yozing...{% elif current_lang == 'en' %}Share your impressions...{% else %}Поделитесь впечатлениями...{% endif %}"></textarea>
-        <button type="submit">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          {% t 'submit_review' %}
-        </button>
-      </form>
-    </div>
-    {% else %}
-    <div style="text-align:center;padding:1.2rem;background:rgba(255,255,255,.7);border:1px solid rgba(181,115,127,.2);border-radius:var(--r-lg);margin-top:1rem">
-      <p style="color:rgba(45,42,44,.55);font-size:.88rem;margin-bottom:.7rem">{% if current_lang == 'uz' %}Sharh qoldirish uchun tizimga kiring{% elif current_lang == 'en' %}Log in to leave a review{% else %}Войдите, чтобы оставить отзыв{% endif %}</p>
-      <a href="{% url 'login' %}" class="fd-btn-cart" style="display:inline-flex">{% if current_lang == 'uz' %}Kirish{% elif current_lang == 'en' %}Log in{% else %}Войти{% endif %}</a>
-    </div>
+  <div class="cart-header">
+    <h1>
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+      {% t 'cart_title' %}
+    </h1>
+    {% if cart_items %}
+    <div class="cart-count">{{ cart_items|length }} {% if current_lang == 'uz' %}ta mahsulot{% elif current_lang == 'en' %}item(s) in cart{% else %}товар(ов) в корзине{% endif %}</div>
     {% endif %}
   </div>
+
+  {% if cart_items %}
+    <div class="cart-items">
+      {% for item in cart_items %}
+      <div class="cart-item">
+
+        <!-- ФОТО -->
+        <div class="ci-img">
+          {% if item.flower.image %}<img src="{{ item.flower.image.url }}" alt="{{ item.flower.name }}">{% else %}🌸{% endif %}
+        </div>
+
+        <!-- ИНФО -->
+        <div class="ci-info">
+          <div class="ci-name">{{ item.flower.name }}</div>
+          <div class="ci-cat">{{ item.flower.category.name }}</div>
+          <div class="ci-unit">{{ item.flower.price }} {% t 'price' %} / {% if current_lang == 'uz' %}dona{% elif current_lang == 'en' %}pc{% else %}шт{% endif %}</div>
+        </div>
+
+        <!-- КОЛИЧЕСТВО + УДАЛИТЬ -->
+        <div class="ci-controls">
+          <div class="qty-wrap">
+            <form method="post" action="{% url 'update_cart' item.flower.pk %}" style="display:contents">
+              {% csrf_token %}
+              <button type="submit" name="quantity" value="{{ item.quantity|add:'-1' }}" class="qty-btn" title="−">−</button>
+            </form>
+            <span class="qty-num">{{ item.quantity }}</span>
+            <form method="post" action="{% url 'update_cart' item.flower.pk %}" style="display:contents">
+              {% csrf_token %}
+              <button type="submit" name="quantity" value="{{ item.quantity|add:'1' }}" class="qty-btn" title="+">+</button>
+            </form>
+          </div>
+          <div class="ci-total">
+            {{ item.total }} {% t 'price' %}
+            <small>{{ item.quantity }} × {{ item.flower.price }}</small>
+          </div>
+          <a href="{% url 'remove_from_cart' item.flower.pk %}" class="rm-btn" title="{% if current_lang == 'uz' %}O'chirish{% elif current_lang == 'en' %}Remove{% else %}Удалить{% endif %}">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </a>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- ИТОГ -->
+    <div class="cart-summary">
+      <div class="cart-summary-row">
+        <span>{% if current_lang == 'uz' %}Mahsulotlar{% elif current_lang == 'en' %}Items{% else %}Товары{% endif %}</span>
+        <span class="val">{{ cart_items|length }} {% if current_lang == 'uz' %}ta{% elif current_lang == 'en' %}pcs{% else %}шт{% endif %}</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>{% if current_lang == 'uz' %}Yetkazib berish{% elif current_lang == 'en' %}Delivery{% else %}Доставка{% endif %}</span>
+        <span class="val" style="color:#2ecc71;font-weight:600">{% if current_lang == 'uz' %}Bepul{% elif current_lang == 'en' %}Free{% else %}Бесплатно{% endif %}</span>
+      </div>
+      <div class="cart-total-row">
+        <span>{% t 'total' %}:</span>
+        <strong>{{ total }} {% t 'price' %}</strong>
+      </div>
+      <a href="{% url 'checkout' %}" class="btn-checkout">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        {% t 'checkout' %}
+      </a>
+      <a href="{% url 'catalog' %}" class="btn-cont">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        {% t 'continue_shopping' %}
+      </a>
+      <div class="cart-delivery">
+        <svg viewBox="0 0 24 24"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        {% if current_lang == 'uz' %}Buxoro bo'ylab 2 soatda yetkazib berish{% elif current_lang == 'en' %}Free delivery across Bukhara in 2 hours{% else %}Бесплатная доставка по Бухаре за 2 часа{% endif %}
+      </div>
+    </div>
+
+  {% else %}
+    <div class="cart-empty">
+      <span class="cart-empty-ico">🛒</span>
+      <h3>{% t 'empty_cart' %}</h3>
+      <p>{% if current_lang == 'uz' %}Hali hech narsa qo'shmadingiz. Katalogdan tanlang!{% elif current_lang == 'en' %}Nothing here yet. Browse our catalog!{% else %}Здесь пока ничего нет. Выберите цветы в каталоге!{% endif %}</p>
+      <a href="{% url 'catalog' %}" class="cart-empty-btn">
+        🌸 {% t 'catalog' %}
+      </a>
+    </div>
+  {% endif %}
+
 </div>
-
-<script>
-// Текущее количество товара
-let currentQty = 1;
-
-// Функция изменения количества
-function changeQty(delta) {
-  currentQty = Math.max(1, currentQty + delta);
-  document.getElementById('qtyNum').textContent = currentQty;
-}
-
-// Функция добавления в корзину через AJAX
-function addToCart() {
-  const flowerId = {{ flower.pk }};
-  const quantity = currentQty;
-  const cartBtn = document.getElementById('cartBtn');
-
-  // Блокируем кнопку на время запроса
-  cartBtn.disabled = true;
-  cartBtn.style.opacity = '0.7';
-  cartBtn.innerHTML = '<svg viewBox="0 0 24 24" style="animation: spin 1s linear infinite"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><path d="M12 2 L12 6 M12 18 L12 22 M2 12 L6 12 M18 12 L22 12" stroke="white" stroke-width="2"/></svg> Добавление...';
-
-  // Добавляем стиль для анимации
-  if (!document.querySelector('#spin-style')) {
-    const style = document.createElement('style');
-    style.id = 'spin-style';
-    style.textContent = '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
-    document.head.appendChild(style);
-  }
-
-  // Отправляем AJAX запрос
-  fetch("{% url 'add_to_cart_ajax' %}", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': '{{ csrf_token }}'
-    },
-    body: JSON.stringify({
-      flower_id: flowerId,
-      quantity: quantity
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      // Показываем уведомление
-      showToast(data.message || 'Товар добавлен в корзину! ✓');
-
-      // Обновляем счетчик корзины в хедере (если есть)
-      updateCartCount(data.cart_total);
-
-      // Восстанавливаем кнопку
-      cartBtn.disabled = false;
-      cartBtn.style.opacity = '1';
-      cartBtn.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> {% t 'add_to_cart' %}';
-    } else {
-      showToast(data.error || 'Ошибка при добавлении товара', 'error');
-      cartBtn.disabled = false;
-      cartBtn.style.opacity = '1';
-      cartBtn.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> {% t 'add_to_cart' %}';
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    showToast('Ошибка соединения. Попробуйте еще раз.', 'error');
-    cartBtn.disabled = false;
-    cartBtn.style.opacity = '1';
-    cartBtn.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> {% t 'add_to_cart' %}';
-  });
-}
-
-// Функция показа уведомления
-function showToast(message, type = 'success') {
-  // Удаляем старые уведомления
-  const oldToast = document.querySelector('.toast-msg');
-  if (oldToast) oldToast.remove();
-
-  // Создаем новое уведомление
-  const toast = document.createElement('div');
-  toast.className = 'toast-msg';
-  toast.style.background = type === 'error' ? 'linear-gradient(135deg,#e74c3c,#c0392b)' : 'linear-gradient(135deg,#27ae60,#219a52)';
-  toast.textContent = message;
-  document.body.appendChild(toast);
-
-  // Удаляем через 3 секунды
-  setTimeout(() => {
-    if (toast) toast.remove();
-  }, 3000);
-}
-
-// Функция обновления счетчика корзины
-function updateCartCount(total) {
-  const cartCounter = document.querySelector('.cart-counter');
-  if (cartCounter && total > 0) {
-    cartCounter.textContent = total;
-    cartCounter.style.display = 'flex';
-  } else if (cartCounter && total === 0) {
-    cartCounter.style.display = 'none';
-  }
-}
-</script>
 {% endblock %}
