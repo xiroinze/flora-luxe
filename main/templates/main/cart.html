@@ -7,64 +7,64 @@
 
 /* ЗАГОЛОВОК */
 .cart-header{margin-bottom:2rem}
-.cart-header h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.4rem;font-weight:700;color:#e0b55a;letter-spacing:-.02em;display:flex;align-items:center;gap:.6rem}
-.cart-header h1 svg{width:28px;height:28px;stroke:#c8963c;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.cart-count{font-size:.85rem;color:rgba(240,237,224,.4);font-family:'DM Sans',sans-serif;font-weight:400;margin-top:.2rem}
+.cart-header h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.4rem;font-weight:700;color:#d4c5a0;letter-spacing:-.02em;display:flex;align-items:center;gap:.6rem}
+.cart-header h1 svg{width:28px;height:28px;stroke:#6b9e58;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.cart-count{font-size:.85rem;color:rgba(180,165,110,.4);font-family:'DM Sans',sans-serif;font-weight:400;margin-top:.2rem}
 
 /* ПУСТАЯ КОРЗИНА */
-.cart-empty{text-align:center;padding:4rem 2rem;background:rgba(22,43,26,.5);border:1px solid rgba(46,204,113,.12);border-radius:1.5rem;backdrop-filter:blur(8px)}
-.cart-empty-ico{font-size:4rem;margin-bottom:1rem;display:block;filter:drop-shadow(0 0 20px rgba(46,204,113,.2))}
-.cart-empty h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;color:#e0b55a;margin-bottom:.5rem}
-.cart-empty p{color:rgba(240,237,224,.4);margin-bottom:1.5rem;font-size:.9rem}
-.cart-empty-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;background:linear-gradient(135deg,#a07828,#c8963c,#e0b55a);color:#0a1a0f;border-radius:2rem;font-weight:700;text-decoration:none;transition:all .22s;box-shadow:0 4px 16px rgba(200,150,60,.4)}
-.cart-empty-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,150,60,.55);color:#0a1a0f}
+.cart-empty{text-align:center;padding:4rem 2rem;background:rgba(30,56,37,.5);border:1px solid rgba(107,158,88,.12);border-radius:1.5rem;backdrop-filter:blur(8px)}
+.cart-empty-ico{font-size:4rem;margin-bottom:1rem;display:block;filter:drop-shadow(0 0 20px rgba(107,158,88,.2))}
+.cart-empty h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;color:#d4c5a0;margin-bottom:.5rem}
+.cart-empty p{color:rgba(180,165,110,.4);margin-bottom:1.5rem;font-size:.9rem}
+.cart-empty-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;background:linear-gradient(135deg,#4a7c59,#6b9e58,#7eb86a);color:#0f1a0c;border-radius:2rem;font-weight:700;text-decoration:none;transition:all .22s;box-shadow:0 4px 16px rgba(74,124,89,.4)}
+.cart-empty-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(74,124,89,.55);color:#0f1a0c}
 
 /* ITEMS */
 .cart-items{display:flex;flex-direction:column;gap:.85rem;margin-bottom:1.5rem}
-.cart-item{display:flex;align-items:center;gap:1rem;background:rgba(22,43,26,.65);border:1px solid rgba(46,204,113,.13);border-radius:1.2rem;padding:1rem 1.2rem;box-shadow:0 4px 16px rgba(0,0,0,.35);transition:border-color .2s;backdrop-filter:blur(8px)}
-.cart-item:hover{border-color:rgba(200,150,60,.25)}
+.cart-item{display:flex;align-items:center;gap:1rem;background:rgba(30,56,37,.65);border:1px solid rgba(107,158,88,.13);border-radius:1.2rem;padding:1rem 1.2rem;box-shadow:0 4px 16px rgba(0,0,0,.35);transition:border-color .2s;backdrop-filter:blur(8px)}
+.cart-item:hover{border-color:rgba(180,165,110,.25)}
 
-.ci-img{width:68px;height:68px;border-radius:.85rem;object-fit:cover;background:linear-gradient(135deg,#162b1a,#1e3322);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;overflow:hidden;border:1px solid rgba(46,204,113,.1)}
+.ci-img{width:68px;height:68px;border-radius:.85rem;object-fit:cover;background:linear-gradient(135deg,#1e3825,#2a4632);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;overflow:hidden;border:1px solid rgba(107,158,88,.1)}
 .ci-img img{width:100%;height:100%;object-fit:cover;display:block}
 
 .ci-info{flex:1;min-width:0}
-.ci-name{font-weight:700;color:#f0ede0;font-size:.97rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ci-cat{font-size:.73rem;color:rgba(240,237,224,.35);margin-top:.1rem;text-transform:uppercase;letter-spacing:.06em}
-.ci-unit{font-size:.82rem;color:rgba(240,237,224,.4);margin-top:.2rem}
+.ci-name{font-weight:700;color:#d4c5a0;font-size:.97rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-cat{font-size:.73rem;color:rgba(180,165,110,.35);margin-top:.1rem;text-transform:uppercase;letter-spacing:.06em}
+.ci-unit{font-size:.82rem;color:rgba(180,165,110,.4);margin-top:.2rem}
 
 .ci-controls{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
-.qty-wrap{display:flex;align-items:center;background:rgba(10,26,15,.6);border:1px solid rgba(46,204,113,.18);border-radius:.65rem;overflow:hidden}
-.qty-btn{width:36px;height:36px;border:none;background:transparent;color:rgba(240,237,224,.55);cursor:pointer;font-size:1.1rem;transition:background .2s,color .2s;display:flex;align-items:center;justify-content:center}
-.qty-btn:hover{background:rgba(46,204,113,.12);color:#2ecc71}
-.qty-num{font-weight:700;font-size:.9rem;min-width:32px;text-align:center;color:#f0ede0;height:36px;display:flex;align-items:center;justify-content:center;border-left:1px solid rgba(46,204,113,.15);border-right:1px solid rgba(46,204,113,.15)}
+.qty-wrap{display:flex;align-items:center;background:rgba(30,56,37,.6);border:1px solid rgba(107,158,88,.18);border-radius:.65rem;overflow:hidden}
+.qty-btn{width:36px;height:36px;border:none;background:transparent;color:rgba(180,165,110,.55);cursor:pointer;font-size:1.1rem;transition:background .2s,color .2s;display:flex;align-items:center;justify-content:center}
+.qty-btn:hover{background:rgba(107,158,88,.12);color:#6b9e58}
+.qty-num{font-weight:700;font-size:.9rem;min-width:32px;text-align:center;color:#d4c5a0;height:36px;display:flex;align-items:center;justify-content:center;border-left:1px solid rgba(107,158,88,.15);border-right:1px solid rgba(107,158,88,.15)}
 
-.ci-total{font-weight:800;color:#c8963c;font-size:1rem;white-space:nowrap;min-width:80px;text-align:right;flex-shrink:0}
-.ci-total small{display:block;font-size:.68rem;color:rgba(240,237,224,.3);font-weight:400;margin-top:.1rem}
+.ci-total{font-weight:800;color:#b8a56e;font-size:1rem;white-space:nowrap;min-width:80px;text-align:right;flex-shrink:0}
+.ci-total small{display:block;font-size:.68rem;color:rgba(180,165,110,.3);font-weight:400;margin-top:.1rem}
 
 .rm-btn{width:34px;height:34px;border-radius:50%;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.2);color:#e74c3c;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .2s;flex-shrink:0}
 .rm-btn:hover{background:rgba(231,76,60,.25);border-color:#e74c3c;transform:scale(1.1)}
 .rm-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round}
 
 /* SUMMARY */
-.cart-summary{background:rgba(22,43,26,.7);border:1px solid rgba(200,150,60,.2);border-radius:1.4rem;padding:1.6rem;box-shadow:0 8px 32px rgba(0,0,0,.4);backdrop-filter:blur(12px)}
-.cart-summary-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(46,204,113,.08)}
+.cart-summary{background:rgba(30,56,37,.7);border:1px solid rgba(180,165,110,.2);border-radius:1.4rem;padding:1.6rem;box-shadow:0 8px 32px rgba(0,0,0,.4);backdrop-filter:blur(12px)}
+.cart-summary-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(107,158,88,.08)}
 .cart-summary-row:last-of-type{border-bottom:none}
-.cart-summary-row span{color:rgba(240,237,224,.45);font-size:.88rem}
-.cart-summary-row .val{color:rgba(240,237,224,.7);font-weight:500}
-.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin:1rem 0 1.4rem;padding-top:1rem;border-top:1px solid rgba(200,150,60,.2)}
-.cart-total-row span{color:rgba(240,237,224,.6);font-size:.95rem;font-weight:600}
-.cart-total-row strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:700;color:#e0b55a}
+.cart-summary-row span{color:rgba(180,165,110,.45);font-size:.88rem}
+.cart-summary-row .val{color:rgba(180,165,110,.7);font-weight:500}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin:1rem 0 1.4rem;padding-top:1rem;border-top:1px solid rgba(180,165,110,.2)}
+.cart-total-row span{color:rgba(180,165,110,.6);font-size:.95rem;font-weight:600}
+.cart-total-row strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:700;color:#d4c5a0}
 
-.btn-checkout{display:flex;align-items:center;justify-content:center;gap:.6rem;text-align:center;padding:1rem;background:linear-gradient(135deg,#a07828,#c8963c,#e0b55a);color:#0a1a0f;border-radius:1rem;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:800;text-decoration:none;transition:all .22s;box-shadow:0 6px 20px rgba(200,150,60,.4);min-height:54px;letter-spacing:.01em}
-.btn-checkout:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(200,150,60,.6);color:#0a1a0f}
+.btn-checkout{display:flex;align-items:center;justify-content:center;gap:.6rem;text-align:center;padding:1rem;background:linear-gradient(135deg,#4a7c59,#6b9e58,#7eb86a);color:#0f1a0c;border-radius:1rem;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:800;text-decoration:none;transition:all .22s;box-shadow:0 6px 20px rgba(74,124,89,.4);min-height:54px;letter-spacing:.01em}
+.btn-checkout:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(74,124,89,.6);color:#0f1a0c}
 .btn-checkout svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0}
-.btn-cont{display:flex;align-items:center;justify-content:center;gap:.5rem;text-align:center;padding:.75rem;background:transparent;border:1.5px solid rgba(46,204,113,.2);color:rgba(240,237,224,.5);border-radius:1rem;font-size:.9rem;text-decoration:none;margin-top:.6rem;transition:border-color .2s,color .2s;min-height:48px}
-.btn-cont:hover{border-color:#2ecc71;color:#2ecc71}
+.btn-cont{display:flex;align-items:center;justify-content:center;gap:.5rem;text-align:center;padding:.75rem;background:transparent;border:1.5px solid rgba(107,158,88,.2);color:rgba(180,165,110,.5);border-radius:1rem;font-size:.9rem;text-decoration:none;margin-top:.6rem;transition:border-color .2s,color .2s;min-height:48px}
+.btn-cont:hover{border-color:#6b9e58;color:#6b9e58}
 .btn-cont svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
 
 /* DELIVERY INFO */
-.cart-delivery{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:rgba(240,237,224,.35);margin-top:.7rem;justify-content:center}
-.cart-delivery svg{width:14px;height:14px;stroke:#2ecc71;fill:none;stroke-width:2;flex-shrink:0}
+.cart-delivery{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:rgba(180,165,110,.35);margin-top:.7rem;justify-content:center}
+.cart-delivery svg{width:14px;height:14px;stroke:#6b9e58;fill:none;stroke-width:2;flex-shrink:0}
 
 @media(max-width:600px){
   .cart-page{padding:1.5rem .9rem 3rem}
@@ -97,19 +97,16 @@
       {% for item in cart_items %}
       <div class="cart-item">
 
-        <!-- ФОТО -->
         <div class="ci-img">
-          {% if item.flower.image %}<img src="{{ item.flower.image.url }}" alt="{{ item.flower.name }}">{% else %}🌸{% endif %}
+          {% if item.flower.image %}<img src="{{ item.flower.image.url }}" alt="{{ item.flower.name }}">{% else %}🌲{% endif %}
         </div>
 
-        <!-- ИНФО -->
         <div class="ci-info">
           <div class="ci-name">{{ item.flower.name }}</div>
           <div class="ci-cat">{{ item.flower.category.name }}</div>
           <div class="ci-unit">{{ item.flower.price }} {% t 'price' %} / {% if current_lang == 'uz' %}dona{% elif current_lang == 'en' %}pc{% else %}шт{% endif %}</div>
         </div>
 
-        <!-- КОЛИЧЕСТВО + УДАЛИТЬ -->
         <div class="ci-controls">
           <div class="qty-wrap">
             <form method="post" action="{% url 'update_cart' item.flower.pk %}" style="display:contents">
@@ -135,7 +132,6 @@
       {% endfor %}
     </div>
 
-    <!-- ИТОГ -->
     <div class="cart-summary">
       <div class="cart-summary-row">
         <span>{% if current_lang == 'uz' %}Mahsulotlar{% elif current_lang == 'en' %}Items{% else %}Товары{% endif %}</span>
@@ -143,7 +139,7 @@
       </div>
       <div class="cart-summary-row">
         <span>{% if current_lang == 'uz' %}Yetkazib berish{% elif current_lang == 'en' %}Delivery{% else %}Доставка{% endif %}</span>
-        <span class="val" style="color:#2ecc71;font-weight:600">{% if current_lang == 'uz' %}Bepul{% elif current_lang == 'en' %}Free{% else %}Бесплатно{% endif %}</span>
+        <span class="val" style="color:#6b9e58;font-weight:600">{% if current_lang == 'uz' %}Bepul{% elif current_lang == 'en' %}Free{% else %}Бесплатно{% endif %}</span>
       </div>
       <div class="cart-total-row">
         <span>{% t 'total' %}:</span>
@@ -169,7 +165,7 @@
       <h3>{% t 'empty_cart' %}</h3>
       <p>{% if current_lang == 'uz' %}Hali hech narsa qo'shmadingiz. Katalogdan tanlang!{% elif current_lang == 'en' %}Nothing here yet. Browse our catalog!{% else %}Здесь пока ничего нет. Выберите цветы в каталоге!{% endif %}</p>
       <a href="{% url 'catalog' %}" class="cart-empty-btn">
-        🌸 {% t 'catalog' %}
+        🌲 {% t 'catalog' %}
       </a>
     </div>
   {% endif %}
