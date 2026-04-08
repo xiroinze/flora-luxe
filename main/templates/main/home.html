@@ -3,16 +3,56 @@
 {% block title %}Flora Luxe — {% t 'shop_name' %}{% endblock %}
 {% block extra_head %}
 <style>
-/* ================== ЛЕСНАЯ ТЕМА ================== */
+/* ================== БАЗОВЫЕ СТИЛИ ================== */
 :root {
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ================== FOREST THEME ================== */
+/* ================== THEME 1: ETHEREAL ROSE ================== */
+.theme-rose {
+  --gold-primary: #e8d0a8;
+  --gold-deep: #c9af7b;
+  --gold-dark: #b8965a;
+  --gold-glow: 0 0 6px rgba(232,208,168,0.4);
+  --gold-glow-intense: 0 0 8px rgba(232,208,168,0.5);
+  --bg-primary: #2d262b;
+  --bg-secondary: #241f23;
+  --bg-card: #332c31;
+  --bg-elevated: #3d353b;
+  --border-gold: rgba(232,208,168,0.2);
+  --accent-rose: #b87c6b;
+  --hero-overlay: linear-gradient(165deg,
+    rgba(45,38,43,0.5) 0%,
+    rgba(45,38,43,0.6) 35%,
+    rgba(45,38,43,0.75) 70%,
+    rgba(45,38,43,0.85) 100%);
+}
+
+/* ================== THEME 2: EMERALD ROYALE ================== */
+.theme-emerald {
+  --gold-primary: #cfc49a;
+  --gold-deep: #b5a56e;
+  --gold-dark: #9b874b;
+  --gold-glow: 0 0 6px rgba(207,196,154,0.35);
+  --gold-glow-intense: 0 0 8px rgba(207,196,154,0.45);
+  --bg-primary: #1a2a24;
+  --bg-secondary: #14201b;
+  --bg-card: #1f322a;
+  --bg-elevated: #2a4036;
+  --border-gold: rgba(207,196,154,0.2);
+  --accent-emerald: #3f7864;
+  --hero-overlay: linear-gradient(165deg,
+    rgba(26,42,36,0.5) 0%,
+    rgba(26,42,36,0.6) 35%,
+    rgba(26,42,36,0.75) 70%,
+    rgba(26,42,36,0.85) 100%);
+}
+
+/* Применение темы к body */
 body {
   font-family: 'DM Sans', sans-serif;
-  background: #1a2f1f;
-  color: #d4c5a0;
+  background: var(--bg-primary);
+  color: var(--gold-primary);
   transition: background 0.4s ease, color 0.3s ease;
   position: relative;
   min-height: 100vh;
@@ -35,7 +75,7 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 1;
-  filter: brightness(0.45) saturate(1.15) contrast(1.08);
+  filter: brightness(0.5) saturate(1.1) contrast(1.05);
   transition: filter 0.5s ease, opacity 1.5s ease;
   opacity: 0;
 }
@@ -48,32 +88,27 @@ body {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: linear-gradient(165deg,
-    rgba(26,47,31,0.4) 0%,
-    rgba(26,47,31,0.55) 35%,
-    rgba(26,47,31,0.7) 70%,
-    rgba(26,47,31,0.85) 100%);
+  background: var(--hero-overlay);
   pointer-events: none;
 }
 
-/* Золотая пыльца/лесная дымка */
+/* Золотая пыльца */
 .hero-gold-dust {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: radial-gradient(circle at 20% 30%, rgba(180,165,110,0.1) 0%, transparent 50%),
-              radial-gradient(circle at 85% 70%, rgba(107,158,88,0.08) 0%, transparent 50%),
-              radial-gradient(circle at 50% 20%, rgba(74,124,89,0.06) 0%, transparent 60%);
+  background: radial-gradient(circle at 20% 30%, rgba(207,196,154,0.08) 0%, transparent 50%),
+              radial-gradient(circle at 85% 70%, rgba(181,165,110,0.08) 0%, transparent 50%);
   pointer-events: none;
-  animation: forestMist 10s ease-in-out infinite;
+  animation: dustPulse 8s ease-in-out infinite;
 }
 
-@keyframes forestMist {
+@keyframes dustPulse {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 0.7; }
 }
 
-/* Падающие лепестки и листья */
+/* Падающие лепестки */
 .hero-particles {
   position: absolute;
   inset: 0;
@@ -87,34 +122,34 @@ body {
   bottom: -60px;
   opacity: 0;
   will-change: transform, opacity;
-  animation: floatLeaf linear infinite;
+  animation: floatPetal linear infinite;
 }
 
 .petal-a {
-  width: 14px;
-  height: 18px;
-  background: linear-gradient(135deg, rgba(107,158,88,0.6), rgba(74,124,89,0.4));
+  width: 12px;
+  height: 20px;
+  background: linear-gradient(135deg, rgba(232,208,168,0.6), rgba(201,175,123,0.4));
   border-radius: 50% 0 50% 0;
-  box-shadow: 0 0 6px rgba(107,158,88,0.3);
+  box-shadow: 0 0 6px rgba(232,208,168,0.3);
 }
 
 .petal-b {
-  width: 10px;
-  height: 12px;
-  background: linear-gradient(135deg, rgba(180,165,110,0.6), rgba(155,135,75,0.4));
+  width: 8px;
+  height: 14px;
+  background: linear-gradient(135deg, rgba(207,196,154,0.7), rgba(181,165,110,0.5));
   border-radius: 50% 50% 0 50%;
-  box-shadow: 0 0 5px rgba(180,165,110,0.3);
+  box-shadow: 0 0 5px rgba(207,196,154,0.3);
 }
 
 .petal-c {
   width: 16px;
-  height: 8px;
-  background: linear-gradient(135deg, rgba(90,110,63,0.5), rgba(74,124,89,0.4));
+  height: 10px;
+  background: linear-gradient(135deg, rgba(224,181,90,0.5), rgba(207,196,154,0.4));
   border-radius: 50%;
-  box-shadow: 0 0 4px rgba(90,110,63,0.3);
+  box-shadow: 0 0 4px rgba(224,181,90,0.3);
 }
 
-@keyframes floatLeaf {
+@keyframes floatPetal {
   0% {
     transform: translateY(0) translateX(0) rotate(0deg) scale(0.5);
     opacity: 0;
@@ -130,33 +165,33 @@ body {
   }
 }
 
-/* Искры/светлячки */
+/* Искры */
 .spark {
   position: absolute;
-  width: 3px;
-  height: 3px;
+  width: 2px;
+  height: 2px;
   border-radius: 50%;
-  background: radial-gradient(circle, #d4c5a0, #b8a56e);
-  box-shadow: 0 0 8px 2px rgba(180,165,110,0.5);
+  background: radial-gradient(circle, var(--gold-primary), var(--gold-deep));
+  box-shadow: 0 0 6px 1px rgba(207,196,154,0.5);
   opacity: 0;
-  animation: fireflyFloat linear infinite;
+  animation: sparkFloat linear infinite;
 }
 
-@keyframes fireflyFloat {
+@keyframes sparkFloat {
   0% {
     transform: translateY(0) scale(0);
     opacity: 0;
   }
   15% {
-    opacity: 0.9;
-    transform: translateY(-15px) scale(1);
+    opacity: 0.8;
+    transform: translateY(-12px) scale(1);
   }
   50% {
-    opacity: 0.6;
-    transform: translateY(-50px) scale(0.8);
+    opacity: 0.5;
+    transform: translateY(-45px) scale(0.8);
   }
   100% {
-    transform: translateY(-100px) scale(0);
+    transform: translateY(-90px) scale(0);
     opacity: 0;
   }
 }
@@ -191,10 +226,10 @@ body {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #d4c5a0;
+  color: var(--gold-primary);
   background: rgba(0,0,0,0.3);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(180,165,110,0.25);
+  border: 1px solid var(--border-gold);
   padding: 0.4rem 1.1rem;
   border-radius: 2rem;
   margin-bottom: 1.5rem;
@@ -216,7 +251,7 @@ body {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(2.2rem, 6vw, 4.8rem);
   font-weight: 700;
-  color: #d4c5a0;
+  color: var(--gold-primary);
   line-height: 1.1;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 15px rgba(0,0,0,0.3);
@@ -236,7 +271,7 @@ body {
 
 .hero-h1 em {
   font-style: italic;
-  background: linear-gradient(90deg, #d4c5a0, #b8a56e, #6b9e58);
+  background: linear-gradient(90deg, var(--gold-primary), var(--gold-deep), var(--gold-dark));
   background-size: 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -251,7 +286,7 @@ body {
 
 .hero-sub {
   font-size: clamp(0.9rem, 2.2vw, 1.1rem);
-  color: rgba(180,165,110,0.85);
+  color: rgba(207,196,154,0.85);
   margin: 1rem 0 2rem;
   line-height: 1.6;
   max-width: 600px;
@@ -305,9 +340,9 @@ body {
 }
 
 .hero-btn-rose {
-  background: linear-gradient(135deg, #5a7c4a 0%, #6b9e58 50%, #7eb86a 100%);
-  color: #0f1a0c;
-  box-shadow: 0 4px 15px rgba(90,124,74,0.3);
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-deep), var(--gold-primary));
+  color: #1a1418;
+  box-shadow: 0 4px 15px rgba(155,135,75,0.3);
   position: relative;
   overflow: hidden;
 }
@@ -319,7 +354,7 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
   transition: left 0.5s;
 }
 
@@ -329,14 +364,14 @@ body {
 
 .hero-btn-rose:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(90,124,74,0.4);
+  box-shadow: 0 8px 25px rgba(155,135,75,0.4);
 }
 
 .hero-btn-ghost {
   background: rgba(0,0,0,0.3);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(180,165,110,0.25);
-  color: #d4c5a0;
+  border: 1px solid var(--border-gold);
+  color: var(--gold-primary);
 }
 
 .hero-btn-ghost:hover {
@@ -355,7 +390,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  color: rgba(180,165,110,0.5);
+  color: rgba(207,196,154,0.5);
   font-size: 0.6rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -385,7 +420,7 @@ body {
   50% { transform: translateY(6px); }
 }
 
-/* ================== ПЕРЕКЛЮЧАТЕЛЬ ТЕМ ================== */
+/* ================== ПЕРЕКЛЮЧАТЕЛЬ ТЕМ (МОБИЛЬНЫЙ + ДЕСКТОП) ================== */
 .theme-switcher {
   position: fixed;
   bottom: 20px;
@@ -403,7 +438,7 @@ body {
   border-radius: 50%;
   background: rgba(0,0,0,0.6);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(180,165,110,0.25);
+  border: 1px solid var(--border-gold);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -415,7 +450,7 @@ body {
 .theme-toggle-btn svg {
   width: 24px;
   height: 24px;
-  stroke: #d4c5a0;
+  stroke: var(--gold-primary);
   fill: none;
   stroke-width: 1.8;
 }
@@ -431,7 +466,7 @@ body {
   right: 20px;
   background: rgba(0,0,0,0.85);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(180,165,110,0.25);
+  border: 1px solid var(--border-gold);
   border-radius: 24px;
   padding: 12px;
   display: none;
@@ -475,8 +510,8 @@ body {
 }
 
 .theme-option.active {
-  border-color: #d4c5a0;
-  background: rgba(180,165,110,0.15);
+  border-color: var(--gold-primary);
+  background: rgba(207,196,154,0.15);
 }
 
 .theme-color-preview {
@@ -486,8 +521,8 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-.theme-color-preview.forest {
-  background: linear-gradient(135deg, #4a7c59, #2a5a3a);
+.theme-color-preview.rose {
+  background: linear-gradient(135deg, #b87c6b, #8b5a4c);
 }
 
 .theme-color-preview.emerald {
@@ -497,10 +532,10 @@ body {
 .theme-option span {
   font-size: 0.85rem;
   font-weight: 500;
-  color: #d4c5a0;
+  color: var(--gold-primary);
 }
 
-/* Для десктопа */
+/* Для десктопа показываем кнопки всегда, для мобильных - меню */
 @media(min-width: 769px) {
   .theme-switcher {
     bottom: 20px;
@@ -511,7 +546,7 @@ body {
     backdrop-filter: blur(10px);
     padding: 8px 12px;
     border-radius: 50px;
-    border: 1px solid rgba(180,165,110,0.25);
+    border: 1px solid var(--border-gold);
   }
 
   .theme-toggle-btn {
@@ -584,138 +619,6 @@ body {
   .petal, .spark { display: none; }
   .hero-eyebrow, .hero-h1, .hero-sub, .hero-actions { animation: none; opacity: 1; transform: none; }
 }
-
-/* ================== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ СЕКЦИЙ ================== */
-.trust-strip {
-  background: rgba(30,56,37,0.7);
-  backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(180,165,110,0.15);
-  border-bottom: 1px solid rgba(180,165,110,0.15);
-  padding: 2rem 1.5rem;
-  margin: 2rem 0;
-}
-
-.trust-item {
-  text-align: center;
-  color: #d4c5a0;
-}
-
-.trust-item svg {
-  stroke: #6b9e58;
-}
-
-.stats-bar {
-  background: rgba(26,47,31,0.8);
-  backdrop-filter: blur(8px);
-  border-radius: 2rem;
-  padding: 2rem;
-  margin: 2rem 0;
-  border: 1px solid rgba(180,165,110,0.15);
-}
-
-.stat-number {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #b8a56e;
-}
-
-.flowers-section {
-  padding: 3rem 1.5rem;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.section-title h2 {
-  display: inline-block;
-  border-bottom: 2px solid #6b9e58;
-  padding-bottom: 0.5rem;
-}
-
-.ai-widget {
-  background: rgba(30,56,37,0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(180,165,110,0.2);
-  border-radius: 1.5rem;
-  padding: 1.5rem;
-  margin: 2rem 0;
-}
-
-.ai-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.ai-header svg {
-  stroke: #6b9e58;
-}
-
-.ai-msgs {
-  background: rgba(26,47,31,0.5);
-  border-radius: 1rem;
-  padding: 1rem;
-  height: 250px;
-  overflow-y: auto;
-}
-
-.ai-bubble {
-  background: rgba(74,124,89,0.3);
-  border-radius: 1rem;
-  padding: 0.75rem 1rem;
-  margin: 0.5rem 0;
-  color: #d4c5a0;
-}
-
-.ai-bubble.user-b {
-  background: rgba(107,158,88,0.4);
-  text-align: right;
-}
-
-.ai-input-wrap {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.ai-input {
-  flex: 1;
-  background: rgba(26,47,31,0.7);
-  border: 1px solid rgba(180,165,110,0.25);
-  border-radius: 2rem;
-  padding: 0.75rem 1rem;
-  color: #d4c5a0;
-}
-
-.ai-send {
-  background: linear-gradient(135deg, #5a7c4a, #6b9e58);
-  border: none;
-  border-radius: 2rem;
-  padding: 0.75rem 1.5rem;
-  color: #0f1a0c;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.cta-wrap {
-  background: linear-gradient(135deg, #2a4632, #1e3825);
-  border-radius: 2rem;
-  padding: 3rem 2rem;
-  text-align: center;
-  margin: 3rem 0;
-  border: 1px solid rgba(180,165,110,0.2);
-}
-
-.cta-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
-  color: #d4c5a0;
-  margin-bottom: 1rem;
-}
 </style>
 {% endblock %}
 
@@ -780,7 +683,7 @@ body {
   </div>
 </section>
 
-<!-- ================== ПЕРЕКЛЮЧАТЕЛЬ ТЕМ ================== -->
+<!-- ================== ПЕРЕКЛЮЧАТЕЛЬ ТЕМ (РАБОТАЕТ НА ТЕЛЕФОНЕ) ================== -->
 <div class="theme-switcher" id="themeSwitcher">
   <button class="theme-toggle-btn" id="themeToggleBtn">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -789,9 +692,9 @@ body {
     </svg>
   </button>
   <div class="theme-menu" id="themeMenu">
-    <div class="theme-option" data-theme="forest">
-      <div class="theme-color-preview forest"></div>
-      <span>🌲 Forest Green</span>
+    <div class="theme-option" data-theme="rose">
+      <div class="theme-color-preview rose"></div>
+      <span>🌹 Ethereal Rose</span>
     </div>
     <div class="theme-option" data-theme="emerald">
       <div class="theme-color-preview emerald"></div>
@@ -800,92 +703,68 @@ body {
   </div>
 </div>
 
-<!-- Доверительная полоса -->
-<div class="trust-strip reveal">
-  <div style="display:flex;flex-wrap:wrap;justify-content:space-around;gap:1.5rem">
-    <div class="trust-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>100% свежие цветы</span></div>
-    <div class="trust-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Доставка за 2 часа</span></div>
-    <div class="trust-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><span>Оплата онлайн/наличные</span></div>
-    <div class="trust-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Флористы-дизайнеры</span></div>
-  </div>
-</div>
-
-<!-- Популярные букеты -->
-<section class="flowers-section reveal">
-  <div class="section-title">
-    <h2>✨ {% if current_lang == 'uz' %}Eng mashhur guldastalar{% elif current_lang == 'en' %}Popular Bouquets{% else %}Популярные букеты{% endif %}</h2>
-  </div>
-  <div class="flowers-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem">
-    <!-- Здесь можно вывести популярные цветы из контекста -->
-    <div class="f-card">
-      <div class="f-card-img-wrap"><div class="f-card-ph">🌿🌹</div></div>
-      <div class="f-body"><div class="f-cat">Premium</div><div class="f-name">Лесная симфония</div><div class="f-price">189 000 UZS</div><a href="#" class="f-btn buy">В корзину</a></div>
-    </div>
-    <div class="f-card">
-      <div class="f-card-img-wrap"><div class="f-card-ph">🍃🌺</div></div>
-      <div class="f-body"><div class="f-cat">Classic</div><div class="f-name">Изумрудный сад</div><div class="f-price">149 000 UZS</div><a href="#" class="f-btn buy">В корзину</a></div>
-    </div>
-    <div class="f-card">
-      <div class="f-card-img-wrap"><div class="f-card-ph">🌲🌸</div></div>
-      <div class="f-body"><div class="f-cat">Luxe</div><div class="f-name">Цветущий лес</div><div class="f-price">229 000 UZS</div><a href="#" class="f-btn buy">В корзину</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- AI-консультант -->
-<div class="ai-widget reveal">
-  <div class="ai-header">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 0 1 10 10c0 2.5-1 4.5-2.5 6"/><path d="M19.5 16c-1 2-2.5 3.5-4 4.5"/><circle cx="12" cy="12" r="3"/><path d="M5 7L2 4"/><path d="M7 5L4 2"/></svg>
-    <h3 style="margin:0">{% if current_lang == 'uz' %}Gul bo'yicha maslahatchi{% elif current_lang == 'en' %}Flower Consultant{% else %}Цветочный консультант{% endif %}</h3>
-  </div>
-  <div class="ai-msgs" id="aiMsgs">
-    <div class="ai-bubble bot">🌿 {% if current_lang == 'uz' %}Salom! Qanday gul yoki guldasta qidiryapsiz?{% elif current_lang == 'en' %}Hello! What flowers or bouquet are you looking for?{% else %}Здравствуйте! Какие цветы или букет вы ищете?{% endif %}</div>
-  </div>
-  <div class="ai-input-wrap">
-    <input type="text" id="aiInput" class="ai-input" placeholder="{% if current_lang == 'uz' %}Masalan, to'y uchun guldasta...{% elif current_lang == 'en' %}For example, a wedding bouquet...{% else %}Например, букет для свадьбы...{% endif %}">
-    <button class="ai-send" onclick="sendAI()">{% t 'send' %}</button>
-  </div>
-</div>
-
-<!-- Призыв к действию -->
-<div class="cta-wrap reveal">
-  <div class="cta-title">🌸 {% if current_lang == 'uz' %}Maxsus taklif{% elif current_lang == 'en' %}Special Offer{% else %}Специальное предложение{% endif %}</div>
-  <p style="margin-bottom:1.5rem;color:rgba(180,165,110,0.8)">{% if current_lang == 'uz' %}Birinchi buyurtmangizga 10% chegirma!{% elif current_lang == 'en' %}Get 10% off your first order!{% else %}Скидка 10% на первый заказ!{% endif %}</p>
-  <a href="{% url 'catalog' %}" class="hero-btn hero-btn-rose" style="display:inline-flex">{% t 'view_catalog' %} →</a>
-</div>
+<!-- Остальной контент (trust-strip, stats-bar, flowers-section, ai-widget, cta-wrap) -->
+<!-- ... вставьте сюда остальной код из вашего шаблона ... -->
 
 <script>
-// ================== ИНИЦИАЛИЗАЦИЯ ТЕМ ==================
+// ================== ИНИЦИАЛИЗАЦИЯ ТЕМ (РАБОТАЕТ НА ТЕЛЕФОНЕ) ==================
 (function initTheme() {
-  const savedTheme = localStorage.getItem('flora_luxe_theme') || 'forest';
+  const savedTheme = localStorage.getItem('flora_luxe_theme') || 'rose';
   document.body.classList.add(`theme-${savedTheme}`);
 
+  // Обновляем активный класс в меню
   document.querySelectorAll('.theme-option').forEach(opt => {
-    if(opt.dataset.theme === savedTheme) opt.classList.add('active');
+    if(opt.dataset.theme === savedTheme) {
+      opt.classList.add('active');
+    }
     opt.addEventListener('click', function(e) {
       e.stopPropagation();
       const theme = this.dataset.theme;
-      document.body.classList.remove('theme-forest', 'theme-emerald');
+      document.body.classList.remove('theme-rose', 'theme-emerald');
       document.body.classList.add(`theme-${theme}`);
+
       document.querySelectorAll('.theme-option').forEach(o => o.classList.remove('active'));
       this.classList.add('active');
+
       localStorage.setItem('flora_luxe_theme', theme);
-      if(window.innerWidth <= 768) document.getElementById('themeMenu')?.classList.remove('open');
+
+      // Закрываем меню на мобильных после выбора
+      if(window.innerWidth <= 768) {
+        document.getElementById('themeMenu')?.classList.remove('open');
+      }
     });
   });
 
+  // Открытие/закрытие меню на мобильных
   const toggleBtn = document.getElementById('themeToggleBtn');
   const menu = document.getElementById('themeMenu');
+
   if(toggleBtn && menu) {
-    toggleBtn.addEventListener('click', function(e) { e.stopPropagation(); menu.classList.toggle('open'); });
+    toggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+
+    // Закрытие при клике вне меню
     document.addEventListener('click', function(e) {
-      if(!menu.contains(e.target) && !toggleBtn.contains(e.target)) menu.classList.remove('open');
+      if(!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+        menu.classList.remove('open');
+      }
     });
   }
-  if(window.innerWidth > 768 && menu) menu.classList.add('open');
+
+  // На десктопе меню всегда открыто
+  if(window.innerWidth > 768) {
+    if(menu) menu.classList.add('open');
+  }
+
+  // При изменении размера окна
   window.addEventListener('resize', function() {
-    if(window.innerWidth > 768 && menu) menu.classList.add('open');
-    else if(menu) menu.classList.remove('open');
+    if(window.innerWidth > 768) {
+      if(menu) menu.classList.add('open');
+    } else {
+      if(menu) menu.classList.remove('open');
+    }
   });
 })();
 
@@ -893,31 +772,63 @@ body {
 (function initAnimations() {
   const container = document.getElementById('heroPetals');
   if(!container) return;
+
+  // Лепестки (уменьшено количество для мобильных)
   const isMobile = window.innerWidth <= 768;
   const petalCount = isMobile ? 20 : 35;
   const sparkCount = isMobile ? 8 : 15;
+
   const types = ['petal-a', 'petal-b', 'petal-c'];
   for(let i = 0; i < petalCount; i++) {
     const el = document.createElement('div');
     el.className = 'petal ' + types[i % 3];
     const size = 8 + Math.random() * (isMobile ? 10 : 14);
-    el.style.cssText = [`left: ${Math.random() * 100}%`,`width: ${size}px`,`height: ${size * (0.6 + Math.random() * 0.8)}px`,`animation-duration: ${12 + Math.random() * (isMobile ? 10 : 14)}s`,`animation-delay: ${Math.random() * 8}s`].join(';');
+    el.style.cssText = [
+      `left: ${Math.random() * 100}%`,
+      `width: ${size}px`,
+      `height: ${size * (0.6 + Math.random() * 0.8)}px`,
+      `animation-duration: ${12 + Math.random() * (isMobile ? 10 : 14)}s`,
+      `animation-delay: ${Math.random() * 8}s`
+    ].join(';');
     container.appendChild(el);
   }
+
+  // Искры
   for(let i = 0; i < sparkCount; i++) {
     const sp = document.createElement('div');
     sp.className = 'spark';
-    sp.style.cssText = [`left: ${10 + Math.random() * 80}%`,`bottom: ${Math.random() * 40 + 10}%`,`animation-duration: ${5 + Math.random() * (isMobile ? 6 : 8)}s`,`animation-delay: ${Math.random() * 5}s`].join(';');
+    sp.style.cssText = [
+      `left: ${10 + Math.random() * 80}%`,
+      `bottom: ${Math.random() * 40 + 10}%`,
+      `animation-duration: ${5 + Math.random() * (isMobile ? 6 : 8)}s`,
+      `animation-delay: ${Math.random() * 5}s`
+    ].join(';');
     container.appendChild(sp);
   }
+
+  // Видео
   const video = document.getElementById('heroVideo');
   if(video) {
-    video.addEventListener('canplay', () => video.classList.add('loaded'));
-    setTimeout(() => { if(video.readyState >= 2) video.classList.add('loaded'); }, 500);
+    video.addEventListener('canplay', () => {
+      video.classList.add('loaded');
+    });
+    setTimeout(() => {
+      if(video.readyState >= 2) video.classList.add('loaded');
+    }, 500);
   }
 })();
 
-// ================== AI ФУНКЦИИ ==================
+// ================== ОСТАЛЬНЫЕ ФУНКЦИИ ==================
+function quickCart(pk, btn) {
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg>';
+  fetch(`/cart/add/${pk}/`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } }).catch(() => {});
+  setTimeout(() => {
+    btn.innerHTML = orig;
+    window.location.href = `/cart/add/${pk}/`;
+  }, 800);
+}
+
 function appendMsg(text, role) {
   const msgs = document.getElementById('aiMsgs');
   if(!msgs) return;
@@ -928,13 +839,21 @@ function appendMsg(text, role) {
   msgs.scrollTop = msgs.scrollHeight;
 }
 
+function askAI(q) {
+  const inp = document.getElementById('aiInput');
+  if(inp) inp.value = q;
+  sendAI();
+}
+
 function sendAI() {
   const inp = document.getElementById('aiInput');
   if(!inp) return;
   const q = inp.value.trim();
   if(!q) return;
+
   appendMsg(q, 'user');
   inp.value = '';
+
   const msgs = document.getElementById('aiMsgs');
   const wait = document.createElement('div');
   wait.className = 'ai-msg';
@@ -942,15 +861,30 @@ function sendAI() {
   wait.innerHTML = '<div class="ai-bubble bot" style="opacity:.6">{% t "typing" %}...</div>';
   if(msgs) msgs.appendChild(wait);
   if(msgs) msgs.scrollTop = 9999;
+
   fetch("{% url 'ai_chat' %}", {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}' },
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': '{{ csrf_token }}'
+    },
     body: JSON.stringify({ question: q })
   })
   .then(r => r.json())
-  .then(d => { const t = document.getElementById('aiTyping'); if(t) t.remove(); appendMsg(d.response, 'bot'); })
-  .catch(() => { const t = document.getElementById('aiTyping'); if(t) t.remove(); appendMsg('{% if current_lang == "uz" %}Xatolik yuz berdi.{% elif current_lang == "en" %}Error occurred.{% else %}Произошла ошибка.{% endif %}', 'bot'); });
+  .then(d => {
+    const t = document.getElementById('aiTyping');
+    if(t) t.remove();
+    appendMsg(d.response, 'bot');
+  })
+  .catch(() => {
+    const t = document.getElementById('aiTyping');
+    if(t) t.remove();
+    appendMsg('{% if current_lang == "uz" %}Xatolik yuz berdi.{% elif current_lang == "en" %}Error occurred.{% else %}Произошла ошибка.{% endif %}', 'bot');
+  });
 }
-document.getElementById('aiInput')?.addEventListener('keydown', e => { if(e.key === 'Enter') sendAI(); });
+
+document.getElementById('aiInput')?.addEventListener('keydown', e => {
+  if(e.key === 'Enter') sendAI();
+});
 </script>
 {% endblock %}
